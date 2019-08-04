@@ -1,0 +1,21 @@
+{
+    "$id": "http://KallSonys.com/schemas/generic/response",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Generic Response",
+    "type":"object",
+    "properties": {
+        "Error":{
+            "type":"boolean",
+            "description": "Indica si hubo error o no"
+        },
+        "Description":{
+            "type":"string",
+            "description": "Muestra el mensaje de error corrrespondiente"
+        },
+        "RowCount":{
+            "type":"integer",
+            "description": "En caso de ser un a lista, especifica el total de registros para la consulta realizada"
+        }
+    },
+    "required": ["Error","Description"]
+}

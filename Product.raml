@@ -1,0 +1,59 @@
+#%RAML 1.0
+title: Product
+version: 1.0
+baseUri: https://pruebas.com/version
+types:
+    Product: 
+        type: !include Schemas/Product.schema.json
+    ProductCreateResponse:
+        type: !include Schemas/ProductCreateResponse.schema.json
+
+/product:
+    post:
+        description: Recurso para la creacion de productos
+        body:
+            application/json:
+                type : Product
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: ProductCreateResponse
+    
+    /{id}:
+        get:
+            description: Recurso para la consulta de un producto por id
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:Product                          
+    
+    /query:
+        /byCode/{id}:
+            get:
+                description: Recurso para la consulta de productos por codigo            
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                type: array
+                                items: Product
+        /byCriteria:
+            get:
+                description: Recurso para la consulta de productos por nombre o por descripcion
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                type: array
+                                items:Product
+        /topFive:
+            get:
+                description: Recurso para la consulta del top 5 de productos
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                type:array
+                                items:Product

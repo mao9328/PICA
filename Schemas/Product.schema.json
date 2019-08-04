@@ -1,0 +1,43 @@
+{
+    "$id": "http://KallSonys.com/schemas/product",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Product",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type":"integer",
+            "minimum": 0,
+            "description": "Llave primaria"            
+        },
+        "Name":{
+            "type":"string",
+            "description": "Nombre del producto"
+        },
+        "Code":{
+            "type":"string",
+            "description": "Descripcion del producto"
+        },
+        "Descripction":{
+            "type":"string",
+            "description": "Descripcion del producto"
+        },
+        "IdCategory":{
+            "type":"integer",
+            "description": "Id Categoria asociada al producto"
+        },
+        "ListPrice":{
+            "type":"number",
+            "description": "Precio del producto",
+            "minimum": 0            
+        },
+        "IdProducer":{
+            "type":"integer",
+            "description": "Id del fabricante asociado al producto"
+        },
+        "ImgURL":{
+            "type":"string",
+            "description": "URL dela imagen que representa al producto."
+        }
+    },
+    "required": ["Id","Name","Code","Description","IdCategory","ListPrice","IdProducer","ImgURL"]
+}
