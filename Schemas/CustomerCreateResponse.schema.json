@@ -1,7 +1,7 @@
 {
-    "$id": "http://KallSonys.com/schemas/product/create-response",
+    "$id": "http://KallSonys.com/schemas/customer/create-response",
     "$schema": "http://json-schema.org/draft-07/schema",
-    "title": "Product Create Response",
+    "title": "Customer Create Response",
     "type": "object",
     "properties": {
         "Response": {

@@ -1,0 +1,47 @@
+{
+    "$id": "http://KallSonys.com/schemas/order",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Order Schema",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "integer",
+            "description": "llave primaria"
+        },
+        "Date": {
+            "type": "string",
+            "description": "Fecha de la orden"
+        },
+        "Price": {
+            "type": "number",
+            "description": "Valor de la orden"
+        },
+        "Comments": {
+            "type": "string",
+            "description": "Comentarios de la orden"
+        },
+        "Items": {
+            "type": "array",
+            "items": {
+                "$ref": "Schemas/Item.schema.json"
+            },
+            "description": "Comentarios de la orden"
+        },
+        "IdCustomer": {
+            "type": "integer",
+            "description": "Relacion al cliente"
+        },
+        "State": {
+            "$ref": "Schemas/State.schema.json",
+            "description": "Estado"
+        }
+    },
+    "required": [
+        "Id",
+        "Date",
+        "Price",
+        "Items",
+        "IdCustomer",
+        "Comments"
+    ]
+}

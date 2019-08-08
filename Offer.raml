@@ -1,0 +1,56 @@
+#%RAML 1.0
+title: Offer
+version: 1.0
+baseUri: https://pruebas.com/version
+types:
+    Offer: 
+        type: !include Schemas/Offer.schema.json    
+    OfferCreateResponse:
+        type: !include Schemas/OfferCreateResponse.schema.json    
+    OfferGetByIdResponse:
+        type: !include Schemas/OfferGetByIdResponse.schema.json
+    OfferUpdateResponse:
+        type: !include Schemas/OfferUpdateResponse.schema.json
+    OfferInForceResponse:
+        type: !include Schemas/OfferInForceResponse.schema.json
+
+/order:
+    post:
+        description: Recurso para la creacion de ofertas
+        body:
+            application/json:
+                type : Offer
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: OfferCreateResponse      
+    put:
+    
+        description: Recurso para la actualizacion de ofertas
+        body:
+            application/json:
+                type : Offer
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: OfferUpdateResponse    
+
+    get:
+        description: Recurso para la consulta de ofertas vigentes        
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: OfferInForceResponse    
+
+    
+    /{id}:
+        get:
+            description: Recurso para la consulta de una cliente por identificacion
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:OfferGetByIdResponse    

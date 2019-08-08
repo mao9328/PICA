@@ -1,0 +1,103 @@
+#%RAML 1.0
+title: Order
+version: 1.0
+baseUri: https://pruebas.com/version
+types:
+    Order: 
+        type: !include Schemas/Order.schema.json    
+    OrderCreateResponse:
+        type: !include Schemas/OrderCreateResponse.schema.json
+    OrderGetByIdResponse:    
+        type: !include Schemas/OrderGetByIdResponse.schema.json
+    OrderDeleteResponse:    
+        type: !include Schemas/OrderDeleteResponse.schema.json
+    OrderCancelationResponse:    
+        type: !include Schemas/OrderCancelationResponse.schema.json
+    OrderGetByHighPriceResponse:    
+        type: !include Schemas/OrderGetByHighPriceResponse.schema.json
+    OrderGetUnclosedResponse:    
+        type: !include Schemas/OrderGetUnclosedResponse.schema.json
+    OrderTotalBilledResponse:
+        type: !include Schemas/OrderTotalBilledResponse.schema.json
+    OrderGetByItemQuantityResponse:
+        type: !include Schemas/OrderGetByItemQuantityResponse.schema.json
+    
+
+/order:
+    post:
+        description: Recurso para la creacion de ordenes
+        body:
+            application/json:
+                type : Order
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: OrderCreateResponse
+    get:
+        description: "Consultar por cliente"
+        queryParameters:
+            idCustomer:
+                type: integer
+                required:true
+        responses:
+            200:
+                body:
+                    application/json:
+                        type:OrderGetByIdResponse
+
+    /closedWithHighPrice:                
+        description: Ordenes cerradas con alta facturacion.
+        responses:
+            200:
+                body:
+                    application/json:
+                        type:OrderGetByHighPriceResponse
+
+    /unclosedOrders:                
+        description: Ordenes que mas tiempo llevan abiertas.
+        responses:
+            200:
+                body:
+                    application/json:
+                        type:OrderGetUnclosedResponse
+    
+    /totalBilled:        
+        description: Total Facturado.
+        responses:
+            200:
+                body:
+                    application/json:
+                        type:OrderTotalBilledResponse
+
+    /byItemQuantity:        
+        description: Ordenes por numero de items.
+        responses:
+            200:
+                body:
+                    application/json:
+                        type:OrderGetByItemQuantityResponse
+    
+    /{id}:
+        get:
+            description: Recurso para la consulta de una orden por id
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:OrderGetByIdResponse                          
+    
+        delete:
+            description: Eliminar una orden
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:OrderDeleteResponse
+        put:
+            description: Cancelar una orden
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:OrderCancelationResponse                          

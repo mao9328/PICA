@@ -1,14 +1,14 @@
 {
-    "$id": "http://KallSonys.com/schemas/product/create-response",
+    "$id": "http://KallSonys.com/schemas/product/get-by-code-response",
     "$schema": "http://json-schema.org/draft-07/schema",
-    "title": "Product Create Response",
+    "title": "Product Get By Code Response",
     "type": "object",
     "properties": {
         "Response": {
             "$ref": "Schemas/GenericResponse.schema.json"
         },
         "Value": {
-            "type": "integer"
+            "$ref": "Schemas/Product.schema.json"
         }
     },
     "required": [

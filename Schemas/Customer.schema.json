@@ -1,0 +1,48 @@
+{
+    "$id": "http://KallSonys.com/schemas/customer",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Customer Schema",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "integer",
+            "description": "Llave primaria"
+        },
+        "FirstName": {
+            "type": "string",
+            "description": "Nombres del cliente"
+        },
+        "LastName": {
+            "type": "string",
+            "description": "Appelidos del cliente"
+        },
+        "PhoneNumber": {
+            "type": "string",
+            "description": "Telefono"
+        },
+        "Email": {
+            "type": "string",
+            "description": "Email"
+        },       
+        "Addresses": {
+            "type": "array",
+            "items": {
+                "$ref": "Schemas/Address.schema.json"
+            },
+            "description": "Direcciones del cliente"
+        },
+        "State": {
+            "$ref": "Schemas/State.schema.json",
+            "description": "Estado"
+        }
+    },
+    "required": [
+        "Id",
+        "FirstName",
+        "Addresses",
+        "Status",
+        "LastName",
+        "Email",
+        "PhoneNumber"
+    ]
+}

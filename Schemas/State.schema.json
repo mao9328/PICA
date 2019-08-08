@@ -1,0 +1,21 @@
+{
+    "$id": "http://KallSonys.com/schemas/State",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "state Schema",
+    "type":"object",
+    "properties": {
+        "Id":{
+            "type":"integer",
+            "description": "llave primaria"
+        },
+        "Name":{
+            "type":"string",
+            "description": "Nombre del Estado"
+        },
+        "Date":{
+            "type":"string",
+            "description": "Fecha de asignacion del estado"
+        }
+    },
+    "required": ["Id","Name","Date"]
+}

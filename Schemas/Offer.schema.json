@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://KallSonys.com/schemas/offer",
+    "title": "Offer schema",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "integer",
+            "description": "Llave primaria"
+        },
+        "Name": {
+            "type": "string",
+            "description": "Nombre de la oferta"
+        },
+        "BeginDate": {
+            "type": "string",
+            "description": "Fecha Inicio de la oferta"
+        },
+        "EndDate": {
+            "type": "string",
+            "description": "Fecha Fin de la oferta"
+        },
+        "Description": {
+            "type": "string",
+            "description": "descripcion de la oferta"
+        },
+        "Discount": {
+            "type": "number",
+            "description": "Descuento"
+        },
+        "Product": {
+            "$ref": "Schemas/Product.schema.json",
+            "description": "Relacion con el producto"
+        }
+    },
+    "required": ["Id","Name","Description","BeginDate","EndDate","Product","Discount"]
+}

@@ -1,0 +1,45 @@
+{
+    "$id": "http://KallSonys.com/schemas/Address",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Address Schema",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "integer",
+            "description": "Llave primaria de la direccion"
+        },
+        "Street": {
+            "type": "string",
+            "description": "Calle"
+        },
+        "State": {
+            "type": "string",
+            "description": "Localidad de la direccion"
+        },
+        "ZIP": {
+            "type": "string",
+            "description": "Codigo ZIP de la region de la direccion"
+        },
+        "Country": {
+            "type": "string",
+            "description": "Pais"
+        },
+        "IdAddrestType": {
+            "type": "integer",
+            "description": "Relacion Tipo de direccion"
+        },
+        "City": {
+            "type": "string",
+            "description": "Ciudad"
+        }
+    },
+    "required": [
+        "Id",
+        "Street",
+        "State",
+        "ZIP",
+        "Country",
+        "IdAddrestType",
+        "City"
+    ]
+}

@@ -1,0 +1,45 @@
+#%RAML 1.0
+title: Customer
+version: 1.0
+baseUri: https://pruebas.com/version
+types:
+    Customer: 
+        type: !include Schemas/Customer.schema.json    
+    CustomerCreateResponse:
+        type: !include Schemas/CustomerCreateResponse.schema.json
+    CustomerUpdateResponse:
+        type: !include Schemas/CustomerUpdateResponse.schema.json    
+    CustomerGetByIdResponse:
+        type: !include Schemas/CustomerGetByIdResponse.schema.json 
+
+/order:
+    post:
+        description: Recurso para la creacion de clientes
+        body:
+            application/json:
+                type : Customer
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: CustomerCreateResponse      
+    put:
+    
+        description: Recurso para la actualizacion de clientes
+        body:
+            application/json:
+                type : Customer
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: CustomerUpdateResponse      
+    
+    /{id}:
+        get:
+            description: Recurso para la consulta de una cliente por identificacion
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:CustomerGetByIdResponse    
