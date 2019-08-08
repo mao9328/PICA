@@ -46,7 +46,8 @@ types:
                     application/json:
                         type:OrderGetByIdResponse
 
-    /closedWithHighPrice:                
+    /closedWithHighPrice: 
+        get:               
         description: Ordenes cerradas con alta facturacion.
         responses:
             200:
@@ -55,28 +56,31 @@ types:
                         type:OrderGetByHighPriceResponse
 
     /unclosedOrders:                
-        description: Ordenes que mas tiempo llevan abiertas.
-        responses:
-            200:
-                body:
-                    application/json:
-                        type:OrderGetUnclosedResponse
+        get:               
+            description: Ordenes que mas tiempo llevan abiertas.
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:OrderGetUnclosedResponse
     
-    /totalBilled:        
-        description: Total Facturado.
-        responses:
-            200:
-                body:
-                    application/json:
-                        type:OrderTotalBilledResponse
+    /totalBilled:      
+        get:                 
+            description: Total Facturado.
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:OrderTotalBilledResponse
 
     /byItemQuantity:        
-        description: Ordenes por numero de items.
-        responses:
-            200:
-                body:
-                    application/json:
-                        type:OrderGetByItemQuantityResponse
+        get:               
+            description: Ordenes por numero de items.
+            responses:
+                200:
+                    body:
+                        application/json:
+                            type:OrderGetByItemQuantityResponse
     
     /{id}:
         get:
