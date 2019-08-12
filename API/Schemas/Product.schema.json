@@ -15,7 +15,7 @@
         },
         "Code":{
             "type":"string",
-            "description": "Descripcion del producto"
+            "description": "Codigo del producto"
         },
         "Descripction":{
             "type":"string",
@@ -36,7 +36,7 @@
         },
         "ImgURL":{
             "type":"string",
-            "description": "URL dela imagen que representa al producto."
+            "description": "URL de la imagen que representa al producto."
         }
     },
     "required": ["Id","Name","Code","Description","IdCategory","ListPrice","IdProducer","ImgURL"]

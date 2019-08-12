@@ -23,11 +23,7 @@
         "Description": {
             "type": "string",
             "description": "descripcion de la oferta"
-        },
-        "Discount": {
-            "type": "number",
-            "description": "Descuento"
-        },
+        },        
         "Product": {
             "$ref": "Schemas/Product.schema.json",
             "description": "Relacion con el producto"

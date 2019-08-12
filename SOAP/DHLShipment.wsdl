@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.example.com/webservice"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ws="http://www.example.com/webservice"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.DHL.com/services">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.DHL.com/services">
+            <xsd:element name="fullfillShipment">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="shipment" type="tns:Shipment" minOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="fullfillShipmentResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="fullfillShipmentResult" type="xsd:boolean"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="checkShipmentStatus">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderId" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="checkShipmentStatusResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="checkShipmentStatusResult" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="Shipment">
+                <xsd:sequence>
+                    <xsd:element name="partner" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="supplier" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="orderId" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="addresseeName" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="addresseeLastName" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="country" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="city" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="street" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="state" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="zipcode" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="items" type="tns:Collection" minOccurs="1"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Item">
+                <xsd:sequence>
+                    <xsd:element name="itemID" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="prodID" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="productName" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="partNumber" type="xsd:string" minOccurs="1"/>
+                    <xsd:element name="price" type="xsd:int" minOccurs="1"/>
+                    <xsd:element name="quantity" type="xsd:int" minOccurs="1"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Collection">
+                <xsd:sequence>
+                    <xsd:element name="item" type="tns:Item" nillable="true" minOccurs="1"
+                        maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="fullfillShipmentSoapIn">
+        <wsdl:part name="parameters" element="tns:fullfillShipment"/>
+    </wsdl:message>
+    <wsdl:message name="fullfillShipmentSoapOut">
+        <wsdl:part name="parameters" element="tns:fullfillShipmentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="checkShipmentStatusIn">
+        <wsdl:part name="parameters" element="tns:checkShipmentStatus"/>
+    </wsdl:message>
+    <wsdl:message name="checkShipmentStatusOut">
+        <wsdl:part name="parameters" element="tns:checkShipmentStatusResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="DHLShipmentService">
+        <wsdl:operation name="fullfillShipment">
+            <wsdl:input message="ws:fullfillShipmentSoapIn"/>
+            <wsdl:output message="ws:fullfillShipmentSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="checkShipmentStatus">
+            <wsdl:input message="ws:checkShipmentStatusIn"/>
+            <wsdl:output message="ws:checkShipmentStatusOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    <wsdl:binding name = "DHL_Binding" type = "ws:DHLShipmentService">
+        <soap:binding style = "rpc" transport = "http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name = "checkShipmentStatus">
+            <soap:operation soapAction = "http://example.com/checkShipmentStatus"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name = "fullfillShipment">
+            <soap:operation soapAction = "http://example.com/fullfillShipment"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name = "IDHLService">
+        <wsdl:port binding = "ws:DHL_Binding" name="IDHLServicePort">
+            <soap:address location = "http://www.DHL.com/IDHLService" />
+        </wsdl:port>
+    </wsdl:service>
+    
+</wsdl:definitions>
