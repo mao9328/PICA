@@ -24,8 +24,8 @@
             "type": "string",
             "description": "descripcion de la oferta"
         },        
-        "Product": {
-            "$ref": "Schemas/Product.schema.json",
+        "IdProduct": {
+            "type":"integer",
             "description": "Relacion con el producto"
         }
     },

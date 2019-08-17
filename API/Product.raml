@@ -4,17 +4,11 @@ version: 1.0
 baseUri: https://pruebas.com/version
 types:
     Product: 
-        type: !include Schemas/Product.schema.json
-    ProductCreateResponse:
-        type: !include Schemas/ProductCreateResponse.schema.json
-    ProductGetByIdResponse:
-        type: !include Schemas/ProductGetByIdResponse.schema.json
-    ProductGetByCodeResponse:
-        type: !include Schemas/ProductGetCodeIdResponse.schema.json
-    ProductGetByCriteriaResponse:
-        type: !include Schemas/ProductGetByCriteriaResponse.schema.json
-    ProductGetTopFiveResponse:
-        type: !include Schemas/ProductGetTopFiveResponse.schema.json   
+        type: !include Schemas/Product.schema.json 
+    Products:
+        type: Product[]
+    Error:
+        type: !include Schemas/GenericResponse.schema.json
 
 
 /product:
@@ -27,7 +21,11 @@ types:
             200:
                 body:
                     application/json:
-                        type: ProductCreateResponse
+                        type: boolean
+            500:
+                body:
+                    application/json:
+                        type: Error 
     
     /{id}:
         get:
@@ -36,7 +34,11 @@ types:
                 200:
                     body:
                         application/json:                        
-                            type: ProductGetByIdResponse
+                            type: Product
+                500:
+                    body:
+                        application/json:
+                            type: Error 
     
     /query:
         /byCode/{id}:
@@ -46,7 +48,11 @@ types:
                     200:
                         body:
                             application/json:
-                                type: ProductGetByCodeResponse
+                                type: Products
+                    500:
+                        body:
+                            application/json:
+                                type: Error 
         /byCriteria:
             get:
                 description: Recurso para la consulta de productos por nombre o por descripcion
@@ -54,7 +60,11 @@ types:
                     200:
                         body:
                             application/json:
-                                type: ProductGetByCriteriaResponse
+                                type: Products
+                    500:
+                        body:
+                            application/json:
+                                type: Error 
         /topFive:
             get:
                 description: Recurso para la consulta del top 5 de productos
@@ -62,4 +72,8 @@ types:
                     200:
                         body:
                             application/json:
-                                type: ProductGetTopFiveResponse
+                                type: Products
+                    500:
+                        body:
+                            application/json:
+                                type: Error 

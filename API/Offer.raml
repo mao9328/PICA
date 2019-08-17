@@ -4,15 +4,11 @@ version: 1.0
 baseUri: https://pruebas.com/version
 types:
     Offer: 
-        type: !include Schemas/Offer.schema.json    
-    OfferCreateResponse:
-        type: !include Schemas/OfferCreateResponse.schema.json    
-    OfferGetByIdResponse:
-        type: !include Schemas/OfferGetByIdResponse.schema.json
-    OfferUpdateResponse:
-        type: !include Schemas/OfferUpdateResponse.schema.json
-    OfferInForceResponse:
-        type: !include Schemas/OfferInForceResponse.schema.json
+        type: !include Schemas/Offer.schema.json
+    Offers:
+        type: Offer[]
+    Error:
+        type: !include Schemas/GenericResponse.schema.json    
 
 /order:
     post:
@@ -24,7 +20,11 @@ types:
             200:
                 body:
                     application/json:
-                        type: OfferCreateResponse      
+                        type: number
+            500:
+                body:
+                    application/json:
+                        type: Error     
     put:
     
         description: Recurso para la actualizacion de ofertas
@@ -35,7 +35,11 @@ types:
             200:
                 body:
                     application/json:
-                        type: OfferUpdateResponse    
+                        type: booelan
+            500:
+                body:
+                    application/json:
+                        type: Error    
 
     get:
         description: Recurso para la consulta de ofertas vigentes        
@@ -43,14 +47,22 @@ types:
             200:
                 body:
                     application/json:
-                        type: OfferInForceResponse    
+                        type: Offers   
+            500:
+                body:
+                    application/json:
+                        type: Error 
 
     
     /{id}:
         get:
-            description: Recurso para la consulta de una cliente por identificacion
+            description: Recurso para la consulta de una campaña por id
             responses:
                 200:
                     body:
                         application/json:
-                            type:OfferGetByIdResponse    
+                            type: Offer   
+                500:
+                    body:
+                        application/json:
+                            type: Error 

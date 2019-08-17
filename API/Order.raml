@@ -5,23 +5,10 @@ baseUri: https://pruebas.com/version
 types:
     Order: 
         type: !include Schemas/Order.schema.json    
-    OrderCreateResponse:
-        type: !include Schemas/OrderCreateResponse.schema.json
-    OrderGetByIdResponse:    
-        type: !include Schemas/OrderGetByIdResponse.schema.json
-    OrderDeleteResponse:    
-        type: !include Schemas/OrderDeleteResponse.schema.json
-    OrderCancelationResponse:    
-        type: !include Schemas/OrderCancelationResponse.schema.json
-    OrderGetByHighPriceResponse:    
-        type: !include Schemas/OrderGetByHighPriceResponse.schema.json
-    OrderGetUnclosedResponse:    
-        type: !include Schemas/OrderGetUnclosedResponse.schema.json
-    OrderTotalBilledResponse:
-        type: !include Schemas/OrderTotalBilledResponse.schema.json
-    OrderGetByItemQuantityResponse:
-        type: !include Schemas/OrderGetByItemQuantityResponse.schema.json
-    
+    Orders:
+        type: Order[]
+    Error:
+        type: !include Schemas/GenericResponse.schema.json     
 
 /order:
     post:
@@ -33,9 +20,14 @@ types:
             200:
                 body:
                     application/json:
-                        type: OrderCreateResponse
+                        type: number
+            500:
+                body:
+                    application/json:
+                        type: Error
+
     get:
-        description: "Consultar por cliente"
+        description: Consultar por cliente
         queryParameters:
             idCustomer:
                 type: integer
@@ -44,16 +36,32 @@ types:
             200:
                 body:
                     application/json:
-                        type:OrderGetByIdResponse
+                        type:Order
+            500:
+                body:
+                    application/json:
+                        type: Error
 
     /closedWithHighPrice: 
         get:               
         description: Ordenes cerradas con alta facturacion.
+        queryParameters:
+            beginDate:
+                type:string
+                required:true
+            endDate:
+                type:string
+                required:true
+
         responses:
             200:
                 body:
                     application/json:
-                        type:OrderGetByHighPriceResponse
+                        type:Orders
+            500:
+                body:
+                    application/json:
+                        type: Error
 
     /unclosedOrders:                
         get:               
@@ -62,16 +70,31 @@ types:
                 200:
                     body:
                         application/json:
-                            type:OrderGetUnclosedResponse
+                            type:Orders
+                500:
+                    body:
+                        application/json:
+                            type: Error
     
     /totalBilled:      
         get:                 
             description: Total Facturado.
+            queryParameters:
+                month:
+                    type:number
+                    required:true
+                year:
+                    type:number
+                    required:true
             responses:
                 200:
                     body:
                         application/json:
-                            type:OrderTotalBilledResponse
+                            type: number
+                500:
+                    body:
+                        application/json:
+                            type: Error
 
     /byItemQuantity:        
         get:               
@@ -80,7 +103,11 @@ types:
                 200:
                     body:
                         application/json:
-                            type:OrderGetByItemQuantityResponse
+                            type:Orders
+                500:
+                    body:
+                        application/json:
+                            type: Error
     
     /{id}:
         get:
@@ -89,19 +116,19 @@ types:
                 200:
                     body:
                         application/json:
-                            type:OrderGetByIdResponse                          
-    
-        delete:
-            description: Eliminar una orden
+                            type:Order
+                 500:
+                    body:
+                        application/json:
+                            type: Error                         
+        patch:
+            description: Cambiar estado de una orden
             responses:
                 200:
                     body:
                         application/json:
-                            type:OrderDeleteResponse
-        put:
-            description: Cancelar una orden
-            responses:
-                200:
+                            type:boolean
+                500:
                     body:
                         application/json:
-                            type:OrderCancelationResponse                          
+                            type: Error                          

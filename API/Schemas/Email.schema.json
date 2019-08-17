@@ -1,0 +1,45 @@
+{
+    "$id": "http://KallSonys.com/schemas/Email",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Email Schema",
+    "type": "object",
+    "properties": {
+        "To": {
+            "type": "string",
+            "description": "Receptor"
+        },
+        "From": {
+            "type": "string",
+            "description": "Emisor"
+        },
+        "About": {
+            "type": "string",
+            "description": "Asunto"
+        },
+        "Body": {
+            "type": "string",
+            "description": "Cuerpo"
+        },
+        "CC": {
+            "type": "string",
+            "description": "Con Copia (separado por comas)"
+        },
+        "CCO": {
+            "type": "string",
+            "description": "Con Copia Oculta (separado por comas)"
+        },
+        "isHTML": {
+            "type": "boolean",
+            "description": "Es html?"
+        }
+    },
+    "required": [
+        "To",
+        "From",
+        "About",
+        "Body",
+        "CC",
+        "CCO",
+        "isHTML"
+    ]
+}

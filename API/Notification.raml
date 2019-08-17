@@ -1,0 +1,27 @@
+#%RAML 1.0
+title: Notification
+version: 1.0
+baseUri: https://pruebas.com/version
+types:
+    Email: 
+        type: !include Schemas/Email.schema.json
+    Error:
+        type: !include Schemas/GenericResponse.schema.json 
+
+/Notificaiton:
+    /Email:
+    post:
+        description: Recurso el envío de emails
+        body:
+            application/json:
+                type : Email
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: boolean
+            500:
+                body:
+                    application/json:
+                        type: Error 
+       
