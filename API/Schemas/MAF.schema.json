@@ -1,0 +1,17 @@
+{
+    "$id": "http://KallSonys.com/schemas/MAF",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "MAF Schema",
+    "type":"object",
+    "properties": {
+        "Number":{
+            "type":"integer",
+            "description": "Numero de la tarjeta de credito."
+        },
+        "Type":{
+            "type":"string",
+            "description": "Tipo de tarjeta de credito."
+        }       
+    },
+    "required": ["Number","Type"]
+}

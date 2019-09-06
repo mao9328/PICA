@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://www.example.com/webservice"
+<wsdl:definitions targetNamespace="http://www.RapidService.com/Services"
     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
@@ -58,16 +58,16 @@
     </wsdl:types>
     
     <wsdl:message name="OrderQuoute">
-        <wsdl:part name="parameters" element="tns:orderQuouteElement"/>
+        <wsdl:part name="parameters" type="tns:orderQuouteElement"/>
     </wsdl:message>
     <wsdl:message name="OrderQuouteResponse">
-        <wsdl:part name="parameters" element="tns:orderQuouteResponseElement"/>
+        <wsdl:part name="parameters" type="tns:orderQuouteResponseElement"/>
     </wsdl:message>
     <wsdl:message name="ProcessQuote">
-        <wsdl:part name="parameters" element="tns:processQuoteElement"/>
+        <wsdl:part name="parameters" type="tns:processQuoteElement"/>
     </wsdl:message>
     <wsdl:message name="ProcessQuoteResponse">
-        <wsdl:part name="parameters" element="tns:processQuoteResponseElement"/>
+        <wsdl:part name="parameters" type="tns:processQuoteResponseElement"/>
     </wsdl:message>
     <wsdl:portType name="RapidService">
         <wsdl:operation name="OrderQuoute">
@@ -85,19 +85,19 @@
         <wsdl:operation name = "OrderQuoute">
             <soap:operation soapAction = "http://example.com/OrderQuote"/>
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.RapidService.com/Services"/>
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.RapidService.com/Services"/>
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name = "ProcessQuote">
             <soap:operation soapAction = "http://example.com/ProcessQuote"/>
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.RapidService.com/Services"/>
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.RapidService.com/Services"/>
             </wsdl:output>
         </wsdl:operation>        
     </wsdl:binding>

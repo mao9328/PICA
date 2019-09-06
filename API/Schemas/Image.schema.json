@@ -1,0 +1,35 @@
+{
+    "$id": "http://KallSonys.com/schemas/Image",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Image Schema",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "integer",
+            "description": "Identificador de la imagen"
+        },
+        "IdProduct": {
+            "type": "integer",
+            "description": "Identificador del producto al cual se asocia la imagen"
+        },
+        "URLSmallSize": {
+            "type": "string",
+            "description": "URL de la imagen pequeña del producto"
+        },
+        "URLNormalSize": {
+            "type": "string",
+            "description": "URL de la imagen normal del producto"
+        },
+        "Content": {
+            "type": "string",
+            "content": "imagen"
+        }
+    },
+    "required": [
+        "Id",
+        "IdProduct",
+        "URLSmallSize",
+        "URLNormalSize",
+        "Content"
+    ]
+}
