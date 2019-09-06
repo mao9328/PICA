@@ -6,12 +6,12 @@
     "properties": {
         "Code":{
             "type":"integer",
-            "description": "codigo del error"
+            "description": "codigo de respuesta"
         },
         "Description":{
             "type":"string",
-            "description": "Muestra el mensaje de error corrrespondiente"
+            "description": "Muestra el mensaje corrrespondiente"
         }       
     },
-    "required": ["Error","Description","RowCount"]
+    "required": ["Error","Description"]
 }

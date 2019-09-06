@@ -1,0 +1,60 @@
+#%RAML 1.0
+title: Image Service
+version: 1.0
+baseUri: https://pruebas.com/version
+types:
+    Image: 
+        type: !include Schemas/Image.schema.json
+    Images: 
+        type: Image []   
+    Error:
+        type: !include Schemas/GenericResponse.schema.json
+
+
+/image:
+    post:
+        description: Recurso para guardar imagenes
+        body:
+            application/json:
+                type : Image
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: number
+            500:
+                body:
+                    application/json:
+                        type: Error      
+    put:
+    
+        description: Recurso para la actualizacion de imagenes
+        body:
+            application/json:
+                type : Image
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: boolean
+            500:
+                body:
+                    application/json:
+                        type: Error   
+
+    get:
+        description: consultar imagenes por producto
+        queryParameters:
+            numeroProducto:
+                type:string
+                required:true
+                example:5
+        responses:
+            200:
+                body:
+                    application/json:
+                        type: Images
+            500:
+                body:
+                    application/json:
+                        type: Error          

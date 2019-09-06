@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://www.example.com/webservice"
+<wsdl:definitions targetNamespace="http://www.DHL.com/services"
     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
@@ -76,16 +76,16 @@
     </wsdl:types>
 
     <wsdl:message name="fullfillShipmentSoapIn">
-        <wsdl:part name="parameters" element="tns:fullfillShipment"/>
+        <wsdl:part name="parameters" type="tns:fullfillShipment"/>
     </wsdl:message>
     <wsdl:message name="fullfillShipmentSoapOut">
-        <wsdl:part name="parameters" element="tns:fullfillShipmentResponse"/>
+        <wsdl:part name="parameters" type="tns:fullfillShipmentResponse"/>
     </wsdl:message>
     <wsdl:message name="checkShipmentStatusIn">
-        <wsdl:part name="parameters" element="tns:checkShipmentStatus"/>
+        <wsdl:part name="parameters" type="tns:checkShipmentStatus"/>
     </wsdl:message>
     <wsdl:message name="checkShipmentStatusOut">
-        <wsdl:part name="parameters" element="tns:checkShipmentStatusResponse"/>
+        <wsdl:part name="parameters" type="tns:checkShipmentStatusResponse"/>
     </wsdl:message>
     <wsdl:portType name="DHLShipmentService">
         <wsdl:operation name="fullfillShipment">
@@ -103,19 +103,19 @@
         <wsdl:operation name = "checkShipmentStatus">
             <soap:operation soapAction = "http://example.com/checkShipmentStatus"/>
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.DHL.com/services"/>
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.DHL.com/services"/>
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name = "fullfillShipment">
             <soap:operation soapAction = "http://example.com/fullfillShipment"/>
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.DHL.com/services"/>
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.DHL.com/services"/>
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>

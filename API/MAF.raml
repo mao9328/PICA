@@ -1,20 +1,20 @@
 #%RAML 1.0
-title: Notification Service
+title: MAF Service
 version: 1.0
 baseUri: https://pruebas.com/version
 types:
-    Email: 
-        type: !include Schemas/Email.schema.json
+    MAF: 
+        type: !include Schemas/MAF.schema.json
     Error:
-        type: !include Schemas/GenericResponse.schema.json 
+        type: !include Schemas/GenericResponse.schema.json
 
-/Notificaiton:
-    /Email:
+
+/MAF:
     post:
-        description: Recurso el envío de emails
+        description: Recurso para validar tarjetas de credito
         body:
             application/json:
-                type : Email
+                type : MAF
         responses:
             200:
                 body:
@@ -23,5 +23,4 @@ types:
             500:
                 body:
                     application/json:
-                        type: Error 
-       
+                        type: Error      

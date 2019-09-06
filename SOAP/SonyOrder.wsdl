@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://www.example.com/webservice"
+<wsdl:definitions targetNamespace="http://www.Sony.com"
     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
@@ -32,10 +32,10 @@
     </wsdl:types>
     
     <wsdl:message name="OrderQuouteRequestMessage">
-        <wsdl:part name="parameters" element="tns:OrderQuouteRequest"/>
+        <wsdl:part name="parameters" type="tns:OrderQuouteRequest"/>
     </wsdl:message>
     <wsdl:message name="OrderQuouteResponseMessage">
-        <wsdl:part name="parameters" element="tns:orderQuouteResponse"/>
+        <wsdl:part name="parameters" type="tns:orderQuouteResponse"/>
     </wsdl:message>
     <wsdl:portType name="SonyOrderService">
         <wsdl:operation name="OrderQuoute">
@@ -49,10 +49,10 @@
         <wsdl:operation name = "OrderQuoute">
             <soap:operation soapAction = "http://example.com/OrderQuote"/>
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.Sony.com"/>
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://www.Sony.com"/>
             </wsdl:output>
         </wsdl:operation>
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://www.example.com/webservice"
+<wsdl:definitions targetNamespace="http://xmlns.oracle.com/SonyQuoteService"
     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
@@ -45,10 +45,10 @@
     </wsdl:types>
 
     <wsdl:message name="SonyQuoteServiceRequestMessage">
-        <wsdl:part name="payload" element="tns:SonyQuoteServiceProcessRequest"/>
+        <wsdl:part name="payload" type="tns:SonyQuoteServiceProcessRequest"/>
     </wsdl:message>
     <wsdl:message name="SonyQuoteServiceResponseMessage">
-        <wsdl:part name="payload" element="tns:SonyQuoteServiceProcessResponse"/>
+        <wsdl:part name="payload" type="tns:SonyQuoteServiceProcessResponse"/>
     </wsdl:message>
     <wsdl:portType name="SonyQuoteService">
         <wsdl:operation name="Qoute">
@@ -62,10 +62,10 @@
         <wsdl:operation name = "Qoute">
             <soap:operation soapAction = "http://example.com/Quote"/>
             <wsdl:input>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/SonyQuoteService"/>
             </wsdl:input>
             <wsdl:output>
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://xmlns.oracle.com/SonyQuoteService"/>
             </wsdl:output>
         </wsdl:operation>        
     </wsdl:binding>
