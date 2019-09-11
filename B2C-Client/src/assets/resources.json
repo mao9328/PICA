@@ -1,0 +1,58 @@
+{
+    "Products": [
+        {
+            "Id": 1,
+            "Name": "Juquete",
+            "Code": "J1",
+            "Price": 250000,
+            "Description": "Juguete de medio pelo",
+            "NormalImageURL": "assets\\Dummy.png",
+            "SmallImageURL": "assets\\Dummy.png"
+        },
+        {
+            "Id": 2,
+            "Name": "Martillo",
+            "Code": "M1",
+            "Price": 120000,
+            "Description": "Martillo de cabo de madera",
+            "NormalImageURL": "assets\\Dummy.png",
+            "SmallImageURL": "assets\\Dummy.png"
+        },
+        {
+            "Id": 3,
+            "Name": "Estufa",
+            "Code": "E1",
+            "Price": 750000,
+            "Description": "Estufa familiar",
+            "NormalImageURL": "assets\\Dummy.png",
+            "SmallImageURL": "assets\\Dummy.png"
+        },
+        {
+            "Id": 4,
+            "Name": "Mesa",
+            "Code": "M2",
+            "Price": 300000,
+            "Description": "Mesa para trabajo",
+            "NormalImageURL": "assets\\Dummy.png",
+            "SmallImageURL": "assets\\Dummy.png"
+        },
+        {
+            "Id": 5,
+            "Name": "Silla",
+            "Code": "S1",
+            "Price": 500000,
+            "Description": "Silla bien chingona",
+            "NormalImageURL": "assets\\Dummy.png",
+            "SmallImageURL": "assets\\Dummy.png"
+        },
+        {
+            "Id": 6,
+            "Name": "Televisor",
+            "Code": "T1",
+            "Price": 2500000,
+            "Description": "Televisor 4K de los propios",
+            "NormalImageURL": "assets\\Dummy.png",
+            "SmallImageURL": "assets\\Dummy.png"
+        }
+    ]
+}

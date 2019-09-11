@@ -5,4 +5,6 @@ export interface Product {
     Code:string;
     Price: number;
     Description: string;
+    NormalImageURL:string;
+    SmallImageURL:string;
 }
