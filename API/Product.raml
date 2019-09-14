@@ -37,8 +37,8 @@ types:
           get:
               description: "Recurso para la consulta de productos por codigo"
               queryParameters:
-                   criteria:
-                   type: string
+                   code:
+                    type: string
               responses:
                  200:
                     body:
@@ -51,6 +51,9 @@ types:
         /byCriteria:
           get:
               description: "Recurso para la consulta de productos por nombre o por descripcion"
+              queryParameters:
+                   criteria:
+                    type: string
               responses:
                  200:
                      body:
