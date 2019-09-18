@@ -54,5 +54,177 @@
             "NormalImageURL": "assets\\Dummy.png",
             "SmallImageURL": "assets\\Dummy.png"
         }
+    ],
+    "ShoppingCart": {
+        "Items": [
+            {
+                "IdProduct": 1,
+                "Amount": 4,
+                "Price": 150000
+            },
+            {
+                "IdProduct": 2,
+                "Amount": 3,
+                "Price": 160000
+            },
+            {
+                "IdProduct": 3,
+                "Amount": 2,
+                "Price": 180000
+            },
+            {
+                "IdProduct": 4,
+                "Amount": 6,
+                "Price": 190000
+            }
+        ],
+        "Total": 800000
+    },
+    "ConfigLists": [
+        {
+            "Id": "Countries",
+            "List": [
+                {
+                    "Value": "1",
+                    "Text": "Colombia",
+                    "Parent": ""
+                },
+                {
+                    "Value": "2",
+                    "Text": "Peru",
+                    "Parent": ""
+                },
+                {
+                    "Value": "3",
+                    "Text": "Ecuador",
+                    "Parent": ""
+                },
+                {
+                    "Value": "4",
+                    "Text": "Argentina",
+                    "Parent": ""
+                },
+                {
+                    "Value": "5",
+                    "Text": "Bolivia",
+                    "Parent": ""
+                },
+                {
+                    "Value": "6",
+                    "Text": "Brasil",
+                    "Parent": ""
+                }
+            ]
+        },
+        {
+            "Id": "Cities",
+            "List": [
+                {
+                    "Value": "1",
+                    "Text": "Bogota",
+                    "Parent": "1"
+                },
+                {
+                    "Value": "2",
+                    "Text": "Cali",
+                    "Parent": "1"
+                },
+                {
+                    "Value": "3",
+                    "Text": "Barranquilla",
+                    "Parent": "1"
+                },
+                {
+                    "Value": "4",
+                    "Text": "Medellin",
+                    "Parent": "1"
+                },
+                {
+                    "Value": "5",
+                    "Text": "Lima",
+                    "Parent": "2"
+                },
+                {
+                    "Value": "6",
+                    "Text": "Arequipa",
+                    "Parent": "2"
+                },
+                {
+                    "Value": "7",
+                    "Text": "Quito",
+                    "Parent": "3"
+                },
+                {
+                    "Value": "8",
+                    "Text": "Tulcan",
+                    "Parent": "3"
+                },
+                {
+                    "Value": "9",
+                    "Text": "Machala",
+                    "Parent": "3"
+                },
+                {
+                    "Value": "10",
+                    "Text": "Cuenca",
+                    "Parent": "3"
+                },
+                {
+                    "Value": "11",
+                    "Text": "Buenos aires",
+                    "Parent": "4"
+                },
+                {
+                    "Value": "12",
+                    "Text": "Las Plata",
+                    "Parent": "4"
+                },
+                {
+                    "Value": "13",
+                    "Text": "Mendoza",
+                    "Parent": "4"
+                },
+                {
+                    "Value": "14",
+                    "Text": "Corrientes",
+                    "Parent": "4"
+                },
+                {
+                    "Value": "15",
+                    "Text": "Sucre",
+                    "Parent": "5"
+                },
+                {
+                    "Value": "16",
+                    "Text": "La Paz",
+                    "Parent": "5"
+                },
+                {
+                    "Value": "17",
+                    "Text": "Rio de Janeiro",
+                    "Parent": "6"
+                },
+                {
+                    "Value": "18",
+                    "Text": "Brasilia",
+                    "Parent": "6"
+                },
+                {
+                    "Value": "19",
+                    "Text": "Sao Pablo",
+                    "Parent": "6"
+                },
+                {
+                    "Value": "20",
+                    "Text": "Salvador de Bhia",
+                    "Parent": "6"
+                },
+                {
+                    "Value": "21",
+                    "Text": "Fortaleza",
+                    "Parent": "6"
+                }
+            ]
+        }
     ]
 }

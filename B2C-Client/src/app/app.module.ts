@@ -12,6 +12,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SpinnerService } from './services/spinner.service';
 import { BusinessService } from './services/business.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddressComponent } from './components/address/address.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     HomeComponent,
     CheckOutComponent,
-    SignUpComponent
+    SignUpComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,

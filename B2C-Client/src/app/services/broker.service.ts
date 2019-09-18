@@ -15,6 +15,7 @@ export class BrokerService {
 
     return this.http.get(url, { observe: 'response' }).pipe(mergeMap((response) => {
 
+      // tslint:disable-next-line:no-string-literal
       const status = response.headers['status'];
 
       if (status == 200) {
@@ -43,8 +44,8 @@ export class BrokerService {
         let genericResponse = new GenericResponse<T>();
 
         genericResponse.Error = true;
-        genericResponse.Message = "";
-        genericResponse.ErrorCode = "";
+        genericResponse.Message = '';
+        genericResponse.ErrorCode = '';
         genericResponse.Result = null;
 
         return throwError(genericResponse);

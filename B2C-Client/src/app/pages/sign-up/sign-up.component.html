@@ -4,97 +4,158 @@
     <p class="lead">Por favor ingrese sus datos para empezar a disfutar de los productos exclusivos que Kall Sony's
       ofrece para usted.</p>
   </div>
-  <div class="row">
+  <div class="row" [formGroup]="signUpForm">
     <div class="col-md-12 order-md-1">
       <h4 class="mb-3">Datos de usuario</h4>
       <div class="needs-validation">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>Nombres</label>
-            <input type="text" class="form-control" placeholder="Nombres">
+            <input type="text" class="form-control" placeholder="Nombres" formControlName="FirstName">
             <div class="invalid-feedback">
               Los nombres son requeridos.
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label>Apellidos</label>
-            <input type="text" class="form-control" placeholder="Apellidos">
+            <input type="text" class="form-control" placeholder="Apellidos" formControlName="LastName">
             <div class="invalid-feedback">
               Los apellidos son requeridos.
             </div>
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="username">Username</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">@</span>
-            </div>
-            <input type="text" class="form-control" id="username" placeholder="Username" required="">
-            <div class="invalid-feedback" style="width: 100%;">
-              El UserName es requerido.
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="username">Username</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+              </div>
+              <input type="text" class="form-control" id="username" placeholder="Username" formControlName="UserName">
+              <div class="invalid-feedback" style="width: 100%;">
+                El UserName es requerido.
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="mb-3">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" placeholder="you@example.com">
-          <div class="invalid-feedback">
-            El email es requerido.
+          <div class="col-md-6 mb-3">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" placeholder="you@example.com" formControlName="Email">
+            <div class="invalid-feedback">
+              El email es requerido.
+            </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-5 mb-3">
-            <label for="country">País</label>
-            <select class="custom-select d-block w-100">
-              <option value="">Seleccione</option>
-              <option>Colombia</option>
-              <option>Mexico</option>
-              <option>Argentina</option>
-              <option>Brasil</option>
-            </select>
-            <div class="invalid-feedback">
-              El país es requerido.
+          <div class="col-md-6 mb-3">
+            <label for="username">Password</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" formControlName="UserName">
+            <div class="invalid-feedback" style="width: 100%;">
+              El password es requerido.
             </div>
           </div>
-          <div class="col-md-5 mb-3">
-            <label for="country">Ciudad</label>
-            <select class="custom-select d-block w-100">
-              <option value="">Seleccione</option>
-              <option>Colombia</option>
-              <option>Mexico</option>
-              <option>Argentina</option>
-              <option>Brasil</option>
-            </select>
-            <div class="invalid-feedback">
-              La ciudad es requerida.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label>Zip</label>
-            <input type="text" class="form-control">
-            <div class="invalid-feedback">
-              El código Zip es requerido.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label>Estado</label>
-            <input type="text" class="form-control">
-            <div class="invalid-feedback">
-              El estado es requerido.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label>Calle</label>
-            <input type="text" class="form-control">
-            <div class="invalid-feedback">
-              La calle es requerida.
+          <div class="col-md-6 mb-3">
+            <label for="username">Confirmar Password</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" formControlName="UserName">
+            <div class="invalid-feedback" style="width: 100%;">
+              El password es requerido.
             </div>
           </div>
         </div>
+
+        <hr class="mb-4">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Agregar Direccion</h4>
+          </div>
+          <div class="col-md-12">
+            <div class="row" [formGroup]="addressForm">
+              <div class="col-md-4 mb-3">
+                <label for="country">País</label>
+                <select class="custom-select d-block w-100" formControlName="Country">
+                  <option value="">Seleccione</option>
+                  <option>Colombia</option>
+                  <option>Mexico</option>
+                  <option>Argentina</option>
+                  <option>Brasil</option>
+                </select>
+                <div class="invalid-feedback"
+                  *ngIf="GetProperty(addressForm,'Country').invalid || GetProperty(addressForm,'Country').pristine == false">
+                  El país es requerido.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="country">Ciudad</label>
+                <select class="custom-select d-block w-100" formControlName="City">
+                  <option value="">Seleccione</option>
+                  <option>Colombia</option>
+                  <option>Mexico</option>
+                  <option>Argentina</option>
+                  <option>Brasil</option>
+                </select>
+                <div class="invalid-feedback">
+                  La ciudad es requerida.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>Calle</label>
+                <input type="text" class="form-control" formControlName="Street">
+                <div class="invalid-feedback">
+                  La calle es requerida.
+                </div>
+              </div>
+              <div class="col-md-2 mb-3">
+                <label>Zip</label>
+                <input type="text" class="form-control" formControlName="ZIP">
+                <div class="invalid-feedback">
+                  El código Zip es requerido.
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label>Estado</label>
+                <input type="text" class="form-control" formControlName="State">
+                <div class="invalid-feedback">
+                  El estado es requerido.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button class="btn btn-primary mt-2" (click)="pushAddress()">Agregar</button>
+          </div>
+        </div>
+
+        <div class="py-5 text-left" *ngIf="someAddresses()">
+          <h4>Direcciones</h4>
+        </div>
+
+        <div class="table-responsive" *ngIf="someAddresses()">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Pais</th>
+                <th>Ciudad</th>
+                <th>Calle</th>
+                <th>ZIP</th>
+                <th>Estado</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let address of GetAddresses().controls; let i = index">
+                <td>{{GetPropertyValue(address,'Country')}}</td>
+                <td>{{GetPropertyValue(address,'City')}}</td>
+                <td>{{GetPropertyValue(address,'Street')}}</td>
+                <td>{{GetPropertyValue(address,'ZIP')}}</td>
+                <td>{{GetPropertyValue(address,'State')}}</td>
+                <td><button type="button" class="btn btn-primary" (click)="deleteAddressAt(i)">Eliminar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <hr class="mb-4">
         <div class="col">
           <div class="row">
@@ -119,4 +180,3 @@
       <li class="list-inline-item"><a href="#">Support</a></li>
     </ul>
   </footer>
-</div>
