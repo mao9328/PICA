@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MasterComponent } from './pages/master/master.component';
@@ -12,7 +12,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SpinnerService } from './services/spinner.service';
 import { BusinessService } from './services/business.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddressComponent } from './components/address/address.component';
+import {DpDatePickerModule} from 'ng2-date-picker';
 
 @NgModule({
   declarations: [
@@ -21,14 +21,14 @@ import { AddressComponent } from './components/address/address.component';
     LoginComponent,
     HomeComponent,
     CheckOutComponent,
-    SignUpComponent,
-    AddressComponent
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DpDatePickerModule
   ],
   providers: [SpinnerService, BusinessService],
   bootstrap: [AppComponent]

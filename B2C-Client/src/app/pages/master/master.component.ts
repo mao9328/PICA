@@ -14,10 +14,11 @@ export class MasterComponent implements OnInit {
 
   ngOnInit() {
 
-    this.shoppingKartCounter = 0;
+    this.shoppingKartCounter = this.business.getItems().length;
+
     this.business.shippingKartSubject.subscribe((value) => {
 
-      this.shoppingKartCounter++;
+      this.shoppingKartCounter = this.business.getItems().length;
     });
   }
 

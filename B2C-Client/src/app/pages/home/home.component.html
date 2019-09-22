@@ -8,26 +8,29 @@
     </div>
   </div>
 </div>
-<div class="col-12 col-md-12 col-lg-12 col-xl-12 mt-2 text-center">
+<div class="col-12 col-md-3 col-lg-3 col-xl-3 offset-md-4 offset-lg-4 offset-xl-4 mt-2 text-center">
   <div class="bd-example">
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
-        <li data-target="#carouselExampleCaptions" [attr.data-slide-to]="i" [ngClass]="{'active': i == 0}" *ngFor="let product of topFiveProducts;let i = index"></li>        
+        <li data-target="#carouselExampleCaptions" (click)="goToOffer(i)" [attr.data-slide-to]="i"
+          [ngClass]="{'active': i == currentOffer}" *ngFor="let product of topFiveProducts;let i = index"></li>
       </ol>
       <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let product of topFiveProducts;let i = index" [ngClass]="{'active': i == 0}">
-          <img style="max-width: 250px; max-height: 250px;" [src]="product.NormalImageURL" class="d-block w-100" alt="...">
+        <div class="carousel-item" *ngFor="let product of topFiveProducts;let i = index"
+          [ngClass]="{'active': i == currentOffer}">
+          <img style="max-width: 250px; max-height: 250px;" [src]="product.NormalImageURL" class="d-block w-100"
+            alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>{{product.Name}}</h5>
             <p>{{product.Description}}</p>
           </div>
         </div>
       </div>
-      <a class="carousel-control-prev"  role="button" data-slide="prev">
+      <a class="carousel-control-prev" (click)="previousOffer()" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next"  role="button" data-slide="next">
+      <a class="carousel-control-next" (click)="nextOffer()" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -52,9 +55,9 @@
             <p>{{product.Description}}</p>
           </div>
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="addItem(product)">Add to
-              Cart</button>
-            <button type="button" class="btn btn-lg btn-success btn-block">Buy</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="addItem(product)">Agregar al
+              carrito</button>
+            <button type="button" class="btn btn-lg btn-success btn-block">Comprar</button>
           </div>
         </div>
       </div>

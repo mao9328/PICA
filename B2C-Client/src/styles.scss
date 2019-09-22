@@ -1,8 +1,116 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
 $spacer: 1rem !default;
 
 .mt-10 {
-    margin-top: ($spacer * 6) !important;
-  }
+  margin-top: ($spacer * 6) !important;
+}
+
+:host dp-date-picker {
+  display: inline-block;
+}
+:host dp-date-picker.dp-material .dp-picker-input {
+  box-sizing: border-box;
+  height: 30px;
+  width: 213px;
+  font-size: 13px;
+  outline: 0;
+}
+:host dp-date-picker .dp-input-container {
+  position: relative;
+}
+:host dp-date-picker .dp-selected {
+  background: #106cc8;
+  color: #fff;
+}
+.dp-popup {
+  position: relative;
+  background: #fff;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+:host dp-day-calendar {
+  display: inline-block;
+}
+:host dp-day-calendar .dp-day-calendar-container {
+  background: #fff;
+}
+:host dp-day-calendar .dp-calendar-wrapper {
+  box-sizing: border-box;
+  border: 1px solid #000;
+}
+:host dp-day-calendar .dp-calendar-wrapper .dp-calendar-weekday:first-child {
+  border-left: none;
+}
+:host dp-day-calendar .dp-weekdays {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+:host dp-day-calendar .dp-calendar-weekday {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+:host dp-day-calendar .dp-calendar-day {
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+:host dp-day-calendar .dp-selected {
+  background: #106cc8;
+  color: #fff;
+}
+:host dp-day-calendar .dp-next-month,
+:host dp-day-calendar .dp-prev-month {
+  opacity: 0.5;
+}
+:host dp-day-calendar .dp-hide-near-month .dp-next-month,
+:host dp-day-calendar .dp-hide-near-month .dp-prev-month {
+  visibility: hidden;
+}
+:host dp-day-calendar .dp-week-number {
+  position: absolute;
+  font-size: 9px;
+}
+:host dp-day-calendar.dp-material .dp-calendar-weekday {
+  height: 25px;
+  width: 30px;
+  line-height: 25px;
+  color: #7a7a7a;
+  border: none;
+}
+:host dp-day-calendar.dp-material .dp-calendar-wrapper {
+  border: 1px solid #e0e0e0;
+}
+:host dp-day-calendar.dp-material .dp-calendar-day,
+:host dp-day-calendar.dp-material .dp-calendar-month {
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 50%;
+  border: none;
+  outline: 0;
+}
+:host dp-day-calendar.dp-material .dp-calendar-day:hover,
+:host dp-day-calendar.dp-material .dp-calendar-month:hover {
+  background: #e0e0e0;
+}
+:host dp-day-calendar.dp-material .dp-selected {
+  background: #106cc8;
+  color: #fff;
+}
+:host dp-day-calendar.dp-material .dp-selected:hover {
+  background: #106cc8;
+}
+:host dp-day-calendar.dp-material .dp-current-day {
+  border: 1px solid #106cc8;
+}

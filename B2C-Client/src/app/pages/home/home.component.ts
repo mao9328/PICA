@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/Product';
 import { BusinessService } from 'src/app/services/business.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Item } from 'src/app/model/Item';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,8 @@ export class HomeComponent implements OnInit {
 
   products: Product[];
   topFiveProducts: Product[];
+
+  currentOffer = 0;
 
   constructor(private business: BusinessService, private builder: FormBuilder) { }
 
@@ -54,8 +57,43 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addItem(item: Product) {
+  addItem(product: Product) {
 
-    this.business.addItemToKart();
+    let item = new Item();
+
+    item.Id = 0;
+    item.IdOrder = 0;
+    item.IdProduct = product.Id;
+    item.Quantity = 1;
+    item.Price = product.Price;
+    item.Name = product.Name;
+
+    this.business.addItemToKart(item);
+  }
+
+  nextOffer() {
+
+    if (this.currentOffer < 4) {
+
+      this.currentOffer++;
+    } else {
+
+      this.currentOffer = 0;
+    }
+  }
+  previousOffer() {
+
+    if (this.currentOffer > 0) {
+
+      this.currentOffer--;
+    } else {
+
+      this.currentOffer = 5;
+    }
+  }
+
+  goToOffer(index: number) {
+
+    this.currentOffer = index;
   }
 }

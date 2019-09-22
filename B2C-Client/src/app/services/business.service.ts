@@ -5,6 +5,7 @@ import { map, filter } from 'rxjs/operators';
 import { Product } from '../model/Product';
 import { ConfigList } from '../model/ConfigList';
 import { GenericResponse } from '../model/GenericResponse';
+import { Item } from '../model/Item';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,58 @@ export class BusinessService {
 
   }
 
-  addItemToKart() {
+  addItemToKart(item: Item) {
+
+    let items = localStorage.getItem('Items');
+
+    if (items == null) {
+
+      let itemsObj = [];
+
+      itemsObj.push(item);
+
+      localStorage.setItem('Items', JSON.stringify(itemsObj));
+
+    } else {
+
+      let itemsObj = JSON.parse(items) as Item[];
+
+      if (itemsObj.some(x => x.IdProduct == item.IdProduct)) {
+
+        const index = itemsObj.findIndex(x => x.IdProduct == item.IdProduct);
+
+        itemsObj[index].Quantity++;
+
+      } else {
+
+        itemsObj.push(item);
+      }
+
+      localStorage.setItem('Items', JSON.stringify(itemsObj));
+
+    }
+
+    this.notifyCartToMaster();
+
+  }
+
+  notifyCartToMaster() {
 
     this.shippingKartSubject.next(1);
+  }
+
+  getItems(): Item[] {
+
+    const items = localStorage.getItem('Items');
+
+    if (items == null) {
+
+      return [];
+
+    } else {
+
+      return JSON.parse(items) as Item[];
+    }
   }
 
   GetProducts(): Observable<GenericResponse<Product[]>> {

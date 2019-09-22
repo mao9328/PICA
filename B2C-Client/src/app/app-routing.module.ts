@@ -9,13 +9,15 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 const privateRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'checkout', component: CheckOutComponent }
+  { path: 'checkout', component: CheckOutComponent },
+  { path: '**', redirectTo: '/home' },
 ];
 
 const routes: Routes = [
   { path: 'secure', component: MasterComponent, children: privateRoutes },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignUpComponent }
+  { path: 'signup', component: SignUpComponent },
+  { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({
