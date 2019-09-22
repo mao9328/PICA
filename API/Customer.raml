@@ -4,13 +4,11 @@ version: 1.0
 baseUri: https://pruebas.com/version
 types:
     Customer: 
-        type: !include Schemas/Customer.schema.json   
+        type: !include Schemas/Customer.schema.json
     Customers:
-        type: Customer[]
+        type: !include Schemas/Customer.schema.json
     Error:
         type: !include Schemas/GenericResponse.schema.json
-
-
 /order:
     post:
         description: Recurso para la creacion de clientes

@@ -1,0 +1,9 @@
+{
+    "$id": "http://KallSonys.com/schemas/Image",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Array Image Schema",
+    "type": "array",
+    "items": {
+        "$ref": "Schemas/Image.schema.json"
+    }
+}

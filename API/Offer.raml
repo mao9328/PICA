@@ -2,10 +2,13 @@
 title: Offer Service
 version: 1.0
 baseUri: https://pruebas.com/version
-shemas:
-   - Offer: !include Schemas/Offer.schema.json
-   - Offers: Offer[]
-   - Error: !include Schemas/GenericResponse.schema.json    
+types:
+    Offer: 
+        type: !include Schemas/Offer.schema.json
+    Offers: 
+        type: !include Schemas/Offers.schema.json
+    Error: 
+        type: !include Schemas/GenericResponse.schema.json    
 
 /order:
     post:
@@ -20,7 +23,7 @@ shemas:
                         type: number
             500:
                 body:
-                    schema: Error     
+                    type: Error     
     put:
     
         description: Recurso para la actualizacion de ofertas
@@ -47,18 +50,16 @@ shemas:
             500:
                 body:
                     application/json:
-                        type: Error 
-
-    
+                        type: Error    
     /{id}:
-        get:
-            description: Recurso para la consulta de una campaña por id
-            responses:
-                200:
-                    body:
-                        application/json:
-                            type: Offer   
-                500:
-                    body:
-                        application/json:
-                            type: Error 
+         get:
+             description: Recurso para la consulta de una campaña por id
+             responses:
+                 200:
+                     body:
+                         application/json:
+                             type: Offer   
+                 500:
+                     body:
+                         application/json:
+                             type: Error 

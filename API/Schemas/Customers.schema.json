@@ -1,0 +1,9 @@
+{
+    "$id": "http://KallSonys.com/schemas/customer",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Array Customers Schema",
+    "type": "array",
+    "items": {
+        "$ref": "Schemas/Customer.schema.json"
+    }
+}
