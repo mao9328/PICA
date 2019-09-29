@@ -19,7 +19,7 @@ export class CheckOutComponent implements OnInit {
   formCreditCard: FormGroup;
   datePickerConfig: IDatePickerConfig = {
     format: 'DD/MM/YYYY',
-    disableKeypress : true
+    disableKeypress: true
   };
 
 
@@ -50,7 +50,21 @@ export class CheckOutComponent implements OnInit {
     return this.order.Items.length;
   }
 
+  validItems(): boolean {
+
+    return this.order.Items.length > 0;
+  }
+
   onClick() {
+
+    localStorage.clear();
+
+    this.business.notifyCartToMaster();
+
+    this.router.navigate(['/secure/home']);
+  }
+
+  onCancel() {
 
     localStorage.clear();
 

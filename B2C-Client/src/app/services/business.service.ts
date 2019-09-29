@@ -86,6 +86,20 @@ export class BusinessService {
     }));
   }
 
+  GetProduct(id: number): Observable<GenericResponse<Product>> {
+
+    return this.getResource('Products').pipe(map((response) => {
+
+      const generic = new GenericResponse<Product>();
+
+      generic.Result = (response as Product[]).find(x => x.Id == id);
+      generic.Error = false;
+      generic.Message = '';
+
+      return generic;
+    }));
+  }
+
   GetTopFiveProducts(): Observable<GenericResponse<Product[]>> {
 
     return this.getResource('Products').pipe(map((response) => {

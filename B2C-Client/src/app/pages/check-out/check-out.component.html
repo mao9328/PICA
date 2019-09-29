@@ -22,6 +22,9 @@
         <strong>{{order.Price| currency}}</strong>
       </li>
     </ul>
+
+    <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onClick()"
+      [disabled]="formCreditCard.invalid || !validItems()">Ordenar</button>
   </div>
   <div class="col-md-8 order-md-1">
     <div class="needs-validation" [formGroup]="formCreditCard">
@@ -57,7 +60,7 @@
       </div>
       <div class="row">
         <div class="col-md-3 mb-3">
-          <label>Expiracion</label>          
+          <label>Expiracion</label>
           <input type="text" class="form-control" [dpDayPicker]="datePickerConfig" formControlName="ExpirationDate"
             [ngClass]="{'is-invalid' : getProperty('ExpirationDate').invalid && getProperty('ExpirationDate').pristine == false}">
           <div class="invalid-feedback"
@@ -79,10 +82,9 @@
           </div>
         </div>
       </div>
-      <hr class="mb-4">
-      <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onClick()"
-        [disabled]="formCreditCard.invalid">Ordenar</button>
     </div>
+    <hr class="mb-4">
+    <button class="btn btn-secondary btn-lg btn-block" type="button" (click)="onCancel()">Cancelar</button>
   </div>
 </div>
 

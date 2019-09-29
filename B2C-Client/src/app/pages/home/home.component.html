@@ -1,14 +1,4 @@
-<div class="col-12 mt-10">
-  <div class="form-row" [formGroup]="formFilter">
-    <div class="col-11">
-      <input type="text" formControlName="filter" placeholder="Name or Description" class="form-control">
-    </div>
-    <div class="col-1">
-      <button type="button" class="btn btn-primary">Search</button>
-    </div>
-  </div>
-</div>
-<div class="col-12 col-md-3 col-lg-3 col-xl-3 offset-md-4 offset-lg-4 offset-xl-4 mt-2 text-center">
+<div class="mt-10 col-12 col-md-3 col-lg-3 col-xl-3 offset-md-4 offset-lg-4 offset-xl-4 mt-2 text-center">
   <div class="bd-example">
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -37,6 +27,13 @@
     </div>
   </div>
 </div>
+<div class="col-12 mt-5">
+  <div class="form-row" [formGroup]="formFilter">
+    <div class="col-12">
+      <input type="text" formControlName="filter" placeholder="Name or Description" class="form-control">
+    </div>
+  </div>
+</div>
 <div class="card-deck mt-5 text-center">
   <div class="col-md-12 col-lg-12 col-sm-12 col-12" *ngFor="let product of products">
     <div class="card mb-4 shadow-sm">
@@ -57,7 +54,8 @@
           <div class="col-12 col-sm-12 col-md-2 col-lg-2">
             <button type="button" class="btn btn-lg btn-primary btn-block" (click)="addItem(product)">Agregar al
               carrito</button>
-            <button type="button" class="btn btn-lg btn-success btn-block">Comprar</button>
+            <button type="button" class="btn btn-lg btn-success btn-block"
+              [routerLink]="['/secure/product',product.Id]">Comprar</button>
           </div>
         </div>
       </div>
