@@ -3,6 +3,13 @@
     <div class="needs-validation">
       <h4 class="mb-3">Producto</h4>
       <div class="row">
+        <div class="col">
+          <div class="alert alert-danger" role="alert" *ngIf="invalid">
+            {{message}}
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6 mb-3">
           <span>{{product.Name}}</span>
           <p>{{product.Description}}</p>
@@ -15,7 +22,8 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <button class="btn btn-secondary btn-lg btn-block" type="button" (click)="onCancelar()">Cancelar</button>
+          <button class="btn btn-secondary btn-lg btn-block" type="button"
+            [routerLink]="['/secure/home']">Cancelar</button>
         </div>
         <div class="col-md-6">
           <div class="row mb-3">

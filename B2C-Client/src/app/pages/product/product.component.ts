@@ -17,6 +17,8 @@ export class ProductComponent implements OnInit {
   ready = false;
   Quantity = 1;
   product: Product;
+  invalid = false;
+  message = '';
 
   constructor(private router: Router, private route: ActivatedRoute, private business: BusinessService) { }
 
@@ -39,18 +41,26 @@ export class ProductComponent implements OnInit {
 
   onClick() {
 
-    const item = new Item();
+    if (this.Quantity > 0) {
 
-    item.Id = 0;
-    item.IdOrder = 0;
-    item.IdProduct = this.product.Id;
-    item.Quantity = this.Quantity;
-    item.Price = this.product.Price;
-    item.Name = this.product.Name;
+      const item = new Item();
 
-    this.business.addItemToKart(item);
+      item.Id = 0;
+      item.IdOrder = 0;
+      item.IdProduct = this.product.Id;
+      item.Quantity = this.Quantity;
+      item.Price = this.product.Price;
+      item.Name = this.product.Name;
 
-    this.router.navigate(['/secure/home']);
+      this.business.addItemToKart(item);
 
+      this.router.navigate(['/secure/home']);
+
+    } else {
+
+      this.invalid = true;
+      this.message = 'La cantidad de productos debe ser mayor a cero.';
+
+    }
   }
 }
