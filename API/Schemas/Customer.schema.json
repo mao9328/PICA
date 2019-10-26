@@ -23,7 +23,11 @@
         "Email": {
             "type": "string",
             "description": "Email"
-        },       
+        },
+        "Type": {
+            "$ref": "Schemas/Type.schema.json",
+            "description": "Tipo cliente"
+        },
         "Addresses": {
             "type": "array",
             "items": {

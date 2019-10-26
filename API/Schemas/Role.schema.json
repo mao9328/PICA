@@ -1,0 +1,27 @@
+{
+    "$id": "http://KallSonys.com/schemas/role",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Role Schema",
+    "type": "object",
+    "properties": {
+        "Id": {
+            "type": "integer",
+            "description": "llave primaria"
+        },
+        "Name": {
+            "type": "string",
+            "description": "Nombre del tipo"
+        },
+        "Modules": {
+            "type": "array",
+            "items": {
+                "$ref": "Schemas/Module.schema.json"
+            }
+        }
+    },
+    "required": [
+        "Id",
+        "Name",
+        "Modules"
+    ]
+}

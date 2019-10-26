@@ -3,51 +3,57 @@
     <p class="lead">Ingrese la información relacionada al producto.</p>
 </div>
 <div class="row">
-    <div class="col-md-12 order-md-1">
+    <div class="col-md-12 col-lg-12 col-xl-12 order-md-1" [formGroup]="formProduct">
         <h4 class="mb-3">Producto</h4>
-        <form class="needs-validation" novalidate="">
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="firstName">Nombre</label>
-                    <input type="text" class="form-control">
-                    <div class="invalid-feedback">
-                        El nombre es requerido.
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="lastName">Código</label>
-                    <input type="text" class="form-control">
-                    <div class="invalid-feedback">
-                        el código es requerido.
-                    </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="firstName">Nombre</label>
+                <input type="text" class="form-control" formControlName="Name">
+                <div class="invalid-feedback">
+                    El nombre es requerido.
                 </div>
             </div>
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="lastName">Descripción</label>
-                    <input type="text" class="form-control">
-                    <div class="invalid-feedback">
-                        La descripción es requerida.
-                    </div>
+            <div class="col-md-6 mb-3">
+                <label for="lastName">Código</label>
+                <input type="text" class="form-control" formControlName="Code">
+                <div class="invalid-feedback">
+                    el código es requerido.
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 mb-3">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Elegir Imagen Pequeña</label>
-                    </div>
-                </div>
-                <div class="col-12 mb-3">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Elegir Imagen Normal</label>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col mb-3">
+                <label for="lastName">Descripción</label>
+                <textarea class="form-control" formControlName="Description"></textarea>
+                <div class="invalid-feedback">
+                    La descripción es requerida.
                 </div>
             </div>
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="button">Guardar</button>
-        </form>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" formControlName="NormalImageURL">
+                    <label class="custom-file-label" for="customFile" >Elegir Imagen Pequeña</label>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" formControlName="SmallImageURL">
+                    <label class="custom-file-label" for="customFile" >Elegir Imagen Normal</label>
+                </div>
+            </div>
+        </div>
+        <hr class="mb-4">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-secondary btn-lg btn-block" [routerLink]="['/secure/products']"
+                    type="button">Cancelar</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-lg btn-block" type="button">Guardar</button>
+            </div>
+        </div>
     </div>
 </div>
 

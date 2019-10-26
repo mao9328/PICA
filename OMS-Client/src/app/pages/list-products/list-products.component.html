@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-10 col-lg-10 col-xl-10">
+        <div class="table-responsive">
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>{{product.Code}}</td>
+                        <td>{{product.Name}}</td>
+                        <td><button class="btn btn-primary btn-block"
+                                [routerLink]="['/secure/product',product.Id]">Editar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-2 col-lg-2 col-xl-2">
+        <button class="btn btn-primary" [routerLink]="['/secure/product']">Crear</button>
+    </div>
+</div>
