@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,7 @@ import { ListProductsComponent } from './pages/list-products/list-products.compo
 import { BrokerService } from './services/broker.service';
 import { BusinessService } from './services/business.service';
 import { SpinnerService } from './services/spinner.service';
+import { OfferComponent } from './pages/offer/offer.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +22,13 @@ import { SpinnerService } from './services/spinner.service';
     MasterComponent,
     LoginComponent,
     HomeComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    OfferComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],

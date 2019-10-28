@@ -8,15 +8,21 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="firstName">Nombre</label>
-                <input type="text" class="form-control" formControlName="Name">
-                <div class="invalid-feedback">
+                <input
+                    [ngClass]="{'is-invalid' : GetProperty(formProduct,'Name').invalid && GetProperty(formProduct,'Name').pristine == false}"
+                    type="text" class="form-control" formControlName="Name">
+                <div *ngIf="GetProperty(formProduct,'Name').pristine == false && GetProperty(formProduct,'Name').errors?.required"
+                    class="invalid-feedback">
                     El nombre es requerido.
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="lastName">Código</label>
-                <input type="text" class="form-control" formControlName="Code">
-                <div class="invalid-feedback">
+                <input
+                    [ngClass]="{'is-invalid' : GetProperty(formProduct,'Code').invalid && GetProperty(formProduct,'Code').pristine == false}"
+                    type="text" class="form-control" formControlName="Code">
+                <div *ngIf="GetProperty(formProduct,'Code').pristine == false && GetProperty(formProduct,'Code').errors?.required"
+                    class="invalid-feedback">
                     el código es requerido.
                 </div>
             </div>
@@ -24,24 +30,57 @@
         <div class="row">
             <div class="col mb-3">
                 <label for="lastName">Descripción</label>
-                <textarea class="form-control" formControlName="Description"></textarea>
-                <div class="invalid-feedback">
+                <textarea
+                    [ngClass]="{'is-invalid' : GetProperty(formProduct,'Description').invalid && GetProperty(formProduct,'Description').pristine == false}"
+                    class="form-control" formControlName="Description"></textarea>
+                <div *ngIf="GetProperty(formProduct,'Description').pristine == false && GetProperty(formProduct,'Description').errors?.required"
+                    class="invalid-feedback">
                     La descripción es requerida.
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-12 mb-3">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" formControlName="NormalImageURL">
-                    <label class="custom-file-label" for="customFile" >Elegir Imagen Pequeña</label>
+            <div class="col-12">
+                <h3>Imagenes</h3>
+            </div>
+        </div>
+        <div class="row" formArrayName="Images">
+            <div class="col-11">
+                <div class="row" *ngFor="let image of GetImages().controls;let i = index" [formGroupName]="i">
+                    <div class="col-12 mb-3">
+                        <label for="lastName">Nombre</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(image,'Name').invalid && GetProperty(image,'Name').pristine == false}"
+                            type="text" class="form-control" formControlName="Name">
+                        <div *ngIf="GetProperty(image,'Name').pristine == false && GetProperty(image,'Name').errors?.required"
+                            class="invalid-feedback">
+                            El nombre es requerido.
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="lastName">Descripcion</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(image,'Description').invalid && GetProperty(image,'Description').pristine == false}"
+                            type="text" class="form-control" formControlName="Description">
+                        <div *ngIf="GetProperty(image,'Description').pristine == false && GetProperty(image,'Description').errors?.required"
+                            class="invalid-feedback">
+                            La descripcion es requerida.
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="lastName">Es miniatura?</label>
+                        <input type="text" class="form-control" formControlName="IsThumbnail">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" formControlName="Url">
+                            <label class="custom-file-label" for="customFile">Elegir Imagen</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-12 mb-3">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" formControlName="SmallImageURL">
-                    <label class="custom-file-label" for="customFile" >Elegir Imagen Normal</label>
-                </div>
+            <div class="col-1">
+                <button class="btn btn-primary" type="button" (click)="addImage()">Agregar Imagen</button>
             </div>
         </div>
         <hr class="mb-4">
