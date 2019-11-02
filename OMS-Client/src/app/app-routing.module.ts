@@ -5,12 +5,14 @@ import { MasterComponent } from './pages/master/master.component';
 import { ProductComponent } from './pages/product/product.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListProductsComponent } from './pages/list-products/list-products.component';
+import { OfferComponent } from './pages/offer/offer.component';
 
 const privateRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'product', component: ProductComponent },
   { path: 'product/:id', component: ProductComponent },
-  { path: 'products', component: ListProductsComponent }
+  { path: 'products', component: ListProductsComponent },
+  { path: 'offer', component: OfferComponent }
 ];
 
 const routes: Routes = [

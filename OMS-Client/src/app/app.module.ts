@@ -14,6 +14,9 @@ import { BrokerService } from './services/broker.service';
 import { BusinessService } from './services/business.service';
 import { SpinnerService } from './services/spinner.service';
 import { OfferComponent } from './pages/offer/offer.component';
+import { OffersComponent } from './pages/offers/offers.component';
+import { CustomersComponent } from './pages/customers/customers.component';
+import { CustomerComponent } from './pages/customer/customer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { OfferComponent } from './pages/offer/offer.component';
     LoginComponent,
     HomeComponent,
     ListProductsComponent,
-    OfferComponent
+    OfferComponent,
+    OffersComponent,
+    CustomersComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,
