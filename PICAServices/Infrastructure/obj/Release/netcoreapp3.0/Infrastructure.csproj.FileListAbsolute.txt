@@ -1,0 +1,9 @@
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\bin\Release\netcoreapp3.0\Infrastructure.deps.json
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\bin\Release\netcoreapp3.0\Infrastructure.runtimeconfig.json
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\bin\Release\netcoreapp3.0\Infrastructure.runtimeconfig.dev.json
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\bin\Release\netcoreapp3.0\Infrastructure.dll
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\bin\Release\netcoreapp3.0\Infrastructure.pdb
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.AssemblyInfo.cs
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.dll
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.pdb
