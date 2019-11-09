@@ -65,11 +65,10 @@ namespace BrokeredAuthentication.Services
 			return tokenString;
 		}
 
-		public bool Autorize(AutorizeModel model)
+		public async Task<bool> Autorize(AutorizeModel model)
 		{
 			try
 			{
-
 				SecurityToken validatedToken;
 
 				var validations = new TokenValidationParameters
@@ -84,9 +83,18 @@ namespace BrokeredAuthentication.Services
 				// And finally when  you received token from client
 				// you can  either validate it or try to  read		
 
-				handler.ValidateToken(model.Token, validations, out validatedToken);
+				var claims = handler.ValidateToken(model.Token, validations, out validatedToken);
 
-				return true;
+				if (!model.IdRol.HasValue)
+				{
+					return true;
+				}
+
+				var user = ((JwtSecurityToken)validatedToken).Subject;
+
+				var userModel = await rep.GetUserByUserName(user);
+
+				return userModel.Roles.Any(x => x.Id == model.IdRol);
 
 			}
 			catch (SecurityTokenException e)

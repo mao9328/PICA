@@ -55,11 +55,11 @@ namespace BrokeredAuthentication.Controllers
 		[Route("Autorize")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest, StatusCode = 400, Type = typeof(ResponseModel<bool>))]
-		public ActionResult<ResponseModel<bool>> Autorize(AutorizeModel model)
+		public async Task<ActionResult<ResponseModel<bool>>> Autorize(AutorizeModel model)
 		{
 			try
 			{
-				return Ok(new ResponseModel<bool>() { Result = securityService.Autorize(model) });
+				return Ok(new ResponseModel<bool>() { Result = await securityService.Autorize(model) });
 			}
 			catch (ApplicationException e)
 			{
