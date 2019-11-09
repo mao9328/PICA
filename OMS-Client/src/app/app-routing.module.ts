@@ -6,13 +6,19 @@ import { ProductComponent } from './pages/product/product.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListProductsComponent } from './pages/list-products/list-products.component';
 import { OfferComponent } from './pages/offer/offer.component';
+import { OffersComponent } from './pages/offers/offers.component';
+import { CustomersComponent } from './pages/customers/customers.component';
+import { CustomerComponent } from './pages/customer/customer.component';
 
 const privateRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'product', component: ProductComponent },
   { path: 'product/:id', component: ProductComponent },
   { path: 'products', component: ListProductsComponent },
-  { path: 'offer', component: OfferComponent }
+  { path: 'offer', component: OfferComponent },
+  { path: 'offers', component: OffersComponent },
+  { path: 'customers', component: CustomersComponent },
+  { path: 'customer/:id', component: CustomerComponent }
 ];
 
 const routes: Routes = [

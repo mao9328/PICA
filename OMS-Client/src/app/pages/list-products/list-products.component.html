@@ -1,4 +1,9 @@
 <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 mb-3">
+        <h3>
+            Productos
+        </h3>
+    </div>
     <div class="col-md-10 col-lg-10 col-xl-10">
         <div class="table-responsive">
             <table class="table table-border table-hover">
@@ -13,8 +18,14 @@
                     <tr *ngFor="let product of products">
                         <td>{{product.Code}}</td>
                         <td>{{product.Name}}</td>
-                        <td><button class="btn btn-primary btn-block"
-                                [routerLink]="['/secure/product',product.Id]">Editar</button></td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button class="btn btn-primary"
+                                    [routerLink]="['/secure/product',product.Id]">Editar</button>
+                                <button class="btn btn-primary"
+                                    [routerLink]="['/secure/product',product.Id]">Eliminar</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
