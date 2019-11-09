@@ -17,7 +17,7 @@ namespace BrokeredAuthentication.Repositories
 
 		public async Task<UserModel> GetUserByUserName(string userName)
 		{
-			var result = await context.Users.SingleAsync(x => x.Email.Equals(userName));
+			var result = await context.Users.Include(x=> x.UserRoles).SingleAsync(x => x.Email.Equals(userName));
 
 			return new UserModel()
 			{
@@ -26,8 +26,7 @@ namespace BrokeredAuthentication.Repositories
 				LastName = result.LastName,
 				Roles = result.UserRoles.Select(x => new RoleModel()
 				{
-					Id = x.Role.Id,
-					Name = x.Role.Name
+					Id = x.RoleId
 				}).ToList()
 			};
 		}

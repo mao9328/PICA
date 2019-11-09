@@ -7,3 +7,4 @@ C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netco
 C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.AssemblyInfo.cs
 C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.dll
 C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.pdb
+C:\Users\Mao\Documents\GitHub\PICA\PICAServices\Infrastructure\obj\Release\netcoreapp3.0\Infrastructure.csprojAssemblyReference.cache
