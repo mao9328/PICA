@@ -9,16 +9,57 @@ import { OfferComponent } from './pages/offer/offer.component';
 import { OffersComponent } from './pages/offers/offers.component';
 import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerComponent } from './pages/customer/customer.component';
+import { MainGuard } from './app.main-guard.guard';
 
 const privateRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'product', component: ProductComponent },
-  { path: 'product/:id', component: ProductComponent },
-  { path: 'products', component: ListProductsComponent },
-  { path: 'offer', component: OfferComponent },
-  { path: 'offers', component: OffersComponent },
-  { path: 'customers', component: CustomersComponent },
-  { path: 'customer/:id', component: CustomerComponent }
+  {
+    path: 'home',
+    component: HomeComponent,
+    data: { IdRole: 0 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'product',
+    component: ProductComponent,
+    data: { IdRole: 2 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'product/:id',
+    component: ProductComponent,
+    data: { IdRole: 2 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'products',
+    component: ListProductsComponent,
+    data: { IdRole: 1 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'offer',
+    component: OfferComponent,
+    data: { IdRole: 3 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'offers',
+    component: OffersComponent,
+    data: { IdRole: 3 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'customers',
+    component: CustomersComponent,
+    data: { IdRole: 6 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'customer/:id',
+    component: CustomerComponent,
+    data: { IdRole: 7 },
+    canActivate: [MainGuard]
+  }
 ];
 
 const routes: Routes = [

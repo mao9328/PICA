@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="row" formArrayName="Images">
-            <div class="col-11">
+            <div class="col-10">
                 <div class="row" *ngFor="let image of GetImages().controls;let i = index" [formGroupName]="i">
                     <div class="col-12 mb-3">
                         <label for="lastName">Nombre</label>
@@ -68,18 +68,19 @@
                         </div>
                     </div>
                     <div class="col-12 mb-3">
-                        <label for="lastName">Es miniatura?</label>
-                        <input type="text" class="form-control" formControlName="IsThumbnail">
-                    </div>
-                    <div class="col-12 mb-3">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" formControlName="Url">
-                            <label class="custom-file-label" for="customFile">Elegir Imagen</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="IsThumbnail">
+                            <label class="form-check-label" for="defaultCheck1">Es miniatura?</label>
                         </div>
                     </div>
+                    <div class="col-12 mb-3">
+                        <label for="customFile">Elegir Imagen</label>
+                        <input type="file" class="form-control" id="customFile" formControlName="Url">
+                    </div>
                 </div>
+                <hr>
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <button class="btn btn-primary" type="button" (click)="addImage()">Agregar Imagen</button>
             </div>
         </div>

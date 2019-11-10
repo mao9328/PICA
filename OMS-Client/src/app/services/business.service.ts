@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { of, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, filter } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { Product } from '../model/Product';
 import { ConfigList } from '../model/ConfigList';
 import { GenericResponse } from '../model/GenericResponse';
 import { Item } from '../model/Item';
+import { BrokerService } from './broker.service';
+import { environment } from 'src/environments/environment';
+import { Security } from '../model/Security';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private broker: BrokerService) { }
 
   shippingKartSubject = new Subject();
 
@@ -166,6 +169,21 @@ export class BusinessService {
     }));
   }
 
+  Authenticate(credentials: any): Observable<GenericResponse<Security<string>>> {
+
+    return this.broker.Post<Security<string>>(environment.baseURL + environment.AuthenticationURL, credentials);
+  }
+
+  SetLocalStorage(key: string, value: any) {
+
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  GetLocalStorage(key: string): any {
+
+    return JSON.parse(localStorage.getItem(key));
+  }
+
   private getResource(member: string): Observable<any> {
 
     return this.http.get('assets/resources.json')
@@ -174,5 +192,41 @@ export class BusinessService {
 
           return response[member];
         }));
+  }
+
+  public Autorize(idRol: number): Observable<boolean> {
+
+    if (idRol == 0) {
+
+      return of(true);
+
+    } else {
+
+      let token = this.GetLocalStorage(environment.TokenKey)
+
+      if (token != null) {
+
+        let request = {
+          Token: token,
+          IdRol: idRol
+        };
+
+        return this.broker.Post<Security<boolean>>(environment.baseURL + environment.AutorizationURL, request).pipe(
+          map((mainResponse) => {
+
+            if (!mainResponse.Error) {
+
+              return mainResponse.Result.result;
+            } else {
+
+              return false;
+            }
+          }));
+
+      } else {
+
+        return of(false);
+      }
+    }
   }
 }

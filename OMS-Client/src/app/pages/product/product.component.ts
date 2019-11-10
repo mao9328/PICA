@@ -46,11 +46,8 @@ export class ProductComponent implements OnInit {
               Description: response.Result.Description
             });
           }
-
         });
-
       }
-
     });
 
   }
@@ -62,7 +59,15 @@ export class ProductComponent implements OnInit {
 
   addImage() {
 
-    (this.formProduct.get('Images') as FormArray).push(this.getImage());
+    console.log(this.formProduct);
+
+    var count = (this.formProduct.get('Images') as FormArray).length;
+
+    if ((this.formProduct.get('Images') as FormArray).at(count - 1).valid) {
+
+      (this.formProduct.get('Images') as FormArray).push(this.getImage());
+    }
+
   }
 
   getImage(): FormGroup {

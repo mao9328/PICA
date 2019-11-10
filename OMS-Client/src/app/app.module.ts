@@ -17,6 +17,7 @@ import { OfferComponent } from './pages/offer/offer.component';
 import { OffersComponent } from './pages/offers/offers.component';
 import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerComponent } from './pages/customer/customer.component';
+import { MainGuard } from './app.main-guard.guard';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { CustomerComponent } from './pages/customer/customer.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [BrokerService, BusinessService, SpinnerService],
+  providers: [BrokerService, BusinessService, SpinnerService, MainGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

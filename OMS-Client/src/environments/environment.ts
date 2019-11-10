@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseURL: 'http://10.39.1.163:8890/',
+  AuthenticationURL: 'security/authentication',
+  AutorizationURL: 'security/autorize',
+  TokenKey: 'SecurityToken'
 };
 
 /*
