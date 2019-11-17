@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { environment } from 'src/environments/environment.prod';
@@ -14,16 +14,24 @@ export class LoginComponent implements OnInit {
   showModal = false;
   modalTitle = '';
   modalText = '';
+  private redirectTo: string;
 
   loginForm: FormGroup;
 
-  constructor(private router: Router, private builder: FormBuilder, private business: BusinessService) { }
+  constructor(private router: Router, private builder: FormBuilder, private business: BusinessService, private route: ActivatedRoute, ) { }
 
   ngOnInit() {
 
     this.loginForm = this.builder.group({
       User: ['', [Validators.required, Validators.email]],
       Password: ['', [Validators.required]]
+    });
+
+    this.route.queryParamMap.subscribe((route) => {
+
+      if (route.get('retUrl') != null) {
+        this.redirectTo = route.get('retUrl');
+      }
     });
 
   }
@@ -36,7 +44,14 @@ export class LoginComponent implements OnInit {
 
         this.business.SetLocalStorage(environment.TokenKey, response.Result.result);
 
-        this.router.navigate(['/secure/products']);
+        if (this.redirectTo != null) {
+
+          this.router.navigate([this.redirectTo]);
+        } else {
+
+          this.router.navigate(['/secure/products']);
+        }
+
       } else {
 
         this.modalTitle = "Error";
@@ -48,7 +63,7 @@ export class LoginComponent implements OnInit {
       this.modalTitle = "Error";
       this.modalText = "Error, credenciales invalidas."
       this.showModal = true;
-      
+
     });
   }
 }

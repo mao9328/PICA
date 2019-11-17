@@ -3,7 +3,7 @@ import { Item } from 'src/app/model/Item';
 import { BusinessService } from 'src/app/services/business.service';
 import { Order } from 'src/app/model/Order';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { DatePickerDirective, DatePickerComponent, IDatePickerConfig } from 'ng2-date-picker';
 
 @Component({
@@ -13,15 +13,12 @@ import { DatePickerDirective, DatePickerComponent, IDatePickerConfig } from 'ng2
 })
 export class CheckOutComponent implements OnInit {
 
-  @ViewChild('dayPicker') datePicker: DatePickerComponent;
-
   order: Order;
   formCreditCard: FormGroup;
   datePickerConfig: IDatePickerConfig = {
     format: 'DD/MM/YYYY',
     disableKeypress: true
   };
-
 
   constructor(
     private business: BusinessService,
@@ -34,7 +31,14 @@ export class CheckOutComponent implements OnInit {
       Name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       Number: ['', [Validators.required, Validators.pattern('[0-9 ]{12}')]],
       ExpirationDate: ['', [Validators.required]],
-      VerificationCode: ['', [Validators.required, Validators.pattern('[0-9]{3}')]]
+      VerificationCode: ['', [Validators.required, Validators.pattern('[0-9]{3}')]],
+      Address: this.builder.group({
+        Country: ['', [Validators.required]],
+        State: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+        City: ['', [Validators.required]],
+        ZIP: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+        Street: ['', [Validators.required]]
+      })
     });
 
     this.order = new Order();
@@ -73,8 +77,19 @@ export class CheckOutComponent implements OnInit {
     this.router.navigate(['/secure/home']);
   }
 
-  getProperty(member: string) {
+  getProperty(member: string, form?: FormGroup, ): FormControl {
 
-    return this.formCreditCard.get(member) as FormControl;
+    if (form != null) {
+
+      return form.get(member) as FormControl;
+
+    } else {
+
+      return this.formCreditCard.get(member) as FormControl;
+    }
+  }
+
+  getAddress(): FormGroup {
+    return this.formCreditCard.get('Address') as FormGroup;
   }
 }

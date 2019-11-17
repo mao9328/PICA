@@ -82,7 +82,7 @@ export class SignUpComponent implements OnInit {
       City: [data.City],
       Country: [data.Country],
       Street: [data.Street],
-      ZIP: [data.ZIP],
+      ZIP: [data.Zip],
       State: [data.State]
     });
   }

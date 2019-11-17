@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Actualize sus datos</h2>
+    </div>
+    <div class="row" [formGroup]="signUpForm">
+        <div class="col-md-12 order-md-1">
+            <h4 class="mb-3">Datos de usuario</h4>
+            <div class="needs-validation">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Nombres</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'FirstName').invalid && GetProperty(signUpForm,'FirstName').pristine == false}"
+                            type="text" class="form-control" placeholder="Nombres" formControlName="FirstName">
+                        <div class="invalid-feedback"
+                            *ngIf="GetProperty(signUpForm,'FirstName').pristine == false && GetProperty(signUpForm,'FirstName').errors?.required">
+                            Los nombres son requeridos.
+                        </div>
+                        <div class="invalid-feedback"
+                            *ngIf="GetProperty(signUpForm,'FirstName').pristine == false && GetProperty(signUpForm,'FirstName').errors?.pattern">
+                            Los nombres no son validos.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Apellidos</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'LastName').invalid && GetProperty(signUpForm,'LastName').pristine == false}"
+                            type="text" class="form-control" placeholder="Apellidos" formControlName="LastName">
+                        <div class="invalid-feedback"
+                            *ngIf="GetProperty(signUpForm,'LastName').pristine == false && GetProperty(signUpForm,'LastName').errors?.required">
+                            Los apellidos son requeridos.
+                        </div>
+                        <div class="invalid-feedback"
+                            *ngIf="GetProperty(signUpForm,'LastName').pristine == false && GetProperty(signUpForm,'LastName').errors?.pattern">
+                            Los apellidos no son validos.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="email">Email</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'Email').invalid && GetProperty(signUpForm,'Email').pristine == false}"
+                            type="email" class="form-control" placeholder="you@example.com" formControlName="Email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="password">Password</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'Password').invalid && GetProperty(signUpForm,'Password').pristine == false}"
+                            type="password" class="form-control" id="password" placeholder="Password"
+                            formControlName="Password">
+                        <div class="invalid-feedback" style="width: 100%;"
+                            *ngIf="GetProperty(signUpForm,'Password').pristine == false && GetProperty(signUpForm,'Password').errors?.required">
+                            El password es requerido.
+                        </div>
+                        <div class="invalid-feedback" style="width: 100%;"
+                            *ngIf="GetProperty(signUpForm,'Password').pristine == false && GetProperty(signUpForm,'Password').errors?.pattern">
+                            El password no es valido.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="ConfPassword">Confirmar Password</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'ConfPassword').invalid && GetProperty(signUpForm,'ConfPassword').pristine == false}"
+                            type="password" class="form-control" id="ConfPassword" placeholder="ConfPassword"
+                            formControlName="ConfPassword">
+                        <div class="invalid-feedback" style="width: 100%;"
+                            *ngIf="GetProperty(signUpForm,'ConfPassword').pristine == false && GetProperty(signUpForm,'ConfPassword').errors?.required">
+                            El password es requerido.
+                        </div>
+                        <div class="invalid-feedback" style="width: 100%;"
+                            *ngIf="GetProperty(signUpForm,'ConfPassword').pristine == false && GetProperty(signUpForm,'ConfPassword').errors?.pattern">
+                            El password no es valido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

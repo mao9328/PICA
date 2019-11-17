@@ -14,6 +14,11 @@ import { BusinessService } from './services/business.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { ProductComponent } from './pages/product/product.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ViewOrderComponent } from './pages/view-order/view-order.component';
+import { MainGuard } from './app.main-guard.guard';
+import { ManageAccountComponent } from './pages/manage-account/manage-account.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,10 @@ import { ProductComponent } from './pages/product/product.component';
     HomeComponent,
     CheckOutComponent,
     SignUpComponent,
-    ProductComponent
+    ProductComponent,
+    OrdersComponent,
+    ViewOrderComponent,
+    ManageAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +40,9 @@ import { ProductComponent } from './pages/product/product.component';
     DpDatePickerModule,
     FormsModule,
     AppRoutingModule,
+    NgxSpinnerModule
   ],
-  providers: [SpinnerService, BusinessService],
+  providers: [SpinnerService, BusinessService, MainGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,19 +6,20 @@ import { Product } from '../model/Product';
 import { ConfigList } from '../model/ConfigList';
 import { GenericResponse } from '../model/GenericResponse';
 import { Item } from '../model/Item';
+import { Order } from '../model/Order';
+import { BrokerService } from './broker.service';
+import { Security } from '../model/Security';
+import { environment } from 'src/environments/environment';
+import { Customer } from '../model/Customer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private broker: BrokerService) { }
 
   shippingKartSubject = new Subject();
-
-  login() {
-
-  }
 
   addItemToKart(item: Item) {
 
@@ -36,9 +37,9 @@ export class BusinessService {
 
       let itemsObj = JSON.parse(items) as Item[];
 
-      if (itemsObj.some(x => x.IdProduct == item.IdProduct)) {
+      if (itemsObj.some(x => x.ProductCode == item.ProductCode)) {
 
-        const index = itemsObj.findIndex(x => x.IdProduct == item.IdProduct);
+        const index = itemsObj.findIndex(x => x.ProductCode == item.ProductCode);
 
         itemsObj[index].Quantity++;
 
@@ -52,7 +53,6 @@ export class BusinessService {
     }
 
     this.notifyCartToMaster();
-
   }
 
   notifyCartToMaster() {
@@ -84,6 +84,48 @@ export class BusinessService {
 
       return generic;
     }));
+  }
+
+  GetOrders(): Observable<GenericResponse<Order[]>> {
+
+    return this.broker.Get<Order[]>(environment.baseURL + environment.OrdersURL);
+
+    // return this.getResource('Orders').pipe(map((response) => {
+
+    //   let generic = new GenericResponse<Order[]>();
+
+    //   generic.Result = response as Order[];
+
+    //   return generic;
+    // }));
+  }
+
+  GetOrder(idOrder: number): Observable<GenericResponse<Order>> {
+
+    return this.broker.Get<Order>(environment.baseURL + environment.OrdersURL + idOrder);
+
+    // return this.getResource('Orders').pipe(map((response) => {
+
+    //   let generic = new GenericResponse<Order>();
+
+    //   generic.Result = response as Order;
+
+    //   return generic;
+    // }));
+  }
+
+  GetCustomer(idUser: number): Observable<GenericResponse<Customer>> {
+
+    return this.broker.Get<Customer>(environment.baseURL + environment.OrdersURL + idUser);
+
+    // return this.getResource('Orders').pipe(map((response) => {
+
+    //   let generic = new GenericResponse<Order>();
+
+    //   generic.Result = response as Order;
+
+    //   return generic;
+    // }));
   }
 
   GetProduct(id: number): Observable<GenericResponse<Product>> {
@@ -163,4 +205,58 @@ export class BusinessService {
           return response[member];
         }));
   }
+
+  public Authenticate(credentials: any): Observable<GenericResponse<Security<string>>> {
+
+    return this.broker.Post<Security<string>>(environment.baseURL + environment.AuthenticationURL, credentials);
+  }
+
+  public Autorize(idRol: number): Observable<boolean> {
+
+    return of(true);
+
+    if (idRol == 0) {
+
+      return of(true);
+
+    } else {
+
+      let token = this.GetLocalStorage(environment.TokenKey)
+
+      if (token != null) {
+
+        let request = {
+          Token: token,
+          IdRol: idRol
+        };
+
+        return this.broker.Post<Security<boolean>>(environment.baseURL + environment.AutorizationURL, request).pipe(
+          map((mainResponse) => {
+
+            if (!mainResponse.Error) {
+
+              return mainResponse.Result.result;
+            } else {
+
+              return false;
+            }
+          }));
+
+      } else {
+
+        return of(false);
+      }
+    }
+  }
+
+  SetLocalStorage(key: string, value: any) {
+
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  GetLocalStorage(key: string): any {
+
+    return JSON.parse(localStorage.getItem(key));
+  }
+
 }

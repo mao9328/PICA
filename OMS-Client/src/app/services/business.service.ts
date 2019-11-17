@@ -9,6 +9,8 @@ import { Item } from '../model/Item';
 import { BrokerService } from './broker.service';
 import { environment } from 'src/environments/environment';
 import { Security } from '../model/Security';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Order } from '../model/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +78,35 @@ export class BusinessService {
       return JSON.parse(items) as Item[];
     }
   }
+
+  GetOrdersByProductName(): Observable<GenericResponse<Order[]>> {
+
+    return this.broker.Get<Order[]>(environment.baseURL + environment.OrdersURL);
+
+    // return this.getResource('Orders').pipe(map((response) => {
+
+    //   let generic = new GenericResponse<Order[]>();
+
+    //   generic.Result = response as Order[];
+
+    //   return generic;
+    // }));
+  }
+
+  GetOrdersByState(): Observable<GenericResponse<Order[]>> {
+
+    return this.broker.Get<Order[]>(environment.baseURL + environment.OrdersURL);
+
+    // return this.getResource('Orders').pipe(map((response) => {
+
+    //   let generic = new GenericResponse<Order[]>();
+
+    //   generic.Result = response as Order[];
+
+    //   return generic;
+    // }));
+  }
+
 
   GetProducts(): Observable<GenericResponse<Product[]>> {
 
@@ -169,11 +200,6 @@ export class BusinessService {
     }));
   }
 
-  Authenticate(credentials: any): Observable<GenericResponse<Security<string>>> {
-
-    return this.broker.Post<Security<string>>(environment.baseURL + environment.AuthenticationURL, credentials);
-  }
-
   SetLocalStorage(key: string, value: any) {
 
     localStorage.setItem(key, JSON.stringify(value));
@@ -194,6 +220,11 @@ export class BusinessService {
         }));
   }
 
+  public Authenticate(credentials: any): Observable<GenericResponse<Security<string>>> {
+
+    return this.broker.Post<Security<string>>(environment.baseURL + environment.AuthenticationURL, credentials);
+  }
+
   public Autorize(idRol: number): Observable<boolean> {
 
     if (idRol == 0) {
@@ -211,12 +242,12 @@ export class BusinessService {
           IdRol: idRol
         };
 
-        return this.broker.Post<Security<boolean>>(environment.baseURL + environment.AutorizationURL, request).pipe(
+        return this.broker.Post<Security<string>>(environment.baseURL + environment.AutorizationURL, request).pipe(
           map((mainResponse) => {
 
             if (!mainResponse.Error) {
 
-              return mainResponse.Result.result;
+              return mainResponse.Result.result == 'true';
             } else {
 
               return false;

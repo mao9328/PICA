@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  baseURL: 'http://10.39.1.163:8890/',
-  AuthenticationURL: 'security/authentication',
-  AutorizationURL: 'security/autorize',
-  TokenKey: 'SecurityToken'
+  baseURL: 'http://10.39.1.163:8891/',
+  AuthenticationURL: 'security/authenticate',
+  AutorizationURL: 'security/authorize',
+  TokenKey: 'SecurityToken',
+  OrdersURL:''
 };
 
 /*

@@ -47,7 +47,7 @@ export class ProductComponent implements OnInit {
 
       item.Id = 0;
       item.IdOrder = 0;
-      item.IdProduct = this.product.Id;
+      item.ProductCode = this.product.Code;
       item.Quantity = this.Quantity;
       item.Price = this.product.Price;
       item.Name = this.product.Name;

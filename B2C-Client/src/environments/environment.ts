@@ -4,7 +4,14 @@
 
 export const environment = {
   production: false,
-  baseURL:''
+  baseURL: 'http://10.39.1.135:8090/',
+  //baseURL: 'http://10.39.1.163:8891/',
+  AuthenticationURL: 'security/authenticate',
+  AutorizationURL: 'security/authorize',
+  OrdersURL: 'OMS/order/22',
+  OrderURL: 'OMS/order/',
+  CustomerURL:'OMS/customer/',
+  TokenKey: 'SecurityToken'
 };
 
 /*

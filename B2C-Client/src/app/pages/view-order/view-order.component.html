@@ -1,0 +1,71 @@
+<div class="row mt-10">
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <h3>Detalle Orden</h3>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col">
+        <label class="float-right">Id: </label>
+      </div>
+      <div class="col">
+        <p class="float-left">{{order.Id}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col">
+        <label class="float-right">Fecha: </label>
+      </div>
+      <div class="col">
+        <p class="float-left">{{order.Date}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col">
+        <label class="float-right">Precio: </label>
+      </div>
+      <div class="col">
+        <p class="float-left">{{order.Price | currency:'COP'}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col">
+        <label class="float-right">Comentarios: </label>
+      </div>
+      <div class="col">
+        <p class="float-left">{{order.Comments}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="row" *ngFor="let item of order.Items">
+      <div class="col">
+
+      </div>
+      <div class="col">
+
+      </div>
+      <div class="col">
+
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col">
+        <label class="float-right">Estado: </label>
+      </div>
+      <div class="col">
+        <p class="float-left">{{order.State.Name}}</p>
+      </div>
+    </div>
+  </div>
+</div>

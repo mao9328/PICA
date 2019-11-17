@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
     item.Id = 0;
     item.IdOrder = 0;
-    item.IdProduct = product.Id;
+    item.ProductCode = product.Code;
     item.Quantity = 1;
     item.Price = product.Price;
     item.Name = product.Name;

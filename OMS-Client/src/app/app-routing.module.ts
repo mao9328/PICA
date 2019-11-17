@@ -65,6 +65,7 @@ const privateRoutes: Routes = [
 const routes: Routes = [
   { path: 'secure', component: MasterComponent, children: privateRoutes },
   { path: 'login', component: LoginComponent },
+  { path: 'login/:retUrl', component: LoginComponent },
   { path: '**', redirectTo: '/login' }
 ];
 

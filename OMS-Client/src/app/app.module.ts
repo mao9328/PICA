@@ -18,6 +18,7 @@ import { OffersComponent } from './pages/offers/offers.component';
 import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { MainGuard } from './app.main-guard.guard';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MainGuard } from './app.main-guard.guard';
     OfferComponent,
     OffersComponent,
     CustomersComponent,
-    CustomerComponent
+    CustomerComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,6 @@
   <h2>Checkout</h2>
   <p class="lead">Por favor ingrese la informacion relativa a la forma de pago.</p>
 </div>
-
 <div class="row">
   <div class="col-md-4 order-md-2 mb-4">
     <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -22,7 +21,6 @@
         <strong>{{order.Price| currency}}</strong>
       </li>
     </ul>
-
     <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onClick()"
       [disabled]="formCreditCard.invalid || !validItems()">Ordenar</button>
   </div>
@@ -61,7 +59,7 @@
       <div class="row">
         <div class="col-md-3 mb-3">
           <label>Expiracion</label>
-          <input type="text" class="form-control" [dpDayPicker]="datePickerConfig" formControlName="ExpirationDate"
+          <input type="text" class="form-control" formControlName="ExpirationDate"
             [ngClass]="{'is-invalid' : getProperty('ExpirationDate').invalid && getProperty('ExpirationDate').pristine == false}">
           <div class="invalid-feedback"
             *ngIf="getProperty('ExpirationDate').pristine == false && getProperty('ExpirationDate').errors?.required">
@@ -79,6 +77,81 @@
           <div class="invalid-feedback"
             *ngIf="getProperty('VerificationCode').pristine == false && getProperty('VerificationCode').errors?.pattern">
             El codigo de seguridad no es valido
+          </div>
+        </div>
+      </div>
+      <div class="row" [formGroup]="getAddress()">
+        <div class="col-md-12">
+          <h3>Dirección</h3>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="country">País</label>
+          <select
+            [ngClass]="{'is-invalid' : getProperty('Country',getAddress()).invalid && getProperty('Country',getAddress()).pristine == false}"
+            class="custom-select d-block w-100" formControlName="Country">
+            <option value="">Seleccione</option>
+            <option>Colombia</option>
+            <option>Mexico</option>
+            <option>Argentina</option>
+            <option>Brasil</option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="!getProperty('Country',getAddress()).pristine || getProperty('Country',getAddress()).errors?.required">
+            El país es requerido.
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="country">Ciudad</label>
+          <select
+            [ngClass]="{'is-invalid' : getProperty('City',getAddress()).invalid && getProperty('City',getAddress()).pristine == false}"
+            class="custom-select d-block w-100" formControlName="City">
+            <option value="">Seleccione</option>
+            <option>Colombia</option>
+            <option>Mexico</option>
+            <option>Argentina</option>
+            <option>Brasil</option>
+          </select>
+          <div class="invalid-feedback"
+            *ngIf="getProperty('City',getAddress()).pristine == false && getProperty('City',getAddress()).errors?.required">
+            La ciudad es requerida.
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label>Calle</label>
+          <input
+            [ngClass]="{'is-invalid' : getProperty('Street',getAddress()).invalid && getProperty('Street',getAddress()).pristine == false}"
+            type="text" class="form-control" formControlName="Street">
+          <div class="invalid-feedback"
+            *ngIf="getProperty('Street',getAddress()).pristine == false && getProperty('Street',getAddress()).errors?.pattern">
+            La calle es requerida.
+          </div>
+        </div>
+        <div class="col-md-2 mb-3">
+          <label>Zip</label>
+          <input
+            [ngClass]="{'is-invalid' : getProperty('ZIP',getAddress()).invalid && getProperty('ZIP',getAddress()).pristine == false}"
+            type="text" class="form-control" formControlName="ZIP">
+          <div class="invalid-feedback"
+            *ngIf="getProperty('ZIP',getAddress()).pristine == false && getProperty('ZIP',getAddress()).errors?.required">
+            El código ZIP es requerido.
+          </div>
+          <div class="invalid-feedback"
+            *ngIf="getProperty('ZIP',getAddress()).pristine == false && getProperty('ZIP',getAddress()).errors?.pattern">
+            El código ZIP no es valido.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>Estado</label>
+          <input
+            [ngClass]="{'is-invalid' : getProperty('State',getAddress()).invalid && getProperty('State',getAddress()).pristine == false}"
+            type="text" class="form-control" formControlName="State">
+          <div class="invalid-feedback"
+            *ngIf="getProperty('State',getAddress()).pristine == false && getProperty('State',getAddress()).errors?.required">
+            El estado es requerido.
+          </div>
+          <div class="invalid-feedback"
+            *ngIf="getProperty('State',getAddress()).pristine == false && getProperty('State',getAddress()).errors?.pattern">
+            El estado no es valido.
           </div>
         </div>
       </div>

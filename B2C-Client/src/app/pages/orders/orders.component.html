@@ -1,0 +1,28 @@
+<div class="row mt-10">
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <h3>Ordenes</h3>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <div class="table-responsive">
+      <table class="table table-border table-hover">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Precio</th>
+            <th>Numero de Items</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{offer.Date}}</td>
+            <td>{{offer.Price}}</td>
+            <td>{{offer.Items.lenght}}</td>
+            <td>{{offer.State}}</td>
+            <td> <button class="btn btn-primary" [routerLink]="['/secure/order',order.Id]">Ver</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

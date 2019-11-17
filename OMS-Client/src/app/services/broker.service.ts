@@ -56,9 +56,8 @@ export class BrokerService {
   Post<T>(url: string, data: any): Observable<GenericResponse<T>> {
 
     return this.http.post(url, data, { observe: 'response' }).pipe(mergeMap((response) => {
-
-      // tslint:disable-next-line:no-string-literal
-      const status = response.headers['status'];
+      
+      const status = response.status;
 
       if (status == 200) {
 
