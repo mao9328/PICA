@@ -5,7 +5,7 @@
   <div class="col-md-12 col-lg-12 col-xl-12">
     <div class="row">
       <div class="col">
-        <label class="float-right">Id: </label>
+        <label class="float-right font-weight-bol">Id: </label>
       </div>
       <div class="col">
         <p class="float-left">{{order.Id}}</p>
@@ -15,7 +15,7 @@
   <div class="col-md-12 col-lg-12 col-xl-12">
     <div class="row">
       <div class="col">
-        <label class="float-right">Fecha: </label>
+        <label class="float-right font-weight-bol">Fecha: </label>
       </div>
       <div class="col">
         <p class="float-left">{{order.Date}}</p>
@@ -25,7 +25,7 @@
   <div class="col-md-12 col-lg-12 col-xl-12">
     <div class="row">
       <div class="col">
-        <label class="float-right">Precio: </label>
+        <label class="float-right font-weight-bol">Precio: </label>
       </div>
       <div class="col">
         <p class="float-left">{{order.Price | currency:'COP'}}</p>
@@ -35,7 +35,7 @@
   <div class="col-md-12 col-lg-12 col-xl-12">
     <div class="row">
       <div class="col">
-        <label class="float-right">Comentarios: </label>
+        <label class="float-right font-weight-bol">Comentarios: </label>
       </div>
       <div class="col">
         <p class="float-left">{{order.Comments}}</p>
@@ -43,29 +43,40 @@
     </div>
   </div>
   <div class="col-md-12 col-lg-12 col-xl-12">
-    <div class="row" *ngFor="let item of order.Items">
+    <div class="row">
       <div class="col">
-
+        <label class="float-right font-weight-bol">Estado: </label>
       </div>
       <div class="col">
-
-      </div>
-      <div class="col">
-
-      </div>
-      <div class="col">
-
+        <p class="float-left">{{order.Status.Name}}</p>
       </div>
     </div>
   </div>
   <div class="col-md-12 col-lg-12 col-xl-12">
-    <div class="row">
-      <div class="col">
-        <label class="float-right">Estado: </label>
-      </div>
-      <div class="col">
-        <p class="float-left">{{order.State.Name}}</p>
+    <div class="row justify-content-md-center">
+      <div class="col-md-4">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.Items">
+              <td>{{item.ProductCode}}</td>
+              <td>{{item.Price}}</td>
+              <td>{{item.Quantity}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <button class="btn btn-secondary btn-block" [routerLink]="['/public/orders']">Atras</button>
   </div>
 </div>

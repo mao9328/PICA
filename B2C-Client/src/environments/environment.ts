@@ -8,9 +8,10 @@ export const environment = {
   //baseURL: 'http://10.39.1.163:8891/',
   AuthenticationURL: 'security/authenticate',
   AutorizationURL: 'security/authorize',
-  OrdersURL: 'OMS/order/22',
+  OrdersURL: 'OMS/order/findByCustomerId/1?ordering=asc&page=1&results=2',
   OrderURL: 'OMS/order/',
-  CustomerURL:'OMS/customer/',
+  CustomerURL: 'OMS/customer/',
+  UpdateCustomerURL: 'OMS/customer',
   TokenKey: 'SecurityToken'
 };
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BusinessService } from 'src/app/services/business.service';
 import { Order } from 'src/app/model/Order';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-order',
@@ -17,13 +18,13 @@ export class ViewOrderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.queryParamMap.subscribe((route) => {
+    this.route.params.subscribe((params) => {
 
       this.spinner.show();
 
-      if (route.get('id') != null) {
+      if (params.id !== undefined) {
 
-        this.business.GetOrder(parseInt(route.get('id'), 10)).subscribe((response) => {
+        this.business.GetOrder(parseInt(params.id, 10)).subscribe((response) => {
 
           this.spinner.hide();
 

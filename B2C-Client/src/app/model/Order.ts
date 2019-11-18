@@ -8,8 +8,8 @@ export class Order {
     Date: string;
     Price: number;
     Comments: string;
-    Address:Address;
+    Address: Address;
     Items: Item[];
     IdCustomer: number;
-    State: State;
+    Status: State;
 }

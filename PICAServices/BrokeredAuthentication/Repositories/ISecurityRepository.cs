@@ -10,6 +10,8 @@ namespace BrokeredAuthentication.Repositories
 	{
 		Task<bool> ValidateCredentials(LoginModel model);
 
-		Task<UserModel> GetUserByUserName(string userName);
+		Task<UserModel> GetUserByEmail(string userName);
+
+		Task<bool> CreateUser(UserModel model);
 	}
 }

@@ -38,42 +38,64 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
+                        <label for="password">Tipo Identificacion</label>
+                        <select
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'IdentificationCardType').invalid && GetProperty(signUpForm,'IdentificationCardType').pristine == false}"
+                            class="form-control" id="password" formControlName="IdentificationCardType">
+                            <option value="">Seleccione</option>
+                            <option value="CC">CC</option>
+                            <option value="CE">CE</option>
+                        </select>
+                        <div class="invalid-feedback" style="width: 100%;"
+                            *ngIf="GetProperty(signUpForm,'IdentificationCardType').pristine == false && GetProperty(signUpForm,'IdentificationCardType').errors?.required">
+                            El tipo de identificacion es requerido.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="IdentificationCard">Numero de Identificacion</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'IdentificationCard').invalid && GetProperty(signUpForm,'IdentificationCard').pristine == false}"
+                            type="text" class="form-control" id="IdentificationCard"
+                            placeholder="Numero de Identificacion" formControlName="IdentificationCard">
+                        <div class="invalid-feedback" style="width: 100%;"
+                            *ngIf="GetProperty(signUpForm,'IdentificationCard').pristine == false && GetProperty(signUpForm,'IdentificationCard').errors?.required">
+                            El numero de identificacion es requerido.
+                        </div>
+                        <div class="invalid-feedback" style="width: 100%;"
+                            *ngIf="GetProperty(signUpForm,'IdentificationCard').pristine == false && GetProperty(signUpForm,'IdentificationCard').errors?.pattern">
+                            El numero de identificacion no es valido.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
                         <label for="email">Email</label>
                         <input
                             [ngClass]="{'is-invalid' : GetProperty(signUpForm,'Email').invalid && GetProperty(signUpForm,'Email').pristine == false}"
                             type="email" class="form-control" placeholder="you@example.com" formControlName="Email">
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="password">Password</label>
+                        <label for="PhoneNumber">Telefono</label>
                         <input
-                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'Password').invalid && GetProperty(signUpForm,'Password').pristine == false}"
-                            type="password" class="form-control" id="password" placeholder="Password"
-                            formControlName="Password">
+                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'PhoneNumber').invalid && GetProperty(signUpForm,'PhoneNumber').pristine == false}"
+                            type="text" class="form-control" id="PhoneNumber" placeholder="Numero de Identificacion"
+                            formControlName="PhoneNumber">
                         <div class="invalid-feedback" style="width: 100%;"
-                            *ngIf="GetProperty(signUpForm,'Password').pristine == false && GetProperty(signUpForm,'Password').errors?.required">
-                            El password es requerido.
+                            *ngIf="GetProperty(signUpForm,'PhoneNumber').pristine == false && GetProperty(signUpForm,'PhoneNumber').errors?.required">
+                            El numero de telefono es requerido.
                         </div>
                         <div class="invalid-feedback" style="width: 100%;"
-                            *ngIf="GetProperty(signUpForm,'Password').pristine == false && GetProperty(signUpForm,'Password').errors?.pattern">
-                            El password no es valido.
+                            *ngIf="GetProperty(signUpForm,'PhoneNumber').pristine == false && GetProperty(signUpForm,'PhoneNumber').errors?.pattern">
+                            El numero de telefono no es valido.
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="ConfPassword">Confirmar Password</label>
-                        <input
-                            [ngClass]="{'is-invalid' : GetProperty(signUpForm,'ConfPassword').invalid && GetProperty(signUpForm,'ConfPassword').pristine == false}"
-                            type="password" class="form-control" id="ConfPassword" placeholder="ConfPassword"
-                            formControlName="ConfPassword">
-                        <div class="invalid-feedback" style="width: 100%;"
-                            *ngIf="GetProperty(signUpForm,'ConfPassword').pristine == false && GetProperty(signUpForm,'ConfPassword').errors?.required">
-                            El password es requerido.
-                        </div>
-                        <div class="invalid-feedback" style="width: 100%;"
-                            *ngIf="GetProperty(signUpForm,'ConfPassword').pristine == false && GetProperty(signUpForm,'ConfPassword').errors?.pattern">
-                            El password no es valido.
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-secondary btn-block" [routerLink]="['/public/home']">Cancelar</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary btn-block" (click)="onSubmit()">Guardar</button>
                     </div>
                 </div>
             </div>

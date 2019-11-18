@@ -19,6 +19,8 @@ namespace Infrastructure.Identity
 
 			//Property Configurations
 			modelBuilder.Entity<UserRole>().HasKey(x => new { x.UserId, x.RoleId });
+
+			modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
 		}
 	}
 }

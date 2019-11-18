@@ -10,5 +10,7 @@ namespace BrokeredAuthentication.Services
 	{
 		Task<string> Authenticate(LoginModel model);
 		Task<bool> Autorize(AutorizeModel model);
+
+		Task<bool> CreateUser(UserModel model);
 	}
 }

@@ -1,5 +1,4 @@
-import { Address } from './Address';
-import { State } from './State';
+import { CustomerType } from './CustomerType';
 
 export class Customer {
     Id: number;
@@ -7,6 +6,7 @@ export class Customer {
     LastName: string;
     PhoneNumber: string;
     Email: string;
-    Addresses: Address[];
-    State: State;
+    Type: CustomerType;
+    IdentificationCardType: string;
+    IdentificationCard: string;
 }

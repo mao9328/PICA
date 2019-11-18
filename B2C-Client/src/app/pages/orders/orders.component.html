@@ -7,6 +7,7 @@
       <table class="table table-border table-hover">
         <thead>
           <tr>
+            <th>Id</th>
             <th>Fecha</th>
             <th>Precio</th>
             <th>Numero de Items</th>
@@ -15,11 +16,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let order of orders">
-            <td>{{offer.Date}}</td>
-            <td>{{offer.Price}}</td>
-            <td>{{offer.Items.lenght}}</td>
-            <td>{{offer.State}}</td>
-            <td> <button class="btn btn-primary" [routerLink]="['/secure/order',order.Id]">Ver</button></td>
+            <td>{{order.Id}}</td>
+            <td>{{order.Date}}</td>
+            <td>{{order.Price}}</td>
+            <td>{{order.Items.length}}</td>
+            <td>{{order.Status.Name}}</td>
+            <td> <button class="btn btn-primary" [routerLink]="['/public/view-order',order.Id]">Ver</button></td>
           </tr>
         </tbody>
       </table>

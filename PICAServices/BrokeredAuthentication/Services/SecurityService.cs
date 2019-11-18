@@ -38,7 +38,7 @@ namespace BrokeredAuthentication.Services
 				throw new ApplicationException("Credenciales invalidas");
 			}
 
-			var user = await rep.GetUserByUserName(model.User);
+			var user = await rep.GetUserByEmail(model.User);
 
 			// Create Security key  using private key above:
 			// not that latest version of JWT using Microsoft namespace instead of System
@@ -92,7 +92,7 @@ namespace BrokeredAuthentication.Services
 
 				var user = ((JwtSecurityToken)validatedToken).Subject;
 
-				var userModel = await rep.GetUserByUserName(user);
+				var userModel = await rep.GetUserByEmail(user);
 
 				return userModel.Roles.Any(x => x.Id == model.IdRol);
 
@@ -111,6 +111,18 @@ namespace BrokeredAuthentication.Services
 			{
 				_logger.LogError(e, "Error en la validacion del token");
 				throw e;
+			}
+		}
+
+		public async Task<bool> CreateUser(UserModel model)
+		{
+			try
+			{
+				return await rep.CreateUser(model);
+			}
+			catch (Exception e)
+			{
+				throw new ApplicationException($"Ha ocurrido un error {e.Message}");
 			}
 		}
 	}

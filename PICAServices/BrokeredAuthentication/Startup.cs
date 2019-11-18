@@ -70,9 +70,12 @@ namespace BrokeredAuthentication
 
 			app.UseAuthorization();
 
+			app.UseCors(options => options.WithOrigins("*").AllowAnyMethod());
+
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllers();
+
+				endpoints.MapControllers().RequireCors("OpenLegs");
 			});
 		}
 	}

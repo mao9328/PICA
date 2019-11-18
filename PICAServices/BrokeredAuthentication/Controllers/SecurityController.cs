@@ -78,6 +78,6 @@ namespace BrokeredAuthentication.Controllers
 					Result = false
 				});
 			}
-		}
+		}		
 	}
 }

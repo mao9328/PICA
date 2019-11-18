@@ -102,7 +102,7 @@ export class BusinessService {
 
   GetOrder(idOrder: number): Observable<GenericResponse<Order>> {
 
-    return this.broker.Get<Order>(environment.baseURL + environment.OrdersURL + idOrder);
+    return this.broker.Get<Order>(environment.baseURL + environment.OrderURL + idOrder);
 
     // return this.getResource('Orders').pipe(map((response) => {
 
@@ -116,7 +116,7 @@ export class BusinessService {
 
   GetCustomer(idUser: number): Observable<GenericResponse<Customer>> {
 
-    return this.broker.Get<Customer>(environment.baseURL + environment.OrdersURL + idUser);
+    return this.broker.Get<Customer>(environment.baseURL + environment.CustomerURL + idUser);
 
     // return this.getResource('Orders').pipe(map((response) => {
 
@@ -126,6 +126,11 @@ export class BusinessService {
 
     //   return generic;
     // }));
+  }
+
+  UpdateCustomer(model: Customer): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Patch<boolean>(environment.baseURL + environment.UpdateCustomerURL, model);
   }
 
   GetProduct(id: number): Observable<GenericResponse<Product>> {

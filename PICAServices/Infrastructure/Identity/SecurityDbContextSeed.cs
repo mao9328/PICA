@@ -46,8 +46,6 @@ namespace Infrastructure.Identity
 					var users = new List<User>() {
 					new User {
 						Email = "camacho.mauricio@javeriana.edu.co",
-						LastName = "Camacho",
-						FirstName = "Mauricio",
 						Password = "Pruebas123*",
 						UserRoles = new List<UserRole>(){
 							new UserRole(){
@@ -66,8 +64,6 @@ namespace Infrastructure.Identity
 					},
 					new User {
 					  Email = "murcia.juan@javeriana.edu.co",
-					  LastName = "Murcia",
-					  FirstName = "Juan",
 					  Password = "Pruebas123*",
 					  UserRoles = new List<UserRole>(){
 							new UserRole(){
@@ -86,8 +82,6 @@ namespace Infrastructure.Identity
 					 },
 					new User {
 					  Email = "leonardo-jurado@javeriana.edu.co",
-					  LastName = "Jurado",
-					  FirstName = "Leonardo",
 					  Password = "Pruebas123*",
 					  UserRoles = new List<UserRole>(){
 							new UserRole(){
@@ -106,8 +100,6 @@ namespace Infrastructure.Identity
 					 },
 					new User {
 					  Email = "ce.castrol@javeriana.edu.co",
-					  LastName = "Castro",
-					  FirstName = "Cristian",
 					  Password = "Pruebas123*",
 					  UserRoles = new List<UserRole>(){
 							new UserRole(){
@@ -126,8 +118,6 @@ namespace Infrastructure.Identity
 					 },
 					new User {
 					  Email = "elkin_torres@javeriana.edu.co",
-					  LastName = "Torres",
-					  FirstName = "Elkin",
 					  Password = "Pruebas123*",
 					  UserRoles = new List<UserRole>(){
 							new UserRole(){
