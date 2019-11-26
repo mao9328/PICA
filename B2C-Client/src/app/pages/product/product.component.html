@@ -22,17 +22,17 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <button class="btn btn-secondary btn-lg btn-block" type="button"
-            [routerLink]="['/secure/home']">Cancelar</button>
-        </div>
-        <div class="col-md-6">
           <div class="row mb-3">
             <div class="col-12 col-md-12">
               <input type="text" [(ngModel)]="Quantity" name="Quantity" class="form-control" placeholder="Cantidad">
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-md-12">
+            <div class="col">
+              <button class="btn btn-secondary btn-lg btn-block" type="button"
+                [routerLink]="['/secure/home']">Cancelar</button>
+            </div>
+            <div class="col">
               <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onClick()">Ordenar</button>
             </div>
           </div>

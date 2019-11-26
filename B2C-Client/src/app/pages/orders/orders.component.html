@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let order of orders">
+          <tr *ngFor="let order of orders | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
             <td>{{order.Id}}</td>
             <td>{{order.Date}}</td>
             <td>{{order.Price}}</td>
@@ -26,5 +26,11 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <pagination-controls (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
+      autoHide="true" responsive="true" previousLabel="Previous" nextLabel="Next"
+      screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
   </div>
 </div>

@@ -47,9 +47,9 @@ export class ProductComponent implements OnInit {
 
       item.Id = 0;
       item.IdOrder = 0;
-      item.ProductCode = this.product.Code;
+      item.ProductId = this.product.Id;
       item.Quantity = this.Quantity;
-      item.Price = this.product.Price;
+      item.Price = this.product.ListPrice;
       item.Name = this.product.Name;
 
       this.business.addItemToKart(item);

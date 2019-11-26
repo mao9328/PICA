@@ -4,4 +4,5 @@ export class GenericResponse<T> {
     Error: boolean;
     Message: string;
     ErrorCode: string;
+    Rows: number;
 }

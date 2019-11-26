@@ -29,21 +29,24 @@
 </div>
 <div class="col-12 mt-5">
   <div class="form-row" [formGroup]="formFilter">
-    <div class="col-10">
+    <div class="col-9">
       <input type="text" formControlName="filter" placeholder="Buscar" class="form-control">
     </div>
     <div class="col-2">
-      <select class="form-control">
-        <option>Buscar Por</option>
-        <option>Codigo</option>
-        <option>Nombre</option>
-        <option>Descripcion</option>
+      <select class="form-control" formControlName="target">
+        <option value="T">Todo</option>
+        <option value="C">Codigo</option>
+        <option value="ND">Nombre - Descripcion</option>
       </select>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary" (click)="onSearch()" type="button" [disabled]="formFilter.invalid">Buscar</button>
     </div>
   </div>
 </div>
 <div class="card-deck mt-5 text-center">
-  <div class="col-md-12 col-lg-12 col-sm-12 col-12" *ngFor="let product of products">
+  <div class="col-md-12 col-lg-12 col-sm-12 col-12"
+    *ngFor="let product of products | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
         <h4 class="my-0 font-weight-normal">{{product.Name}}</h4>
@@ -54,7 +57,7 @@
             <img [src]="product.SmallImageURL" class="mr-3">
           </div>
           <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <h1 class="card-title pricing-card-title">{{product.Price | currency:'COP'}}</h1>
+            <h1 class="card-title pricing-card-title">{{product.ListPrice | currency:'COP'}}</h1>
           </div>
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
             <p>{{product.Description}}</p>
@@ -68,5 +71,11 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="col-md-12 col-lg-12 col-xl-12">
+    <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true" responsive="true"
+      previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
   </div>
 </div>

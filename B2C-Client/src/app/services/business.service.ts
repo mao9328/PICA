@@ -23,11 +23,11 @@ export class BusinessService {
 
   addItemToKart(item: Item) {
 
-    let items = localStorage.getItem('Items');
+    const items = localStorage.getItem('Items');
 
     if (items == null) {
 
-      let itemsObj = [];
+      const itemsObj = [];
 
       itemsObj.push(item);
 
@@ -35,11 +35,11 @@ export class BusinessService {
 
     } else {
 
-      let itemsObj = JSON.parse(items) as Item[];
+      const itemsObj = JSON.parse(items) as Item[];
 
-      if (itemsObj.some(x => x.ProductCode == item.ProductCode)) {
+      if (itemsObj.some(x => x.ProductId == item.ProductId)) {
 
-        const index = itemsObj.findIndex(x => x.ProductCode == item.ProductCode);
+        const index = itemsObj.findIndex(x => x.ProductId == item.ProductId);
 
         itemsObj[index].Quantity++;
 
@@ -74,84 +74,51 @@ export class BusinessService {
     }
   }
 
-  GetProducts(): Observable<GenericResponse<Product[]>> {
+  GetProducts(page: number, elements: number): Observable<GenericResponse<Product[]>> {
 
-    return this.getResource('Products').pipe(map((response) => {
-
-      let generic = new GenericResponse<Product[]>();
-
-      generic.Result = response as Product[];
-
-      return generic;
-    }));
+    return this.broker.Get<Product[]>(environment.GetAllProducstURL + elements + '/' + page);
   }
 
-  GetOrders(): Observable<GenericResponse<Order[]>> {
+  GetOrders(id: number, elements: number, page: number): Observable<GenericResponse<Order[]>> {
 
-    return this.broker.Get<Order[]>(environment.baseURL + environment.OrdersURL);
-
-    // return this.getResource('Orders').pipe(map((response) => {
-
-    //   let generic = new GenericResponse<Order[]>();
-
-    //   generic.Result = response as Order[];
-
-    //   return generic;
-    // }));
+    return this.broker.Get<Order[]>(environment.GetOrdersByCustomer + id + '?ordering=asc&page=' + page + '&results=' + elements);
   }
 
   GetOrder(idOrder: number): Observable<GenericResponse<Order>> {
 
-    return this.broker.Get<Order>(environment.baseURL + environment.OrderURL + idOrder);
-
-    // return this.getResource('Orders').pipe(map((response) => {
-
-    //   let generic = new GenericResponse<Order>();
-
-    //   generic.Result = response as Order;
-
-    //   return generic;
-    // }));
+    return this.broker.Get<Order>(environment.GetOrderById + idOrder);
   }
 
-  GetCustomer(idUser: number): Observable<GenericResponse<Customer>> {
+  CreateOrder(model: Order): Observable<GenericResponse<number>> {
 
-    return this.broker.Get<Customer>(environment.baseURL + environment.CustomerURL + idUser);
-
-    // return this.getResource('Orders').pipe(map((response) => {
-
-    //   let generic = new GenericResponse<Order>();
-
-    //   generic.Result = response as Order;
-
-    //   return generic;
-    // }));
+    return this.broker.Post<number>(environment.CreateOrder, model);
   }
 
-  UpdateCustomer(model: Customer): Observable<GenericResponse<boolean>> {
+  GetCustomerByEmail(idUser: number): Observable<GenericResponse<Customer>> {
 
-    return this.broker.Patch<boolean>(environment.baseURL + environment.UpdateCustomerURL, model);
+    return this.broker.Get<Customer>(environment.GetCustomerByEmailURL + idUser);
+  }
+
+  UpdateCustomer(id: number, model: Customer): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Put<boolean>(environment.UpdateCustomerURL + id, model);
+  }
+
+  CreateCustomer(model: Customer): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Post<boolean>(environment.UpdateCustomerURL, model);
   }
 
   GetProduct(id: number): Observable<GenericResponse<Product>> {
 
-    return this.getResource('Products').pipe(map((response) => {
-
-      const generic = new GenericResponse<Product>();
-
-      generic.Result = (response as Product[]).find(x => x.Id == id);
-      generic.Error = false;
-      generic.Message = '';
-
-      return generic;
-    }));
+    return this.broker.Get<Product>(environment.GetProducstByIdURL + id);
   }
 
   GetTopFiveProducts(): Observable<GenericResponse<Product[]>> {
 
     return this.getResource('Products').pipe(map((response) => {
 
-      let generic = new GenericResponse<Product[]>();
+      const generic = new GenericResponse<Product[]>();
 
       generic.Result = response as Product[];
 
@@ -159,46 +126,14 @@ export class BusinessService {
     }));
   }
 
-  GetProductsByNameOrDesc(criteria: string): Observable<GenericResponse<Product[]>> {
+  GetProductsByCode(criteria: string, elements: number, page: number): Observable<GenericResponse<Product[]>> {
 
-    return this.getResource('Products').pipe(
-
-      map((response) => {
-
-        let generic = new GenericResponse<Product[]>();
-
-        generic.Result = (response as Product[]).filter(x => x.Description.toUpperCase().indexOf(criteria.toUpperCase()) > -1 || x.Name.toUpperCase().indexOf(criteria.toUpperCase()) > -1);
-
-        return generic;
-      }));
+    return this.broker.Get<Product[]>(environment.GetProducstByCodeURL + criteria + '/' + elements + '/' + page);
   }
 
-  GetConfigList(list: string): Observable<GenericResponse<ConfigList>> {
+  GetProductsByNameOrDesc(criteria: string, elements: number, page: number): Observable<GenericResponse<Product[]>> {
 
-    return this.getResource('ConfigLists').pipe(map((response) => {
-
-      let generic = new GenericResponse<ConfigList>();
-
-      generic.Result = (response as any[]).find(x => x.Id == list) as ConfigList;
-
-      return generic;
-    }));
-  }
-
-  GetConfigListByParent(list: string, parent: string): Observable<GenericResponse<ConfigList>> {
-
-    return this.getResource('ConfigLists').pipe(map((response) => {
-
-      let configList = (response as any[]).find(x => x.Id == list) as ConfigList;
-
-      configList.List = configList.List.filter(x => x.Parent == parent);
-
-      let generic = new GenericResponse<ConfigList>();
-
-      generic.Result = configList;
-
-      return generic;
-    }));
+    return this.broker.Get<Product[]>(environment.GetProducstByCriteriaURL + criteria + '/' + elements + '/' + page);
   }
 
   private getResource(member: string): Observable<any> {
@@ -213,12 +148,10 @@ export class BusinessService {
 
   public Authenticate(credentials: any): Observable<GenericResponse<Security<string>>> {
 
-    return this.broker.Post<Security<string>>(environment.baseURL + environment.AuthenticationURL, credentials);
+    return this.broker.Post<Security<string>>(environment.AuthenticationURL, credentials);
   }
 
   public Autorize(idRol: number): Observable<boolean> {
-
-    return of(true);
 
     if (idRol == 0) {
 
@@ -226,16 +159,16 @@ export class BusinessService {
 
     } else {
 
-      let token = this.GetLocalStorage(environment.TokenKey)
+      const token = this.GetLocalStorage(environment.TokenKey)
 
       if (token != null) {
 
-        let request = {
+        const request = {
           Token: token,
           IdRol: idRol
         };
 
-        return this.broker.Post<Security<boolean>>(environment.baseURL + environment.AutorizationURL, request).pipe(
+        return this.broker.Post<Security<boolean>>(environment.AutorizationURL, request).pipe(
           map((mainResponse) => {
 
             if (!mainResponse.Error) {

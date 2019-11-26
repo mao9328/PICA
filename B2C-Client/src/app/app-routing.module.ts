@@ -14,7 +14,7 @@ import { ManageAccountComponent } from './pages/manage-account/manage-account.co
 
 const privateRoutes: Routes = [
   { path: 'checkout', component: CheckOutComponent, data: { IdRole: 1 } },
-  { path: 'manage-account', component: ManageAccountComponent },
+  { path: 'manage-account', component: ManageAccountComponent, data: { IdRole: 0 } },
   { path: '**', redirectTo: '/public/home' }
 ];
 
@@ -28,7 +28,7 @@ const publicRoutes: Routes = [
 
 
 const routes: Routes = [
-  { path: 'secure', component: MasterComponent, children: privateRoutes, canActivate: [MainGuard] },
+  { path: 'secure', component: MasterComponent, children: privateRoutes, canActivate: [MainGuard], data: { IdRole: 0 } },
   { path: 'public', component: MasterComponent, children: publicRoutes },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },

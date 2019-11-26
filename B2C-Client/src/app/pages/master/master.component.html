@@ -8,7 +8,8 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/secure/manage-account']">Mi Cuenta <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/secure/manage-account']">Mi Cuenta <span
+            class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/public/home']">Home <span class="sr-only">(current)</span></a>
@@ -21,7 +22,7 @@
             class="badge badge-light">{{shoppingKartCounter}}</span></a>
       </li>
     </ul>
-    <button class="btn btn-outline-light" [routerLink]="['/login']">Sign out</button>
+    <button class="btn btn-outline-light" (click)="logOut()">Sign out</button>
   </div>
 </nav>
 <main role="main" class="container">

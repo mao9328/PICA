@@ -19,6 +19,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewOrderComponent } from './pages/view-order/view-order.component';
 import { MainGuard } from './app.main-guard.guard';
 import { ManageAccountComponent } from './pages/manage-account/manage-account.component';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { ManageAccountComponent } from './pages/manage-account/manage-account.co
     DpDatePickerModule,
     FormsModule,
     AppRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule,
+    ToastrModule.forRoot()
   ],
   providers: [SpinnerService, BusinessService, MainGuard],
   bootstrap: [AppComponent]

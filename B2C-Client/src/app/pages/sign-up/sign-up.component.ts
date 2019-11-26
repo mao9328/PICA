@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@ang
 import { Address } from 'src/app/model/Address';
 import { Router } from '@angular/router';
 import { TouchSequence } from 'selenium-webdriver';
+import { BusinessService } from 'src/app/services/business.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +17,13 @@ export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
   addressForm: FormGroup;
 
-  constructor(private builder: FormBuilder, private router: Router) { }
+  constructor(
+    private builder: FormBuilder,
+    private router: Router,
+    private business: BusinessService,
+    private spinner: SpinnerService,
+    private toast: ToastrService
+  ) { }
 
   ngOnInit() {
 
@@ -22,18 +31,11 @@ export class SignUpComponent implements OnInit {
       FirstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       LastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       Email: ['', [Validators.required, Validators.email]],
-      UserName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]],
+      PhoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{7,10}$')]],
+      IdentificationCardType: ['', [Validators.required]],
+      IdentificationCard: ['', [Validators.required, Validators.pattern('^[0-9]{8,12}$')]],
       Password: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
-      ConfPassword: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
-      Addresses: this.builder.array([])
-    });
-
-    this.addressForm = this.builder.group({
-      Country: ['', [Validators.required]],
-      State: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      City: ['', [Validators.required]],
-      ZIP: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      Street: ['', [Validators.required]]
+      ConfPassword: ['', [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
     });
   }
 
@@ -41,7 +43,6 @@ export class SignUpComponent implements OnInit {
 
     const pass = this.signUpForm.get('Password').value;
     const confPass = this.signUpForm.get('ConfPassword').value;
-
 
     if (pass !== confPass) {
 
@@ -51,7 +52,25 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/login']);
+    this.spinner.show();
+
+    this.business.CreateCustomer(this.signUpForm.value).subscribe((response) => {
+
+      this.spinner.hide();
+
+      if (!response.Error) {
+
+        this.toast.success('Registro Exitoso!', 'Exito!');
+
+        this.router.navigate(['/login']);
+      }
+
+    }, (error) => {
+
+      this.spinner.hide();
+
+    });
+
   }
 
   GetPropertyValue(group: FormGroup, member: string): any {

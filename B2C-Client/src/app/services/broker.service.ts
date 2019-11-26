@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, mergeMap } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { map, mergeMap, catchError, tap } from 'rxjs/operators';
 import { Observable, throwError, of } from 'rxjs';
 import { GenericResponse } from '../model/GenericResponse';
 
@@ -13,12 +13,12 @@ export class BrokerService {
 
   Get<T>(url: string): Observable<GenericResponse<T>> {
 
-    return this.http.get(url, { observe: 'response' }).pipe(mergeMap((response) => {
+    return this.http.get(url, { observe: 'response' }).pipe(
+      tap((response) => {
 
-      // tslint:disable-next-line:no-string-literal
-      const status = response.status;
-
-      if (status === 200) {
+        console.log(response);
+      }),
+      mergeMap((response) => {
 
         const genericResponse = new GenericResponse<T>();
 
@@ -27,118 +27,120 @@ export class BrokerService {
         genericResponse.ErrorCode = null;
         genericResponse.Result = response.body as T;
 
+        const rows = response.headers.get('X-Total-Count');
+
+        if (rows !== null) {
+
+          genericResponse.Rows = parseInt(rows, 10);
+        }
+
         return of(genericResponse);
-
-      } else if (status === 500) {
-
-        const genericResponse = new GenericResponse<T>();
-
-        genericResponse.Error = true;
-        genericResponse.Message = response.body['Description'];
-        genericResponse.ErrorCode = response.body['Code'];
-        genericResponse.Result = null;
-
-        return throwError(genericResponse);
-      } else {
+      }),
+      catchError((response: HttpErrorResponse) => {
 
         const genericResponse = new GenericResponse<T>();
 
+        const body: any = response.error;
+
+        if (body.Description !== undefined) {
+
+          genericResponse.Message = body.Description;
+        }
+
+        if (body.message !== undefined) {
+
+          genericResponse.Message = body.message;
+        }
+
         genericResponse.Error = true;
-        genericResponse.Message = '';
         genericResponse.ErrorCode = '';
         genericResponse.Result = null;
 
         return throwError(genericResponse);
-      }
-    }))
+      }));
   }
 
   Post<T>(url: string, data: any): Observable<GenericResponse<T>> {
 
-    return this.http.post(url, data, { observe: 'response' }).pipe(mergeMap((response) => {
+    return this.http.post(url, data).pipe(mergeMap((response) => {
 
-      const status = response.status;
+      const genericResponse = new GenericResponse<T>();
 
-      if (status === 200) {
+      genericResponse.Error = false;
+      genericResponse.Message = null;
+      genericResponse.ErrorCode = null;
+      genericResponse.Result = response as T;
 
-        const genericResponse = new GenericResponse<T>();
+      return of(genericResponse);
 
-        genericResponse.Error = false;
-        genericResponse.Message = null;
-        genericResponse.ErrorCode = null;
-        genericResponse.Result = response.body as T;
-
-        return of(genericResponse);
-
-      } else if (status === 500) {
+    }),
+      catchError((response: HttpErrorResponse) => {
 
         const genericResponse = new GenericResponse<T>();
 
-        genericResponse.Error = true;
-        genericResponse.Message = response.body['Description'];
-        genericResponse.ErrorCode = response.body['Code'];
-        genericResponse.Result = null;
+        const body: any = response.error;
 
-        return throwError(genericResponse);
-      } else {
+        if (body.Description !== undefined) {
 
-        const genericResponse = new GenericResponse<T>();
-
-        genericResponse.Error = true;
-        genericResponse.Message = '';
-        genericResponse.ErrorCode = '';
-        genericResponse.Result = null;
-
-        return throwError(genericResponse);
-      }
-    }));
-  }
-
-  Patch<T>(url: string, data: any): Observable<GenericResponse<T>> {
-
-    return this.http.patch(url, data, { observe: 'response' }).pipe(mergeMap((response) => {
-
-      const status = response.status;
-
-      if (status === 200) {
-
-        const genericResponse = new GenericResponse<T>();
-
-        genericResponse.Error = false;
-        genericResponse.Message = null;
-        genericResponse.ErrorCode = null;
-
-        if (response.body != null) {
-
-          genericResponse.Result = response.body as T;
-        } else {
-
-          genericResponse.Result = null;
+          genericResponse.Message = body.Description;
         }
 
-        return of(genericResponse);
+        if (body.message !== undefined) {
 
-      } else if (status === 500) {
-
-        const genericResponse = new GenericResponse<T>();
-
-        genericResponse.Error = true;
-        genericResponse.Message = response.body['Description'];
-        genericResponse.ErrorCode = response.body['Code'];
-        genericResponse.Result = null;
-
-        return throwError(genericResponse);
-      } else {
-
-        const genericResponse = new GenericResponse<T>();
+          genericResponse.Message = body.message;
+        }
 
         genericResponse.Error = true;
-        genericResponse.Message = '';
         genericResponse.ErrorCode = '';
         genericResponse.Result = null;
 
         return throwError(genericResponse);
+      }));
+  }
+
+  Put<T>(url: string, data: any): Observable<GenericResponse<T>> {
+
+    return this.http.put(url, data).pipe(mergeMap((response) => {
+
+
+
+      const genericResponse = new GenericResponse<T>();
+
+      genericResponse.Error = false;
+      genericResponse.Message = null;
+      genericResponse.ErrorCode = null;
+
+      if (response != null) {
+
+        genericResponse.Result = response as T;
+      } else {
+
+        genericResponse.Result = null;
       }
-    }));
+
+      return of(genericResponse);
+    }),
+      catchError((response: HttpErrorResponse) => {
+
+        const genericResponse = new GenericResponse<T>();
+
+        const body: any = response.error;
+
+        if (body.Description !== undefined) {
+
+          genericResponse.Message = body.Description;
+        }
+
+        if (body.message !== undefined) {
+
+          genericResponse.Message = body.message;
+        }
+
+        genericResponse.Error = true;
+        genericResponse.ErrorCode = '';
+        genericResponse.Result = null;
+
+        return throwError(genericResponse);
+      }));
   }
 }

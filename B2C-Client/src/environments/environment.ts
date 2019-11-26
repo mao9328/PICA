@@ -4,15 +4,21 @@
 
 export const environment = {
   production: false,
-  baseURL: 'http://10.39.1.135:8090/',
-  //baseURL: 'http://10.39.1.163:8891/',
-  AuthenticationURL: 'security/authenticate',
-  AutorizationURL: 'security/authorize',
-  OrdersURL: 'OMS/order/findByCustomerId/1?ordering=asc&page=1&results=2',
-  OrderURL: 'OMS/order/',
-  CustomerURL: 'OMS/customer/',
-  UpdateCustomerURL: 'OMS/customer',
-  TokenKey: 'SecurityToken'
+  AuthenticationURL: 'http://10.39.1.163:8891/security/authenticate',
+  AutorizationURL: 'http://10.39.1.163:8891/security/authorize',
+  GetProducstByCodeURL: 'http://10.39.1.135:9070/v1/Product/GetByCode/',
+  GetProducstByCriteriaURL: 'http://10.39.1.135:9070/v1/Product/GetByCriteria/',
+  GetAllProducstURL: 'http://10.39.1.135:9070/v1/Product/GetAll/',
+  GetProducstByIdURL: 'http://10.39.1.135:9070/v1/Product/GetById/',
+  GetCustomerByEmailURL: 'http://10.39.1.163:8893/OMS/customer/findByEmail/',
+  UpdateCustomerURL: 'http://10.39.1.163:8893/OMS/customer/',
+  CreateCustomerURL: 'http://10.39.1.163:8893/OMS/customer',
+  CreateOrder: 'http://10.39.1.163:8893/OMS/order',
+  GetOrdersByCustomer: 'http://10.39.1.163:8893/OMS/order/findByCustomerId/',
+  GetOrderById: 'http://10.39.1.163:8893/OMS/order',  
+  TokenKey: 'SecurityToken',
+  UserKey: 'UserKey',
+  IdKey: 'IdKey',
 };
 
 /*

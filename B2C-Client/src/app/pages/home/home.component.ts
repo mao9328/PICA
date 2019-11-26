@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/Product';
 import { BusinessService } from 'src/app/services/business.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Item } from 'src/app/model/Item';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -17,34 +19,41 @@ export class HomeComponent implements OnInit {
   topFiveProducts: Product[];
 
   currentOffer = 0;
+  elements = 10;
+  page = 1;
+  total = 0;
 
-  constructor(private business: BusinessService, private builder: FormBuilder) { }
+  constructor(
+    private business: BusinessService,
+    private builder: FormBuilder,
+    private spinner: SpinnerService,
+    private toast: ToastrService
+  ) { }
 
   ngOnInit() {
 
+    this.spinner.show();
+
     this.formFilter = this.builder.group({
-      filter: ['']
+      filter: [''],
+      target: ['', [Validators.required]]
     });
 
-    this.formFilter.get('filter').valueChanges.subscribe((value) => {
+    this.business.GetProducts(this.page, this.elements).subscribe((response) => {
 
-      this.business.GetProductsByNameOrDesc(value).subscribe((response) => {
-
-        if (!response.Error) {
-
-          this.products = response.Result;
-        }
-
-      });
-
-    });
-
-    this.business.GetProducts().subscribe((response) => {
+      this.spinner.hide();
 
       if (!response.Error) {
 
         this.products = response.Result;
+        this.total = response.Rows;
       }
+
+    }, (error) => {
+
+      this.spinner.hide();
+
+      this.toast.error('Se ha producido un error consultado los productos', 'Error');
 
     });
 
@@ -59,13 +68,13 @@ export class HomeComponent implements OnInit {
 
   addItem(product: Product) {
 
-    let item = new Item();
+    const item = new Item();
 
     item.Id = 0;
     item.IdOrder = 0;
-    item.ProductCode = product.Code;
+    item.ProductId = product.Id;
     item.Quantity = 1;
-    item.Price = product.Price;
+    item.Price = product.ListPrice;
     item.Name = product.Name;
 
     this.business.addItemToKart(item);
@@ -95,5 +104,77 @@ export class HomeComponent implements OnInit {
   goToOffer(index: number) {
 
     this.currentOffer = index;
+  }
+
+  pageChanged(pagina) {
+    console.log(pagina);
+  }
+
+  onSearch() {
+
+    this.spinner.show();
+
+    const value = this.formFilter.get('filter').value;
+
+    const target = this.formFilter.get('target').value;
+
+    if (target == 'C') {
+
+      this.business.GetProductsByCode(value, this.elements, this.page).subscribe((response) => {
+
+        this.spinner.hide();
+
+        if (!response.Error) {
+
+          this.products = response.Result;
+          this.total = response.Rows;
+        }
+      }, (error) => {
+
+        this.spinner.hide();
+
+        this.toast.error('Se ha producido un error consultado los productos', 'Error');
+
+      });
+
+    } else if (target == 'ND') {
+
+      this.business.GetProductsByNameOrDesc(value, this.elements, this.page).subscribe((response) => {
+
+        this.spinner.hide();
+
+        if (!response.Error) {
+
+          this.products = response.Result;
+          this.total = response.Rows;
+        }
+      }, (error) => {
+
+        this.spinner.hide();
+
+        this.toast.error('Se ha producido un error consultado los productos', 'Error');
+
+      });
+    } else {
+
+      this.business.GetProducts(this.page, this.elements).subscribe((response) => {
+
+        this.spinner.hide();
+
+        if (!response.Error) {
+
+          this.products = response.Result;
+          this.total = response.Rows;
+        }
+
+      }, (error) => {
+
+        this.spinner.hide();
+
+        this.toast.error('Se ha producido un error consultado los productos', 'Error');
+
+      });
+
+    }
   }
 }

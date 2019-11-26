@@ -12,4 +12,6 @@ export class Order {
     Items: Item[];
     IdCustomer: number;
     Status: State;
+    InventoryProvider: string;
+    CourierProvider: string;
 }

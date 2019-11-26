@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BusinessService } from 'src/app/services/business.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-master',
@@ -10,7 +11,7 @@ export class MasterComponent implements OnInit {
 
   shoppingKartCounter: number;
 
-  constructor(private business: BusinessService) { }
+  constructor(private business: BusinessService, private router: Router) { }
 
   ngOnInit() {
 
@@ -20,6 +21,13 @@ export class MasterComponent implements OnInit {
 
       this.shoppingKartCounter = this.business.getItems().length;
     });
+  }
+
+  logOut() {
+
+    localStorage.clear();
+
+    this.router.navigate(['/login']);
   }
 
 }

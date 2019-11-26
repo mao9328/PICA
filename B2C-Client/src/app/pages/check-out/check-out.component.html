@@ -65,6 +65,10 @@
             *ngIf="getProperty('ExpirationDate').pristine == false && getProperty('ExpirationDate').errors?.required">
             La fecha de expiracion es requerida
           </div>
+          <div class="invalid-feedback"
+            *ngIf="getProperty('ExpirationDate').pristine == false && getProperty('ExpirationDate').errors?.pattern">
+            La fecha no es valida.
+          </div>
         </div>
         <div class="col-md-3 mb-3">
           <label>CVV</label>
@@ -87,33 +91,31 @@
         <div class="col-md-4 mb-3">
           <label for="country">País</label>
           <select
-            [ngClass]="{'is-invalid' : getProperty('Country',getAddress()).invalid && getProperty('Country',getAddress()).pristine == false}"
-            class="custom-select d-block w-100" formControlName="Country">
+            [ngClass]="{'is-invalid' : getProperty('CountryCode',getAddress()).invalid && getProperty('CountryCode',getAddress()).pristine == false}"
+            class="custom-select d-block w-100" formControlName="CountryCode">
             <option value="">Seleccione</option>
-            <option>Colombia</option>
-            <option>Mexico</option>
-            <option>Argentina</option>
-            <option>Brasil</option>
+            <option VALUE="COL">Colombia</option>
+            <option VALUE="PER">Peru</option>
+            <option VALUE="CHL">Chile</option>
+            <option VALUE="MEX">Mexico</option>
           </select>
           <div class="invalid-feedback"
-            *ngIf="!getProperty('Country',getAddress()).pristine || getProperty('Country',getAddress()).errors?.required">
+            *ngIf="!getProperty('CountryCode',getAddress()).pristine || getProperty('CountryCode',getAddress()).errors?.required">
             El país es requerido.
           </div>
         </div>
         <div class="col-md-4 mb-3">
           <label for="country">Ciudad</label>
-          <select
+          <input
             [ngClass]="{'is-invalid' : getProperty('City',getAddress()).invalid && getProperty('City',getAddress()).pristine == false}"
-            class="custom-select d-block w-100" formControlName="City">
-            <option value="">Seleccione</option>
-            <option>Colombia</option>
-            <option>Mexico</option>
-            <option>Argentina</option>
-            <option>Brasil</option>
-          </select>
+            class="form-control" type="text" formControlName="City" />
           <div class="invalid-feedback"
             *ngIf="getProperty('City',getAddress()).pristine == false && getProperty('City',getAddress()).errors?.required">
             La ciudad es requerida.
+          </div>
+          <div class="invalid-feedback"
+            *ngIf="getProperty('City',getAddress()).pristine == false && getProperty('City',getAddress()).errors?.pattern">
+            La ciudad no es valida.
           </div>
         </div>
         <div class="col-md-4 mb-3">

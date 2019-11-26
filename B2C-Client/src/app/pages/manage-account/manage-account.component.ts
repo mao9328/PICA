@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Address } from 'src/app/model/Address';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { BusinessService } from 'src/app/services/business.service';
+import { environment } from 'src/environments/environment';
+import { Customer } from 'src/app/model/Customer';
 
 @Component({
   selector: 'app-manage-account',
@@ -13,6 +15,7 @@ import { BusinessService } from 'src/app/services/business.service';
 export class ManageAccountComponent implements OnInit {
 
   signUpForm: FormGroup;
+  customer: Customer;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,25 +40,28 @@ export class ManageAccountComponent implements OnInit {
 
       this.spinner.show();
 
-      this.business.GetCustomer(1).subscribe((response) => {
+      this.business.GetCustomerByEmail(this.business.GetLocalStorage(environment.UserKey)).subscribe((response) => {
 
         this.spinner.hide();
 
         if (!response.Error) {
 
+          this.customer = response.Result;
+
           this.signUpForm.patchValue({
-            FirstName: [response.Result.FirstName],
-            LastName: [response.Result.LastName],
-            Email: [response.Result.Email],
-            PhoneNumber: [response.Result.PhoneNumber],
-            IdentificationCardType: [response.Result.IdentificationCardType],
-            IdentificationCard: [response.Result.IdentificationCard]
+            FirstName: response.Result.FirstName,
+            LastName: response.Result.LastName,
+            Email: response.Result.Email,
+            PhoneNumber: response.Result.PhoneNumber,
+            IdentificationCardType: response.Result.IdentificationCardType,
+            IdentificationCard: response.Result.IdentificationCard
           });
         }
 
       }, (error) => {
 
         this.spinner.hide();
+
       });
 
     });
@@ -68,7 +74,7 @@ export class ManageAccountComponent implements OnInit {
 
     this.spinner.show();
 
-    this.business.UpdateCustomer(value).subscribe((response) => {
+    this.business.UpdateCustomer(this.customer.Id, value).subscribe((response) => {
 
       this.spinner.hide();
 
