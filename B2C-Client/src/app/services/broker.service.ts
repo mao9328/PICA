@@ -14,10 +14,6 @@ export class BrokerService {
   Get<T>(url: string): Observable<GenericResponse<T>> {
 
     return this.http.get(url, { observe: 'response' }).pipe(
-      tap((response) => {
-
-        console.log(response);
-      }),
       mergeMap((response) => {
 
         const genericResponse = new GenericResponse<T>();

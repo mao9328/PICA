@@ -21,16 +21,44 @@
             <td>{{order.Price}}</td>
             <td>{{order.Items.length}}</td>
             <td>{{order.Status.Name}}</td>
-            <td> <button class="btn btn-primary" [routerLink]="['/public/view-order',order.Id]">Ver</button></td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-success" [routerLink]="['/public/view-order',order.Id]">Ver</button>
+                <button class="btn btn-danger" *ngIf="order.Status.Id == 1 || order.Status.Id == 2"
+                  (click)="openCancel(order.Id)">Cancelar</button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
   <div class="col-md-12 col-lg-12 col-xl-12">
-    <pagination-controls (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true"
-      autoHide="true" responsive="true" previousLabel="Previous" nextLabel="Next"
-      screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+    <pagination-controls (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="true"
+      responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
     </pagination-controls>
   </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'fade show db':showModal}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cancelar Orden</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Esta seguro de cancelar la orden?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="onAbort()" class="btn btn-secondary">Cancelar</button>
+        <button type="button" (click)="onCancelOrder()" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop fade show" *ngIf="showModal"></div>

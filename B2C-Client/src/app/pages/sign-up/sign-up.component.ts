@@ -82,35 +82,4 @@ export class SignUpComponent implements OnInit {
 
     return group.get(member) as FormControl;
   }
-
-  GetAddresses(): FormArray {
-
-    return this.signUpForm.get('Addresses') as FormArray;
-  }
-
-  pushAddress() {
-
-    (this.signUpForm.get('Addresses') as FormArray).push(this.setAddress(this.addressForm.value));
-
-    this.addressForm.reset();
-  }
-
-  setAddress(data: Address): FormGroup {
-
-    return this.builder.group({
-      City: [data.City],
-      Country: [data.Country],
-      Street: [data.Street],
-      ZIP: [data.Zip],
-      State: [data.State]
-    });
-  }
-
-  someAddresses(): boolean {
-    return (this.signUpForm.get('Addresses') as FormArray).length > 0;
-  }
-
-  deleteAddressAt(index: number) {
-    (this.signUpForm.get('Addresses') as FormArray).removeAt(index);
-  }
 }

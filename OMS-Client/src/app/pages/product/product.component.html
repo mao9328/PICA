@@ -38,6 +38,24 @@
                     La descripción es requerida.
                 </div>
             </div>
+            <div class="col mb-3">
+                <label for="lastName">Precio</label>
+                <input
+                    [ngClass]="{'is-invalid' : GetProperty(formProduct,'ListPrice').invalid && GetProperty(formProduct,'ListPrice').pristine == false}"
+                    class="form-control" formControlName="ListPrice" type="text" />
+                <div *ngIf="GetProperty(formProduct,'ListPrice').pristine == false && GetProperty(formProduct,'ListPrice').errors?.required"
+                    class="invalid-feedback">
+                    El precio es requerido.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-check">
+                    <input class="form-check-input" formControlName="IsActive" id="activo" type="checkbox" />
+                    <label for="activo" class="form-check-label">Activo</label>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-12">
@@ -69,13 +87,17 @@
                     </div>
                     <div class="col-12 mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="IsThumbnail">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                formControlName="IsThumbnail">
                             <label class="form-check-label" for="defaultCheck1">Es miniatura?</label>
                         </div>
                     </div>
                     <div class="col-12 mb-3">
-                        <label for="customFile">Elegir Imagen</label>
-                        <input type="file" class="form-control" id="customFile" formControlName="Url">
+                        <div class="row">
+                            <div class="col">
+                                <app-load-img formControlName="Url"></app-load-img>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -91,7 +113,8 @@
                     type="button">Cancelar</button>
             </div>
             <div class="col">
-                <button class="btn btn-primary btn-lg btn-block" type="button">Guardar</button>
+                <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onSave()"
+                    [disabled]="formProduct.invalid">Guardar</button>
             </div>
         </div>
     </div>

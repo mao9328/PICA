@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Item } from 'src/app/model/Item';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { ToastrService } from 'ngx-toastr';
+import { Offer } from 'src/app/model/Offer';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   formFilter: FormGroup;
 
   products: Product[];
-  topFiveProducts: Product[];
+  topFiveProducts: Offer[];
 
   currentOffer = 0;
   elements = 10;
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
 
     this.formFilter = this.builder.group({
       filter: [''],
-      target: ['', [Validators.required]]
+      target: ['T', [Validators.required]]
     });
 
     this.business.GetProducts(this.page, this.elements).subscribe((response) => {
@@ -107,6 +108,7 @@ export class HomeComponent implements OnInit {
   }
 
   pageChanged(pagina) {
+
     console.log(pagina);
   }
 

@@ -10,6 +10,7 @@ import { OffersComponent } from './pages/offers/offers.component';
 import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { MainGuard } from './app.main-guard.guard';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 const privateRoutes: Routes = [
   {
@@ -34,6 +35,18 @@ const privateRoutes: Routes = [
     path: 'products',
     component: ListProductsComponent,
     data: { IdRole: 1 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent,
+    data: { IdRole: 4 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent,
+    data: { IdRole: 5 },
     canActivate: [MainGuard]
   },
   {

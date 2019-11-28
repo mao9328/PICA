@@ -131,14 +131,14 @@
         <div class="col-md-2 mb-3">
           <label>Zip</label>
           <input
-            [ngClass]="{'is-invalid' : getProperty('ZIP',getAddress()).invalid && getProperty('ZIP',getAddress()).pristine == false}"
-            type="text" class="form-control" formControlName="ZIP">
+            [ngClass]="{'is-invalid' : getProperty('Zip',getAddress()).invalid && getProperty('Zip',getAddress()).pristine == false}"
+            type="text" class="form-control" formControlName="Zip">
           <div class="invalid-feedback"
-            *ngIf="getProperty('ZIP',getAddress()).pristine == false && getProperty('ZIP',getAddress()).errors?.required">
+            *ngIf="getProperty('Zip',getAddress()).pristine == false && getProperty('Zip',getAddress()).errors?.required">
             El código ZIP es requerido.
           </div>
           <div class="invalid-feedback"
-            *ngIf="getProperty('ZIP',getAddress()).pristine == false && getProperty('ZIP',getAddress()).errors?.pattern">
+            *ngIf="getProperty('Zip',getAddress()).pristine == false && getProperty('Zip',getAddress()).errors?.pattern">
             El código ZIP no es valido.
           </div>
         </div>

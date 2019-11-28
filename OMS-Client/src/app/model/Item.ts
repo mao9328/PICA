@@ -1,6 +1,6 @@
 export class Item {
     Id: number;
-    IdProduct: number;
+    ProductId: number;
     Name: string;
     Quantity: number;
     Price: number;

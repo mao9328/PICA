@@ -36,13 +36,13 @@ export class CheckOutComponent implements OnInit {
     this.formCreditCard = this.builder.group({
       Name: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       Number: ['', [Validators.required, Validators.pattern('[0-9 ]{12}')]],
-      ExpirationDate: ['', [Validators.required, Validators.pattern('[0-9]{2}\/[0-9]{2}{12}')]],
+      ExpirationDate: ['', [Validators.required, Validators.pattern('[0-9]{2}\/[0-9]{2}')]],
       VerificationCode: ['', [Validators.required, Validators.pattern('[0-9]{3}')]],
       Address: this.builder.group({
         CountryCode: ['', [Validators.required]],
         State: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
         City: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-        ZIP: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+        Zip: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
         Street: ['', [Validators.required]]
       })
     });
@@ -97,6 +97,8 @@ export class CheckOutComponent implements OnInit {
 
     this.business.CreateOrder(this.order).subscribe((response) => {
 
+      this.spinner.hide();
+
       if (!response.Error) {
 
 
@@ -105,7 +107,7 @@ export class CheckOutComponent implements OnInit {
 
     }, (error) => {
 
-      this.spinner.show();
+      this.spinner.hide();
 
       this.tooast.error('Se ha presentado un error en la creacion de la orden', 'Error');
 

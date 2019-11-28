@@ -8,7 +8,15 @@ export const environment = {
   AuthenticationURL: 'security/authenticate',
   AutorizationURL: 'security/authorize',
   TokenKey: 'SecurityToken',
-  OrdersURL:''
+  OrdersByStateURL: 'http://10.39.1.135:8090/OMS/order/findAllByStatus/',
+  OrdersByCustomerIdURL: 'http://10.39.1.135:8090/OMS/order/findByCustomerId/',
+  OrdersByIdURL: 'http://10.39.1.135:8090/OMS/order/',
+  OrdersByProductIdURL: 'http://10.39.1.135:8090/OMS/order/findByProductId/',
+  OrdersBySellingRankingURL: 'http://10.39.1.135:8090/OMS/order/sellingProductRanking',
+  OrdersByPaymentRankingURL: 'http://10.39.1.135:8090/OMS/order/paymentRanking/',
+  OrdersByMontlyReportURL: 'http://10.39.1.135:8090/OMS/order/monthlyReportByStatus/',
+  PostFileURL: 'http://localhost:8081/saveImage',
+  CreateProductURL: 'http://10.39.1.135:9070/v1/Product'
 };
 
 /*

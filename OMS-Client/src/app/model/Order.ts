@@ -1,5 +1,6 @@
 import { Item } from './Item';
 import { State } from './State';
+import { Address } from './Address';
 
 export class Order {
 
@@ -7,7 +8,10 @@ export class Order {
     Date: string;
     Price: number;
     Comments: string;
+    Address: Address;
     Items: Item[];
     IdCustomer: number;
-    State: State;
+    Status: State;
+    InventoryProvider: string;
+    CourierProvider: string;
 }

@@ -3,16 +3,16 @@
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleCaptions" (click)="goToOffer(i)" [attr.data-slide-to]="i"
-          [ngClass]="{'active': i == currentOffer}" *ngFor="let product of topFiveProducts;let i = index"></li>
+          [ngClass]="{'active': i == currentOffer}" *ngFor="let offer of topFiveProducts;let i = index"></li>
       </ol>
       <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let product of topFiveProducts;let i = index"
+        <div class="carousel-item" *ngFor="let offer of topFiveProducts;let i = index"
           [ngClass]="{'active': i == currentOffer}">
-          <img style="max-width: 250px; max-height: 250px;" [src]="product.NormalImageURL" class="d-block w-100"
+          <img style="max-width: 250px; max-height: 250px;" [src]="offer.Image.Url" class="d-block w-100"
             alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h5>{{product.Name}}</h5>
-            <p>{{product.Description}}</p>
+            <h5>{{offer.Name}}</h5>
+            <p>{{offer.Description}}</p>
           </div>
         </div>
       </div>

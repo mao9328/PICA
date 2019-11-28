@@ -6,6 +6,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { BusinessService } from 'src/app/services/business.service';
 import { environment } from 'src/environments/environment';
 import { Customer } from 'src/app/model/Customer';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-account',
@@ -22,7 +23,8 @@ export class ManageAccountComponent implements OnInit {
     private builder: FormBuilder,
     private router: Router,
     private business: BusinessService,
-    private spinner: SpinnerService
+    private spinner: SpinnerService,
+    private toast: ToastrService
   ) { }
 
   ngOnInit() {
@@ -61,6 +63,10 @@ export class ManageAccountComponent implements OnInit {
       }, (error) => {
 
         this.spinner.hide();
+
+        this.toast.error('Se ha presentado un error consultando el cliente.', 'Error');
+
+        this.router.navigate(['/public/home']);
 
       });
 

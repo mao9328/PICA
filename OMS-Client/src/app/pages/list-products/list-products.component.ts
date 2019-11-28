@@ -12,6 +12,10 @@ export class ListProductsComponent implements OnInit {
 
   products: Product[];
 
+  elements = 10;
+  page = 0;
+  total = 1;
+
   constructor(private business: BusinessService, private spinner: SpinnerService) { }
 
   ngOnInit() {

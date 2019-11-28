@@ -2,6 +2,51 @@
     <div class="col-md-12 col-lg-12 col-xl-12">
         <h3>Ordenes</h3>
     </div>
+    <div class="col-md-12 col-lg-12 col-xl-12 mb-3">
+        <div class="row justify-content-start" [formGroup]="filterForm">
+            <div class="col-md-3">
+                <label>Tipo Consulta</label>
+                <select class="form-control" formControlName="Filter">
+                    <option value="">Seleccione</option>
+                    <option value="E">Por Estado</option>
+                    <option value="NP">Por Nombre Producto</option>
+                    <option value="F">Por Top Facturacion</option>
+                    <option value="C">Por Cliente</option>
+                    <option value="V">Por Ventas</option>
+                    <option value="I">Por Id</option>
+                </select>
+            </div>
+            <div class="col-md-3" *ngIf="showCriteria">
+                <label>Criterio</label>
+                <input class="form-control" type="text" formControlName="Criteria">
+            </div>
+            <div class="col-md-6" *ngIf="showDateRange">
+                <div class="row">
+                    <div class="col">
+                        <label>Desde</label>
+                        <input class="form-control" type="date" formControlName="From">
+                    </div>
+                    <div class="col">
+                        <label>Hasta</label>
+                        <input class="form-control" type="date" formControlName="To">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="showState">
+                <label>Estado</label>
+                <select class="form-control" formControlName="State">
+                    <option value="1">Validacion</option>
+                    <option value="2">Transito</option>
+                    <option value="3">Rechazada</option>
+                    <option value="4">Cerrada</option>
+                    <option value="5">Cancelada</option>
+                </select>
+            </div>
+            <div class="col-md-2" *ngIf="showCriteria || showDateRange || showState">
+                <button class="btn btn-primary btn-block" (click)="onSearch()">Buscar</button>
+            </div>
+        </div>
+    </div>
     <div class="col-md-12 col-lg-12 col-xl-12">
         <div class="table-responsive">
             <table class="table table-border table-hover">
@@ -14,15 +59,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let order of orders">
-                        <td>{{offer.Date}}</td>
-                        <td>{{offer.Price}}</td>
-                        <td>{{offer.Items.lenght}}</td>
-                        <td>{{offer.State}}</td>
+                    <tr
+                        *ngFor="let order of orders | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
+                        <td>{{order.Date}}</td>
+                        <td>{{order.Price}}</td>
+                        <td>{{order.Items.length}}</td>
+                        <td>{{order.Status.Name}}</td>
                         <td> <button class="btn btn-primary" [routerLink]="['/secure/order',order.Id]">Ver</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-12 text-center">
+        <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true"
+            responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
     </div>
 </div>

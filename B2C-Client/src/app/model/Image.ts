@@ -1,8 +1,9 @@
 export class Image {
-    Description: string;
+
+    Id: number;
     Name: string;
     IsThumbnail: boolean;
     Url: string;
     IdProduct: number;
-    IdOffer?: number;
+    IdOffer: number;
 }

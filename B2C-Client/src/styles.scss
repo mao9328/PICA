@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
-@import '~ngx-toastr/toastr';
+@import "~ngx-toastr/toastr";
 
 $spacer: 1rem !default;
 
 .mt-10 {
   margin-top: ($spacer * 6) !important;
+}
+
+.db {
+  display: block !important;
 }
 
 :host dp-date-picker {

@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" (change)="fileProgress($event)" id="customFile">
+            <label class="custom-file-label" for="customFile">{{imgName}}</label>
+        </div>
+    </div>
+    <div class="col">
+        <div class="media" *ngIf="previewUrl">
+            <img [src]="previewUrl" class="m-3" style="max-height: 300px;max-width: 400px;" />
+        </div>
+    </div>
+</div>

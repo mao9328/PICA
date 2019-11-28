@@ -11,6 +11,7 @@ import { BrokerService } from './broker.service';
 import { Security } from '../model/Security';
 import { environment } from 'src/environments/environment';
 import { Customer } from '../model/Customer';
+import { Offer } from '../model/Offer';
 
 @Injectable({
   providedIn: 'root'
@@ -114,16 +115,9 @@ export class BusinessService {
     return this.broker.Get<Product>(environment.GetProducstByIdURL + id);
   }
 
-  GetTopFiveProducts(): Observable<GenericResponse<Product[]>> {
+  GetTopFiveProducts(): Observable<GenericResponse<Offer[]>> {
 
-    return this.getResource('Products').pipe(map((response) => {
-
-      const generic = new GenericResponse<Product[]>();
-
-      generic.Result = response as Product[];
-
-      return generic;
-    }));
+    return this.broker.Get<Offer[]>(environment.GetActiveOffers + '1/1');
   }
 
   GetProductsByCode(criteria: string, elements: number, page: number): Observable<GenericResponse<Product[]>> {
@@ -134,6 +128,11 @@ export class BusinessService {
   GetProductsByNameOrDesc(criteria: string, elements: number, page: number): Observable<GenericResponse<Product[]>> {
 
     return this.broker.Get<Product[]>(environment.GetProducstByCriteriaURL + criteria + '/' + elements + '/' + page);
+  }
+
+  UpdatStateOrder(id: number): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Put<boolean>(environment.UpdateStateOrderURL + id, { Id: 5 });
   }
 
   private getResource(member: string): Observable<any> {

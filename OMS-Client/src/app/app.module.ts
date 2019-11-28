@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,12 @@ import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { MainGuard } from './app.main-guard.guard';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { LoadImgComponent } from './components/load-img/load-img.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +38,20 @@ import { OrdersComponent } from './pages/orders/orders.component';
     OffersComponent,
     CustomersComponent,
     CustomerComponent,
-    OrdersComponent
+    OrdersComponent,
+    LoadImgComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgxPaginationModule,
+    CommonModule,
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [BrokerService, BusinessService, SpinnerService, MainGuard],
   bootstrap: [AppComponent]

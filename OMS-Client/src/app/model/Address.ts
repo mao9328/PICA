@@ -2,8 +2,8 @@ export class Address {
     Id: number;
     Street: string;
     State: string;
-    ZIP: string;
-    Country: string;
+    Zip: string;
+    CountryCode: string;
     IdAddrestType: number;
     City: string;
 }

@@ -3,7 +3,11 @@ export interface Product {
     Id: number;
     Name: string;
     Code: string;
-    Price: number;
+    ListPrice: number;
     Description: string;
     Images: Image[];
+    IdCategory: string;
+    IdProducer: string;
+    IdProvider: string;
+    IsActive: boolean;
 }

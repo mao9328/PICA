@@ -41,9 +41,9 @@ export class BusinessService {
 
       let itemsObj = JSON.parse(items) as Item[];
 
-      if (itemsObj.some(x => x.IdProduct == item.IdProduct)) {
+      if (itemsObj.some(x => x.ProductId == item.ProductId)) {
 
-        const index = itemsObj.findIndex(x => x.IdProduct == item.IdProduct);
+        const index = itemsObj.findIndex(x => x.ProductId == item.ProductId);
 
         itemsObj[index].Quantity++;
 
@@ -79,34 +79,42 @@ export class BusinessService {
     }
   }
 
-  GetOrdersByProductName(): Observable<GenericResponse<Order[]>> {
+  GetOrdersByProductId(id: number, elements: number, page: number): Observable<GenericResponse<Order[]>> {
 
-    return this.broker.Get<Order[]>(environment.baseURL + environment.OrdersURL);
-
-    // return this.getResource('Orders').pipe(map((response) => {
-
-    //   let generic = new GenericResponse<Order[]>();
-
-    //   generic.Result = response as Order[];
-
-    //   return generic;
-    // }));
+    return this.broker.Get<Order[]>(environment.OrdersByProductIdURL + id + '?ordering=asc&page=' + page + '&results=' + elements);
   }
 
-  GetOrdersByState(): Observable<GenericResponse<Order[]>> {
+  // tslint:disable-next-line:max-line-length
+  GetOrdersByPaymentRanking(idState: number, from: string, to: string, elements: number, page: number): Observable<GenericResponse<Order[]>> {
 
-    return this.broker.Get<Order[]>(environment.baseURL + environment.OrdersURL);
-
-    // return this.getResource('Orders').pipe(map((response) => {
-
-    //   let generic = new GenericResponse<Order[]>();
-
-    //   generic.Result = response as Order[];
-
-    //   return generic;
-    // }));
+    // tslint:disable-next-line:max-line-length
+    return this.broker.Get<Order[]>(environment.OrdersByPaymentRankingURL + idState + '?start=' + from + '&end=' + to + '&ordering=asc&page=' + page + '&results=' + elements);
   }
 
+  GetOrdersBySellingProductRanking(from: string, to: string, elements: number, page: number): Observable<GenericResponse<Order[]>> {
+
+    return this.broker.Get<Order[]>(environment.OrdersBySellingRankingURL + '?startDate=' + from + '&endDate=' + to);
+  }
+
+  GetOrdersByState(idState: number, elements: number, page: number): Observable<GenericResponse<Order[]>> {
+
+    return this.broker.Get<Order[]>(environment.OrdersByStateURL + idState + '?ordering=asc&page=' + page + '&results=' + elements);
+  }
+
+  GetOrdersByCustomer(id: number, elements: number, page: number): Observable<GenericResponse<Order[]>> {
+
+    return this.broker.Get<Order[]>(environment.OrdersByCustomerIdURL + id + '?ordering=asc&page=' + page + '&results=' + elements);
+  }
+
+  GetOrdersById(id: number): Observable<GenericResponse<Order>> {
+
+    return this.broker.Get<Order>(environment.OrdersByIdURL + id);
+  }
+
+  GetOrdersByMontlyReport(year: number, month: number, day: number, elements: number, page: number): Observable<GenericResponse<Order[]>> {
+
+    return this.broker.Get<Order[]>(environment.OrdersByMontlyReportURL + year + '/' + month + '/' + day);
+  }
 
   GetProducts(): Observable<GenericResponse<Product[]>> {
 
@@ -172,34 +180,6 @@ export class BusinessService {
       }));
   }
 
-  GetConfigList(list: string): Observable<GenericResponse<ConfigList>> {
-
-    return this.getResource('ConfigLists').pipe(map((response) => {
-
-      let generic = new GenericResponse<ConfigList>();
-
-      generic.Result = (response as any[]).find(x => x.Id == list) as ConfigList;
-
-      return generic;
-    }));
-  }
-
-  GetConfigListByParent(list: string, parent: string): Observable<GenericResponse<ConfigList>> {
-
-    return this.getResource('ConfigLists').pipe(map((response) => {
-
-      let configList = (response as any[]).find(x => x.Id == list) as ConfigList;
-
-      configList.List = configList.List.filter(x => x.Parent == parent);
-
-      let generic = new GenericResponse<ConfigList>();
-
-      generic.Result = configList;
-
-      return generic;
-    }));
-  }
-
   SetLocalStorage(key: string, value: any) {
 
     localStorage.setItem(key, JSON.stringify(value));
@@ -260,4 +240,15 @@ export class BusinessService {
       }
     }
   }
+
+  sendFile(file: any): Observable<GenericResponse<any>> {
+
+    return this.broker.Post<any>(environment.PostFileURL, file);
+  }
+
+  CreateProduct(model: Product): Observable<GenericResponse<any>> {
+
+    return this.broker.Post<number>(environment.CreateProductURL, model);
+  }
+
 }
