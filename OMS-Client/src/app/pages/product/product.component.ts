@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormattedMessageChain } from '@angular/compiler';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { BusinessService } from 'src/app/services/business.service';
 import { LoadImgComponent } from 'src/app/components/load-img/load-img.component';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, VirtualTimeScheduler } from 'rxjs';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { ToastrService } from 'ngx-toastr';
+import { Product } from 'src/app/model/Product';
+import { Image } from 'src/app/model/Image';
 
 @Component({
   selector: 'app-product',
@@ -19,8 +21,11 @@ export class ProductComponent implements OnInit {
 
   formProduct: FormGroup;
 
+  product: Product;
+
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private builder: FormBuilder,
     private business: BusinessService,
     private spinner: SpinnerService,
@@ -50,13 +55,21 @@ export class ProductComponent implements OnInit {
 
           if (!response.Error) {
 
+            this.product = response.Result;
+
             this.formProduct.patchValue({
               Id: response.Result.Id,
               Name: response.Result.Name,
               Code: response.Result.Code,
-              Price: response.Result.ListPrice,
-              Description: response.Result.Description
+              ListPrice: response.Result.ListPrice,
+              Description: response.Result.Description,
+              IdCategory: response.Result.IdCategory,
+              IdProducer: response.Result.IdProducer,
+              IdProvider: response.Result.IdProvider,
+              IsActive: response.Result.IsActive,
             });
+
+            response.Result.Images.forEach(x => this.GetImages().push(this.setImage(x)));
           }
         });
       }
@@ -91,7 +104,20 @@ export class ProductComponent implements OnInit {
       Name: ['', [Validators.required]],
       IsThumbnail: [false],
       Url: [''],
-      IdProduct: [0]
+      IdProduct: [0],
+      IdOffer: [0]
+    });
+  }
+
+  setImage(model: Image): FormGroup {
+    return this.builder.group({
+      Description: [model.Description, [Validators.required]],
+      Name: [model.Name, [Validators.required]],
+      IsThumbnail: [model.IsThumbnail],
+      Url: [model.Url],
+      IdProduct: [model.IdProduct],
+      IdOffer: [model.IdOffer],
+      Id: [model.Id]
     });
   }
 
@@ -115,24 +141,54 @@ export class ProductComponent implements OnInit {
 
       if (responses.every(response => response)) {
 
-        this.business.CreateProduct(this.formProduct.value).subscribe((response) => {
+        const product = this.formProduct.value as Product;
 
-          this.spinner.hide();
+        if (product.Id != 0) {
 
-          if (!response.Error) {
+          this.business.UpdateProduct(product).subscribe((response) => {
 
-            this.toast.success('Producto creado satisfactoriamente', 'Exito!');
-          }
+            this.spinner.hide();
 
-        }, (error) => {
+            if (!response.Error) {
 
-          this.spinner.hide();
+              this.toast.success('Producto actualizado satisfactoriamente', 'Exito!');
 
-          this.toast.error('No fue posible crear el producto', 'Error!');
+              this.router.navigate(['/secure/products']);
+            }
 
-        });
+          }, (error) => {
+
+            this.spinner.hide();
+
+            this.toast.error('No fue posible actualizar el producto', 'Error!');
+
+          });
+
+        } else {
+
+          this.business.CreateProduct(product).subscribe((response) => {
+
+            this.spinner.hide();
+
+            if (!response.Error) {
+
+              this.toast.success('Producto creado satisfactoriamente', 'Exito!');
+
+              this.router.navigate(['/secure/products']);
+            }
+
+          }, (error) => {
+
+            this.spinner.hide();
+
+            this.toast.error('No fue posible crear el producto', 'Error!');
+
+          });
+        }
 
       } else {
+
+        this.spinner.hide();
 
         this.toast.error('No fue posible cargar las imagenes', 'Error!');
       }

@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { Security } from '../model/Security';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Order } from '../model/Order';
+import { Customer } from '../model/Customer';
 
 @Injectable({
   providedIn: 'root'
@@ -116,16 +117,10 @@ export class BusinessService {
     return this.broker.Get<Order[]>(environment.OrdersByMontlyReportURL + year + '/' + month + '/' + day);
   }
 
-  GetProducts(): Observable<GenericResponse<Product[]>> {
+  GetProducts(elements: number, page: number): Observable<GenericResponse<Product[]>> {
 
-    return this.getResource('Products').pipe(map((response) => {
+    return this.broker.Get<Product[]>(environment.GetProductsURL + elements + '/' + page);
 
-      let generic = new GenericResponse<Product[]>();
-
-      generic.Result = response as Product[];
-
-      return generic;
-    }));
   }
 
   GetOffers(): Observable<GenericResponse<Product[]>> {
@@ -142,16 +137,7 @@ export class BusinessService {
 
   GetProduct(id: number): Observable<GenericResponse<Product>> {
 
-    return this.getResource('Products').pipe(map((response) => {
-
-      const generic = new GenericResponse<Product>();
-
-      generic.Result = (response as Product[]).find(x => x.Id == id);
-      generic.Error = false;
-      generic.Message = '';
-
-      return generic;
-    }));
+    return this.broker.Get<Product>(environment.GetProductByIdURL + id);
   }
 
   GetTopFiveProducts(): Observable<GenericResponse<Product[]>> {
@@ -200,12 +186,12 @@ export class BusinessService {
         }));
   }
 
-  public Authenticate(credentials: any): Observable<GenericResponse<Security<string>>> {
+  Authenticate(credentials: any): Observable<GenericResponse<Security<string>>> {
 
     return this.broker.Post<Security<string>>(environment.baseURL + environment.AuthenticationURL, credentials);
   }
 
-  public Autorize(idRol: number): Observable<boolean> {
+  Autorize(idRol: number): Observable<boolean> {
 
     if (idRol == 0) {
 
@@ -249,6 +235,26 @@ export class BusinessService {
   CreateProduct(model: Product): Observable<GenericResponse<any>> {
 
     return this.broker.Post<number>(environment.CreateProductURL, model);
+  }
+
+  UpdateProduct(model: Product): Observable<GenericResponse<any>> {
+
+    return this.broker.Put<number>(environment.UpdateProductURL, model);
+  }
+
+  DeleteProduct(id: number): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Delete<boolean>(environment.DeleteProductURL + id);
+  }
+
+  GetCustomerByIdentification(type: string, id: string): Observable<GenericResponse<Customer>> {
+
+    return this.broker.Get<Customer>(environment.GetCustomerByIdentificationURL + type + '/' + id);
+  }
+
+  GetCustomerByProductId(id: string, elements: number, page: number): Observable<GenericResponse<Customer[]>> {
+
+    return this.broker.Get<Customer[]>(environment.GetCustomerByProductIdURL + id + '?ordering=asc&page=' + page + '&results=' + elements);
   }
 
 }

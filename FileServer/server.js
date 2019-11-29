@@ -1,8 +1,8 @@
 var express = require('express');
 var moment = require('moment');
 var cors = require('cors');
+var fileupload = require('express-fileupload')
 var app = express();
-const fileupload = require('express-fileupload')
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
@@ -21,7 +21,9 @@ app.post('/saveImage', (req, res) => {
     let prefix = moment().unix();
 
     const image = req.files.file;
-    const path = __dirname + '/images/' + prefix + image.name;
+
+    // const path = __dirname + '/images/' + prefix + image.name;
+    const path = 'C://FileServer//images//' + prefix + image.name;
 
     image.mv(path, (error) => {
 
@@ -40,7 +42,7 @@ app.post('/saveImage', (req, res) => {
             'Content-Type': 'application/json'
         });
 
-        res.end(JSON.stringify({ path: '/images/' + image.name }));
+        res.end(JSON.stringify({ path: 'http://10.39.1.163:9191/images/' + image.name }));
     })
 });
 

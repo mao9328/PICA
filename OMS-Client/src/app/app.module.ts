@@ -39,7 +39,7 @@ import { LoadImgComponent } from './components/load-img/load-img.component';
     CustomersComponent,
     CustomerComponent,
     OrdersComponent,
-    LoadImgComponent
+    LoadImgComponent    
   ],
   imports: [
     BrowserModule,

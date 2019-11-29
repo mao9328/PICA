@@ -145,4 +145,48 @@ export class BrokerService {
         return throwError(genericResponse);
       }));
   }
+
+  Delete<T>(url: string): Observable<GenericResponse<T>> {
+
+    return this.http.delete(url).pipe(mergeMap((response) => {
+
+      const genericResponse = new GenericResponse<T>();
+
+      genericResponse.Error = false;
+      genericResponse.Message = null;
+      genericResponse.ErrorCode = null;
+
+      if (response != null) {
+
+        genericResponse.Result = response as T;
+      } else {
+
+        genericResponse.Result = null;
+      }
+
+      return of(genericResponse);
+    }),
+      catchError((response: HttpErrorResponse) => {
+
+        const genericResponse = new GenericResponse<T>();
+
+        const body: any = response.error;
+
+        if (body.Description !== undefined) {
+
+          genericResponse.Message = body.Description;
+        }
+
+        if (body.message !== undefined) {
+
+          genericResponse.Message = body.message;
+        }
+
+        genericResponse.Error = true;
+        genericResponse.ErrorCode = '';
+        genericResponse.Result = null;
+
+        return throwError(genericResponse);
+      }));
+  }
 }

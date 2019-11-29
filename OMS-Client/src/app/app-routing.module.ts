@@ -68,6 +68,12 @@ const privateRoutes: Routes = [
     canActivate: [MainGuard]
   },
   {
+    path: 'customer',
+    component: CustomerComponent,
+    data: { IdRole: 7 },
+    canActivate: [MainGuard]
+  },
+  {
     path: 'customer/:id',
     component: CustomerComponent,
     data: { IdRole: 7 },

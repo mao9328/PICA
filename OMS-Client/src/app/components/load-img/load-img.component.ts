@@ -46,7 +46,8 @@ export class LoadImgComponent implements OnInit, ControlValueAccessor {
 
     if (obj) {
 
-      this.value = obj || '';
+      this.value = this.previewUrl = obj || '';
+
     } else {
 
       this.value = '';

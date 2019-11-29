@@ -15,8 +15,14 @@ export const environment = {
   OrdersBySellingRankingURL: 'http://10.39.1.135:8090/OMS/order/sellingProductRanking',
   OrdersByPaymentRankingURL: 'http://10.39.1.135:8090/OMS/order/paymentRanking/',
   OrdersByMontlyReportURL: 'http://10.39.1.135:8090/OMS/order/monthlyReportByStatus/',
-  PostFileURL: 'http://localhost:8081/saveImage',
-  CreateProductURL: 'http://10.39.1.135:9070/v1/Product'
+  PostFileURL: 'http://10.39.1.163:9090/saveImage',
+  CreateProductURL: 'http://10.39.1.135:9070/v1/Product',
+  UpdateProductURL: 'http://10.39.1.135:9070/v1/Product',
+  DeleteProductURL: 'http://10.39.1.135:9070/v1/Product/DisableById/',
+  GetProductsURL: 'http://10.39.1.135:9070/v1/Product/GetAll/',
+  GetProductByIdURL: 'http://10.39.1.135:9070/v1/Product/GetById/',
+  GetCustomerByIdentificationURL: 'http://10.39.1.135:8090/OMS/customer/',
+  GetCustomerByProductIdURL: 'http://10.39.1.135:8090/OMS/customer/findByProductId/',
 };
 
 /*
