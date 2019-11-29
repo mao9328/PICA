@@ -4,18 +4,24 @@
             <table class="table table-border table-hover">
                 <thead>
                     <tr>
-                        <th>Codigo</th>
                         <th>Nombre</th>
                         <th>Fecha Inicio</th>
                         <th>Fecha Fin</th>
+                        <th>Descuento</th>
+                        <th>Activo</th>
+                        <th>Accion</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let offer of offers">
-                        <td>{{offer.Product.Code}}</td>
-                        <td>{{offer.Product.Name}}</td>
+                    <tr
+                        *ngFor="let offer of offers | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
+                        <td>{{offer.Name}}</td>
                         <td>{{offer.BeginDate}}</td>
                         <td>{{offer.EndDate}}</td>
+                        <td>{{offer.Discount}}%</td>
+                        <td>{{offer.IsActive}}</td>
+                        <td><button class="btn btn-success" [routerLink]="['/secure/offer',offer.Id]">Editar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -23,5 +29,13 @@
     </div>
     <div class="col-md-2 col-lg-2 col-xl-2">
         <button class="btn btn-primary" [routerLink]="['/secure/offer']">Crear</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 text-center">
+        <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true" responsive="true"
+            previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
     </div>
 </div>

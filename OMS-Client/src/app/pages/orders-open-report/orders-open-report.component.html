@@ -1,0 +1,34 @@
+<div class="row mt-10">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <h3>Ordenes que mas tiempo llevan abiertas</h3>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="table-responsive">
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Precio</th>
+                        <th>Numero de Items</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let order of orders | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
+                        <td>{{order.Date}}</td>
+                        <td>{{order.Price}}</td>
+                        <td>{{order.Items.length}}</td>
+                        <td>{{order.Status.Name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-12 text-center">
+        <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true" responsive="true"
+            previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</div>

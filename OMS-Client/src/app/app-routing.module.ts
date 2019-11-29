@@ -11,6 +11,10 @@ import { CustomersComponent } from './pages/customers/customers.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { MainGuard } from './app.main-guard.guard';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { CustomerPurchasesReportComponent } from './pages/customer-purchases-report/customer-purchases-report.component';
+import { OrdersClosedReportComponent } from './pages/orders-closed-report/orders-closed-report.component';
+import { OrdersOpenReportComponent } from './pages/orders-open-report/orders-open-report.component';
+import { TopSellingProductComponent } from './pages/top-selling-product/top-selling-product.component';
 
 const privateRoutes: Routes = [
   {
@@ -56,6 +60,12 @@ const privateRoutes: Routes = [
     canActivate: [MainGuard]
   },
   {
+    path: 'offer/:id',
+    component: OfferComponent,
+    data: { IdRole: 3 },
+    canActivate: [MainGuard]
+  },
+  {
     path: 'offers',
     component: OffersComponent,
     data: { IdRole: 3 },
@@ -77,6 +87,30 @@ const privateRoutes: Routes = [
     path: 'customer/:id',
     component: CustomerComponent,
     data: { IdRole: 7 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'customer-purchases',
+    component: CustomerPurchasesReportComponent,
+    data: { IdRole: 0 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'orders-closed',
+    component: OrdersClosedReportComponent,
+    data: { IdRole: 0 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'orders-open',
+    component: OrdersOpenReportComponent,
+    data: { IdRole: 0 },
+    canActivate: [MainGuard]
+  },
+  {
+    path: 'top-selling-products',
+    component: TopSellingProductComponent,
+    data: { IdRole: 0 },
     canActivate: [MainGuard]
   }
 ];

@@ -10,6 +10,8 @@ export class MasterComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  showSelect = false;
+
   ngOnInit() {
   }
 
@@ -18,6 +20,12 @@ export class MasterComponent implements OnInit {
     localStorage.clear();
 
     this.router.navigate(['/login']);
+
+  }
+
+  showSelectReport() {
+
+    this.showSelect = !this.showSelect;
 
   }
 

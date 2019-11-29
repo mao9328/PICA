@@ -1,23 +1,130 @@
-<div class="row mt-10">
-    <h3>Campañas</h3>
-</div>
-<div class="row">
-    <div class="col-4">
-        <label>Producto</label>
-        <select class="form-control">
-            <option value="">Seleccione</option>
-        </select>
-    </div>
-    <div class="col-4">
-        <label>Fecha Inicio</label>
-        <input class="form-control" type="date">
-    </div>
-    <div class="col-4">
-        <label>Fecha Fin</label>
-        <input class="form-control" type="date">
-    </div>
-    <div class="col-12">
-        <label>Descripción</label>
-        <textarea class="form-control"></textarea>
+<div class="row  mt-10">
+    <div class="col" [formGroup]="offerForm">
+        <div class="row">
+            <h3>Campañas</h3>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label for="firstName">Nombre</label>
+                <input maxlength="50"
+                    [ngClass]="{'is-invalid' : GetProperty(offerForm,'Name').invalid && GetProperty(offerForm,'Name').pristine == false}"
+                    type="text" class="form-control" formControlName="Name">
+                <div *ngIf="GetProperty(offerForm,'Name').pristine == false && GetProperty(offerForm,'Name').errors?.required"
+                    class="invalid-feedback">
+                    El nombre es requerido.
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="firstName">Producto</label>
+                <input maxlength="10"
+                    [ngClass]="{'is-invalid' : GetProperty(offerForm,'IdProduct').invalid && GetProperty(offerForm,'IdProduct').pristine == false}"
+                    type="text" class="form-control" formControlName="IdProduct">
+                <div *ngIf="GetProperty(offerForm,'IdProduct').pristine == false && GetProperty(offerForm,'IdProduct').errors?.required"
+                    class="invalid-feedback">
+                    El producto es requerido.
+                </div>
+                <div *ngIf="GetProperty(offerForm,'IdProduct').pristine == false && GetProperty(offerForm,'IdProduct').errors?.pattern"
+                    class="invalid-feedback">
+                    El producto no es valido.
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="firstName">Fecha Inicio</label>
+                <input
+                    [ngClass]="{'is-invalid' : GetProperty(offerForm,'BeginDate').invalid && GetProperty(offerForm,'BeginDate').pristine == false}"
+                    type="date" class="form-control" formControlName="BeginDate">
+                <div *ngIf="GetProperty(offerForm,'BeginDate').pristine == false && GetProperty(offerForm,'BeginDate').errors?.required"
+                    class="invalid-feedback">
+                    la fecha de inicio es requerida.
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="firstName">Fecha Fin</label>
+                <input
+                    [ngClass]="{'is-invalid' : GetProperty(offerForm,'EndDate').invalid && GetProperty(offerForm,'EndDate').pristine == false}"
+                    type="date" class="form-control" formControlName="EndDate">
+                <div *ngIf="GetProperty(offerForm,'EndDate').pristine == false && GetProperty(offerForm,'EndDate').errors?.required"
+                    class="invalid-feedback">
+                    la fecha de fin es requerida.
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="firstName">Descuento</label>
+                <input
+                    [ngClass]="{'is-invalid' : GetProperty(offerForm,'Discount').invalid && GetProperty(offerForm,'Discount').pristine == false}"
+                    type="text" class="form-control" formControlName="Discount">
+                <div *ngIf="GetProperty(offerForm,'Discount').pristine == false && GetProperty(offerForm,'Discount').errors?.required"
+                    class="invalid-feedback">
+                    El descuento es requerido.
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="firstName">Descripcion</label>
+                <input
+                    [ngClass]="{'is-invalid' : GetProperty(offerForm,'Description').invalid && GetProperty(offerForm,'Description').pristine == false}"
+                    type="text" class="form-control" formControlName="Description">
+                <div *ngIf="GetProperty(offerForm,'Description').pristine == false && GetProperty(offerForm,'Description').errors?.required"
+                    class="invalid-feedback">
+                    La descripcion es requerida.
+                </div>
+            </div>
+            <div class="col-4 mt-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="defaultCheck1" formControlName="IsActive">
+                    <label class="form-check-label" for="defaultCheck1">Activo</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3" formGroupName="Image">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="lastName">Nombre</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(GetImage(),'Name').invalid && GetProperty(GetImage(),'Name').pristine == false}"
+                            type="text" class="form-control" formControlName="Name">
+                        <div *ngIf="GetProperty(GetImage(),'Name').pristine == false && GetProperty(GetImage(),'Name').errors?.required"
+                            class="invalid-feedback">
+                            El nombre es requerido.
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="lastName">Descripcion</label>
+                        <input
+                            [ngClass]="{'is-invalid' : GetProperty(GetImage(),'Description').invalid && GetProperty(GetImage(),'Description').pristine == false}"
+                            type="text" class="form-control" formControlName="Description">
+                        <div *ngIf="GetProperty(GetImage(),'Description').pristine == false && GetProperty(GetImage(),'Description').errors?.required"
+                            class="invalid-feedback">
+                            La descripcion es requerida.
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                formControlName="IsThumbnail">
+                            <label class="form-check-label" for="defaultCheck1">Es miniatura?</label>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <app-load-img formControlName="Url"></app-load-img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button class="btn btn-secondary btn-lg btn-block" [routerLink]="['/secure/offers']"
+                    type="button">Cancelar</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onSave()"
+                    [disabled]="offerForm.invalid">Guardar</button>
+            </div>
+        </div>
     </div>
 </div>

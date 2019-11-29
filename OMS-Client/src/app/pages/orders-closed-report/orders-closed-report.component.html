@@ -1,0 +1,50 @@
+<div class="row mt-10">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <h3>Ordenes cerradas con mayor facturacion</h3>
+    </div>
+    <div class="col-md-6" [formGroup]="filterForm">
+        <div class="row">
+            <div class="col">
+                <label>Desde</label>
+                <input class="form-control" type="date" formControlName="From">
+            </div>
+            <div class="col">
+                <label>Hasta</label>
+                <input class="form-control" type="date" formControlName="To">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary btn-block" (click)="onSearch()">Buscar</button>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="table-responsive">
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Precio</th>
+                        <th>Numero de Items</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let order of orders | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
+                        <td>{{order.Date}}</td>
+                        <td>{{order.Price}}</td>
+                        <td>{{order.Items.length}}</td>
+                        <td>{{order.Status.Name}}</td>
+                        <td> <button class="btn btn-primary" [routerLink]="['/secure/order',order.Id]">Ver</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-12 text-center">
+        <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true" responsive="true"
+            previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</div>

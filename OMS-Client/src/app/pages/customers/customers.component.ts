@@ -20,12 +20,14 @@ export class CustomersComponent implements OnInit {
   ) { }
 
   filterForm: FormGroup;
+  reclasificar: FormGroup;
   elements = 10;
   page = 0;
   total = 1;
   Customers: Customer[] = [];
 
   showType = false;
+  showModal = false;
 
 
   ngOnInit() {
@@ -34,6 +36,12 @@ export class CustomersComponent implements OnInit {
       Filter: [''],
       Criteria: [''],
       Type: ['CC']
+    });
+
+    this.reclasificar = this.builder.group({
+      Type: ['1'],
+      Id: [''],
+      Identificacion: ['']
     });
 
     this.filterForm.get('Filter').valueChanges.subscribe((value) => {
@@ -138,6 +146,49 @@ export class CustomersComponent implements OnInit {
 
     this.onSearch();
 
+  }
+
+  openChangeType(model: Customer) {
+
+    this.reclasificar.patchValue({
+      Id: model.Id,
+      Identificacion: model.IdentificationCard
+    });
+
+    this.showModal = true;
+  }
+
+  onChangeType() {
+
+    this.showModal = false;
+
+    this.spinner.show();
+
+    this.business.UpdateTypeCustomer(this.reclasificar.value.Type, this.reclasificar.value.Id).subscribe((response) => {
+
+      this.spinner.hide();
+
+      if (!response.Error) {
+
+        this.toast.success('Se ha reclasificado el cliente satisfactoriamente', 'Exito!');
+
+        this.onSearch();
+
+      }
+
+    }, (error) => {
+
+      this.spinner.hide();
+
+      this.toast.error(error.Message, 'Error!');
+
+    });
+  }
+
+  onCancel() {
+
+    this.reclasificar.reset();
+    this.showModal = false;
   }
 
 }

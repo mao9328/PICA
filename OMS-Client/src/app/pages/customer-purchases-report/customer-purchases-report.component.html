@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 mb-3">
+        <h3>
+            Clientes que mas han comprado
+        </h3>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-12 mb-3">
+        <div class="row justify-content-start" [formGroup]="filterForm">
+            <div class="col">
+                <label>Desde</label>
+                <input class="form-control" type="date" formControlName="From">
+            </div>
+            <div class="col">
+                <label>Hasta</label>
+                <input class="form-control" type="date" formControlName="To">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary btn-block" (click)="onSearch()">Buscar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="table-responsive">
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Tipo Identificacion</th>
+                        <th>Numero Identificacion</th>
+                        <th>Tipo</th>
+                        <th>Valor Comprado</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let record of Customers | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
+                        <td>{{record.Customer.FirstName}}</td>
+                        <td>{{record.Customer.LastName}}</td>
+                        <td>{{record.Customer.IdentificationCardType}}</td>
+                        <td>{{record.Customer.IdentificationCard}}</td>
+                        <td>{{record.Customer.Type.Name}}</td>
+                        <td>{{record.Price | currency:'COP'}}</td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 text-center">
+        <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true" responsive="true"
+            previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</div>

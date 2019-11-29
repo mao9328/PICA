@@ -115,4 +115,8 @@ export class OrdersComponent implements OnInit {
 
   }
 
+  pageChanged(pagina) {
+
+    console.log(pagina);
+  }
 }

@@ -25,6 +25,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import { LoadImgComponent } from './components/load-img/load-img.component';
+import { OrdersClosedReportComponent } from './pages/orders-closed-report/orders-closed-report.component';
+import { CustomerPurchasesReportComponent } from './pages/customer-purchases-report/customer-purchases-report.component';
+import { OrdersOpenReportComponent } from './pages/orders-open-report/orders-open-report.component';
+import { TopSellingProductComponent } from './pages/top-selling-product/top-selling-product.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { LoadImgComponent } from './components/load-img/load-img.component';
     CustomersComponent,
     CustomerComponent,
     OrdersComponent,
-    LoadImgComponent    
+    LoadImgComponent,
+    OrdersClosedReportComponent,
+    CustomerPurchasesReportComponent,
+    OrdersOpenReportComponent,
+    TopSellingProductComponent    
   ],
   imports: [
     BrowserModule,

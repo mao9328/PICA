@@ -55,6 +55,7 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <button class="btn btn-success"
                                     [routerLink]="['/secure/customer',customer.Id]">Editar</button>
+                                <button class="btn btn-warning" (click)="openChangeType(customer)">Reclasificar</button>
                             </div>
                         </td>
                     </tr>
@@ -74,3 +75,33 @@
         </pagination-controls>
     </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'fade show db':showModal}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reclasificar cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col" [formGroup]="reclasificar">
+                        <select class="form-control" formControlName="Type">
+                            <option value="1">Plateado</option>
+                            <option value="2">Dorado</option>
+                            <option value="3">Platino</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="onCancel()" class="btn btn-secondary">Cancelar</button>
+                <button type="button" (click)="onChangeType()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade show" *ngIf="showModal"></div>

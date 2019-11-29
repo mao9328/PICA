@@ -17,8 +17,24 @@
         <a class="nav-link" [routerLink]="['/secure/products']">Productos</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/secure/orders']">Ordenes</a>
-        </li>
+        <a class="nav-link" [routerLink]="['/secure/orders']">Ordenes</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" (click)="showSelectReport()" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Reportes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" [ngClass]="{'show':showSelect}">
+          <a class="dropdown-item" (click)="showSelectReport()" [routerLink]="['/secure/orders-closed']">Ordenes
+            Cerradas</a>
+          <a class="dropdown-item" (click)="showSelectReport()" [routerLink]="['/secure/orders-open']">Ordenes
+            Abiertas</a>
+          <a class="dropdown-item" (click)="showSelectReport()" [routerLink]="['/secure/customer-purchases']">Clientes
+            Facturacion</a>
+          <a class="dropdown-item" (click)="showSelectReport()" [routerLink]="['/secure/top-selling-products']">Productos
+            Mas Vendidos</a>
+        </div>
+      </li>
     </ul>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item text-nowrap">

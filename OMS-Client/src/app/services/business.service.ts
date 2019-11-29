@@ -3,15 +3,14 @@ import { of, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, mergeMap } from 'rxjs/operators';
 import { Product } from '../model/Product';
-import { ConfigList } from '../model/ConfigList';
 import { GenericResponse } from '../model/GenericResponse';
 import { Item } from '../model/Item';
 import { BrokerService } from './broker.service';
 import { environment } from 'src/environments/environment';
 import { Security } from '../model/Security';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Order } from '../model/Order';
 import { Customer } from '../model/Customer';
+import { Offer } from '../model/Offer';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +122,16 @@ export class BusinessService {
 
   }
 
+  GetProductsByCode(criteria: string, elements: number, page: number): Observable<GenericResponse<Product[]>> {
+
+    return this.broker.Get<Product[]>(environment.GetProducstByCodeURL + criteria + '/' + elements + '/' + page);
+  }
+
+  GetProductsByNameOrDesc(criteria: string, elements: number, page: number): Observable<GenericResponse<Product[]>> {
+
+    return this.broker.Get<Product[]>(environment.GetProducstByCriteriaURL + criteria + '/' + elements + '/' + page);
+  }
+
   GetOffers(): Observable<GenericResponse<Product[]>> {
 
     return this.getResource('Offers').pipe(map((response) => {
@@ -150,20 +159,6 @@ export class BusinessService {
 
       return generic;
     }));
-  }
-
-  GetProductsByNameOrDesc(criteria: string): Observable<GenericResponse<Product[]>> {
-
-    return this.getResource('Products').pipe(
-
-      map((response) => {
-
-        let generic = new GenericResponse<Product[]>();
-
-        generic.Result = (response as Product[]).filter(x => x.Description.toUpperCase().indexOf(criteria.toUpperCase()) > -1 || x.Name.toUpperCase().indexOf(criteria.toUpperCase()) > -1);
-
-        return generic;
-      }));
   }
 
   SetLocalStorage(key: string, value: any) {
@@ -252,9 +247,54 @@ export class BusinessService {
     return this.broker.Get<Customer>(environment.GetCustomerByIdentificationURL + type + '/' + id);
   }
 
+  GetCustomerById(id: string): Observable<GenericResponse<Customer>> {
+
+    return this.broker.Get<Customer>(environment.GetCustomerByIdURL + id);
+  }
+
   GetCustomerByProductId(id: string, elements: number, page: number): Observable<GenericResponse<Customer[]>> {
 
     return this.broker.Get<Customer[]>(environment.GetCustomerByProductIdURL + id + '?ordering=asc&page=' + page + '&results=' + elements);
+  }
+
+  GetCustomerPaymentRanking(from: string, to: string): Observable<GenericResponse<Customer[]>> {
+
+    return this.broker.Get<Customer[]>(environment.GetCustomerPaymentRanking + '?start=' + from + '&end=' + to);
+  }
+
+  UpdateCustomer(id: number, model: Customer): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Put<boolean>(environment.UpdateCustomerURL + id, model);
+  }
+
+  CreateCustomer(model: Customer): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Post<boolean>(environment.CreateCustomerURL, model);
+  }
+
+  UpdateTypeCustomer(idType: number, id: number): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Put<boolean>(environment.UpdateTypeCustomerURL + id, { Id: idType });
+  }
+
+  GetActiveOffers(elements: number, page: number): Observable<GenericResponse<Offer[]>> {
+
+    return this.broker.Get<Offer[]>(environment.GetActiveOfferURL + elements + '/' + page);
+  }
+
+  UpdateOffer(model: Offer): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Put<boolean>(environment.UpdateOfferURL, model);
+  }
+
+  CreateOffer(model: Offer): Observable<GenericResponse<boolean>> {
+
+    return this.broker.Post<boolean>(environment.CreateOfferURL, model);
+  }
+
+  GetOfferById(id: number): Observable<GenericResponse<Offer>> {
+
+    return this.broker.Get<Offer>(environment.GetOfferByIdURL + id);
   }
 
 }

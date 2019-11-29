@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { BusinessService } from './services/business.service';
 import { map } from 'rxjs/operators';
 
@@ -16,7 +16,9 @@ export class MainGuard implements CanActivate {
 
             if (!response) {
 
-                this.router.navigate(["/login"], { queryParams: { retUrl: '/' + route.parent.url.toString() + '/' + route.url.toString() } });
+
+                // tslint:disable-next-line:max-line-length
+                this.router.navigate(['/login'], { queryParams: { retUrl: '/' + route.parent.url.toString() + '/' + route.url.toString() } });
 
                 return false;
 

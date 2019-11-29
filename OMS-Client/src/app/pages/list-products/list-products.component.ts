@@ -20,6 +20,8 @@ export class ListProductsComponent implements OnInit {
 
   showModal = false;
   formCancelar: FormGroup;
+  filterForm: FormGroup;
+  showCriteria = false;
 
   constructor(
     private business: BusinessService,
@@ -33,14 +35,81 @@ export class ListProductsComponent implements OnInit {
       Id: [0]
     });
 
-    this.loadAllProducts();
+    this.filterForm = this.builder.group({
+      Filter: ['T'],
+      Criteria: ['']
+    });
+
+    this.filterForm.get('Filter').valueChanges.subscribe((value) => {
+
+      this.products = [];
+
+      switch (value) {
+
+        case 'C':
+        case 'ND':
+
+          this.showCriteria = true;
+
+          break;
+
+        default:
+          this.showCriteria = false;
+          break;
+
+      }
+
+    });
 
   }
 
   loadAllProducts() {
+
     this.spinner.show();
 
     this.business.GetProducts(this.elements, this.page).subscribe((response) => {
+
+      this.spinner.hide();
+
+      if (!response.Error) {
+
+        this.products = response.Result;
+      }
+    }, () => {
+
+      this.spinner.hide();
+
+      this.toast.error('No ha sido posible consultar los productos', 'Error!');
+
+    });
+  }
+
+  productsByCode(criteria: string) {
+
+    this.spinner.show();
+
+    this.business.GetProductsByCode(criteria, this.elements, this.page).subscribe((response) => {
+
+      this.spinner.hide();
+
+      if (!response.Error) {
+
+        this.products = response.Result;
+      }
+    }, () => {
+
+      this.spinner.hide();
+
+      this.toast.error('No ha sido posible consultar los productos', 'Error!');
+
+    });
+  }
+
+  productsByNameDesc(criteria: string) {
+
+    this.spinner.show();
+
+    this.business.GetProductsByNameOrDesc(criteria, this.elements, this.page).subscribe((response) => {
 
       this.spinner.hide();
 
@@ -97,6 +166,41 @@ export class ListProductsComponent implements OnInit {
 
     this.formCancelar.reset();
     this.showModal = false;
+  }
+
+  onSearch() {
+
+    const filter = this.filterForm.get('Filter').value;
+    const criteria = this.filterForm.get('Criteria').value;
+
+    switch (filter) {
+
+      case 'T':
+
+        this.loadAllProducts();
+
+        break;
+
+      case 'C':
+
+        this.productsByCode(criteria);
+
+        break;
+
+      case 'ND':
+
+        this.productsByNameDesc(criteria);
+
+        break;
+    }
+  }
+
+  pageChanged(pagina) {
+
+    this.page = pagina;
+
+    this.onSearch();
+
   }
 
 }
