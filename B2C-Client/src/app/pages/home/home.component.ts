@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
 
   nextOffer() {
 
-    if (this.currentOffer < 4) {
+    if (this.currentOffer < this.topFiveProducts.length) {
 
       this.currentOffer++;
     } else {
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
       this.currentOffer--;
     } else {
 
-      this.currentOffer = 5;
+      this.currentOffer = this.topFiveProducts.length - 1;
     }
   }
 

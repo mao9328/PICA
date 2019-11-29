@@ -21,19 +21,41 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="row mb-3">
-            <div class="col-12 col-md-12">
-              <input type="text" [(ngModel)]="Quantity" name="Quantity" class="form-control" placeholder="Cantidad">
+        <div class="col">
+          <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" (click)="goToOffer(i)" [attr.data-slide-to]="i"
+                  [ngClass]="{'active': i == currentOffer}" *ngFor="let image of GetImages();let i = index"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item" *ngFor="let image of GetImages();let i = index"
+                  [ngClass]="{'active': i == currentImage}">
+                  <img style="max-width: 250px; max-height: 250px;" [src]="image.Url" class="d-block w-100" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{image.Name}}</h5>
+                    <p>{{image.Description}}</p>
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" (click)="previousImage()" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" (click)="nextImage()" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
           <div class="row">
             <div class="col">
               <button class="btn btn-secondary btn-lg btn-block" type="button"
                 [routerLink]="['/secure/home']">Cancelar</button>
-            </div>
-            <div class="col">
-              <button class="btn btn-primary btn-lg btn-block" type="button" (click)="onClick()">Ordenar</button>
             </div>
           </div>
         </div>

@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
   product: Product;
   invalid = false;
   message = '';
+  currentImage = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private business: BusinessService) { }
 
@@ -63,4 +64,30 @@ export class ProductComponent implements OnInit {
 
     }
   }
+
+  GetImages() {
+    return this.product.Images;
+  }
+
+  nextImage() {
+
+    if (this.currentImage < 4) {
+
+      this.currentImage++;
+    } else {
+
+      this.currentImage = 0;
+    }
+  }
+  previousImage() {
+
+    if (this.currentImage > 0) {
+
+      this.currentImage--;
+    } else {
+
+      this.currentImage = 5;
+    }
+  }
+
 }

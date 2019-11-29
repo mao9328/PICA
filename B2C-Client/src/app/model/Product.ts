@@ -1,3 +1,5 @@
+import { Image } from './Image';
+
 export interface Product {
 
     Id: number;
@@ -5,6 +7,9 @@ export interface Product {
     Code: string;
     ListPrice: number;
     Description: string;
-    NormalImageURL: string;
-    SmallImageURL: string;
+    Images: Image[];
+    IdCategory: string;
+    IdProducer: string;
+    IdProvider: string;
+    IsActive: boolean;
 }

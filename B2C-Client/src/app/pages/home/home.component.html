@@ -1,81 +1,121 @@
-<div class="mt-10 col-12 col-md-3 col-lg-3 col-xl-3 offset-md-4 offset-lg-4 offset-xl-4 mt-2 text-center">
-  <div class="bd-example">
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleCaptions" (click)="goToOffer(i)" [attr.data-slide-to]="i"
-          [ngClass]="{'active': i == currentOffer}" *ngFor="let offer of topFiveProducts;let i = index"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let offer of topFiveProducts;let i = index"
-          [ngClass]="{'active': i == currentOffer}">
-          <img style="max-width: 250px; max-height: 250px;" [src]="offer.Image.Url" class="d-block w-100"
-            alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>{{offer.Name}}</h5>
-            <p>{{offer.Description}}</p>
+<div class="row">
+  <div class="mt-10 col-12">
+    <div class="row">
+      <div class="col text-center">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" (click)="goToOffer(i)" [attr.data-slide-to]="i"
+              [ngClass]="{'active': i == currentOffer}" *ngFor="let offer of topFiveProducts;let i = index"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let offer of topFiveProducts;let i = index"
+              [ngClass]="{'active': i == currentOffer}">
+              <img style="max-height: 250px;" [src]="offer.Image.Url" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>{{offer.Name}}</h5>
+                <p>{{offer.Description}}</p>
+              </div>
+            </div>
           </div>
+          <a class="carousel-control-prev" (click)="previousOffer()" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" (click)="nextOffer()" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </div>
-      <a class="carousel-control-prev" (click)="previousOffer()" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" (click)="nextOffer()" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-</div>
-<div class="col-12 mt-5">
-  <div class="form-row" [formGroup]="formFilter">
-    <div class="col-9">
-      <input type="text" formControlName="filter" placeholder="Buscar" class="form-control">
-    </div>
-    <div class="col-2">
-      <select class="form-control" formControlName="target">
-        <option value="T">Todo</option>
-        <option value="C">Codigo</option>
-        <option value="ND">Nombre - Descripcion</option>
-      </select>
-    </div>
-    <div class="col">
-      <button class="btn btn-primary" (click)="onSearch()" type="button" [disabled]="formFilter.invalid">Buscar</button>
-    </div>
-  </div>
-</div>
-<div class="card-deck mt-5 text-center">
-  <div class="col-md-12 col-lg-12 col-sm-12 col-12"
-    *ngFor="let product of products | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">{{product.Name}}</h4>
+      <div class="col text-center">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" (click)="goToOffer(i)" [attr.data-slide-to]="i"
+              [ngClass]="{'active': i == currentOffer}" *ngFor="let offer of topFiveProducts;let i = index"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let offer of topFiveProducts;let i = index"
+              [ngClass]="{'active': i == currentOffer}">
+              <img style="max-height: 250px;" [src]="offer.Image.Url" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block">
+                <h5><a [routerLink]="['/public/product']">{{offer.Name}}</a></h5>
+                <p>{{offer.Description}}</p>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" (click)="previousOffer()" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" (click)="nextOffer()" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
       </div>
-      <div class="card-body">
+    </div>
+
+  </div>
+  <div class="col-12 mt-5">
+    <div class="row">
+      <div class="col-md-12">
         <div class="row">
-          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-            <img [src]="product.SmallImageURL" class="mr-3">
+          <div class="col-12 mt-5">
+            <div class="form-row" [formGroup]="formFilter">
+              <div class="col-8">
+                <input type="text" formControlName="filter" placeholder="Buscar" class="form-control">
+              </div>
+              <div class="col-2">
+                <select class="form-control" formControlName="target">
+                  <option value="T">Todo</option>
+                  <option value="C">Codigo</option>
+                  <option value="ND">Nombre - Descripcion</option>
+                </select>
+              </div>
+              <div class="col-2">
+                <button class="btn btn-primary btn-block" (click)="onSearch()" type="button"
+                  [disabled]="formFilter.invalid">Buscar</button>
+              </div>
+            </div>
           </div>
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <h1 class="card-title pricing-card-title">{{product.ListPrice | currency:'COP'}}</h1>
-          </div>
-          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-            <p>{{product.Description}}</p>
-          </div>
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-            <button type="button" class="btn btn-lg btn-primary btn-block" (click)="addItem(product)">Agregar al
-              carrito</button>
-            <button type="button" class="btn btn-lg btn-success btn-block"
-              [routerLink]="['/public/product',product.Id]">Comprar</button>
+          <div class="card-deck mt-5 text-center">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-12"
+              *ngFor="let product of products | paginate: { itemsPerPage: elements, currentPage: page, totalItems: total }">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">{{product.Name}}</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                      <img [src]="product.SmallImageURL" class="mr-3">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                      <h1 class="card-title pricing-card-title">{{product.ListPrice | currency:'COP'}}</h1>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                      <p>{{product.Description}}</p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                      <button type="button" class="btn btn-lg btn-primary btn-block" (click)="addItem(product)">Agregar
+                        al
+                        carrito</button>
+                      <button type="button" class="btn btn-lg btn-success btn-block"
+                        [routerLink]="['/public/product',product.Id]">Ver</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-xl-12">
+              <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true"
+                responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+              </pagination-controls>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-12 col-lg-12 col-xl-12">
-    <pagination-controls (pageChange)="pageChanged($event)" maxSize="10" directionLinks="true" responsive="true"
-      previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page"
-      screenReaderCurrentLabel="You're on page">
-    </pagination-controls>
   </div>
 </div>
